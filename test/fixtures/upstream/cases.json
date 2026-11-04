@@ -1,0 +1,464 @@
+[
+  {
+    "id": "account-static",
+    "kind": "payload",
+    "operation": "request",
+    "request": {
+      "bankBin": "970422",
+      "accountNo": "056789799999",
+      "serviceType": "account",
+      "qrType": "static"
+    }
+  },
+  {
+    "id": "account-dynamic",
+    "kind": "payload",
+    "operation": "request",
+    "request": {
+      "bankBin": "970422",
+      "accountNo": "056789799999",
+      "serviceType": "account",
+      "qrType": "dynamic",
+      "amount": 2000
+    }
+  },
+  {
+    "id": "card-static",
+    "kind": "payload",
+    "operation": "request",
+    "request": {
+      "bankBin": "970422",
+      "accountNo": "056789799999",
+      "serviceType": "card",
+      "qrType": "static"
+    }
+  },
+  {
+    "id": "card-dynamic",
+    "kind": "payload",
+    "operation": "request",
+    "request": {
+      "bankBin": "970422",
+      "accountNo": "056789799999",
+      "serviceType": "card",
+      "qrType": "dynamic",
+      "amount": 2000
+    }
+  },
+  {
+    "id": "readme",
+    "kind": "payload",
+    "operation": "request",
+    "request": {
+      "bankBin": "970422",
+      "accountNo": "056789799999",
+      "amount": 2000,
+      "description": "Thanh toan cafe"
+    }
+  },
+  {
+    "id": "amount-missing",
+    "kind": "payload",
+    "operation": "request",
+    "request": {
+      "bankBin": "970422",
+      "accountNo": "056789799999"
+    }
+  },
+  {
+    "id": "amount-zero",
+    "kind": "payload",
+    "operation": "request",
+    "request": {
+      "bankBin": "970422",
+      "accountNo": "056789799999",
+      "amount": 0
+    }
+  },
+  {
+    "id": "amount-negative",
+    "kind": "payload",
+    "operation": "request",
+    "request": {
+      "bankBin": "970422",
+      "accountNo": "056789799999",
+      "amount": -1
+    }
+  },
+  {
+    "id": "amount-fractional",
+    "kind": "payload",
+    "operation": "request",
+    "request": {
+      "bankBin": "970422",
+      "accountNo": "056789799999",
+      "amount": 1.5
+    }
+  },
+  {
+    "id": "amount-max13",
+    "kind": "payload",
+    "operation": "request",
+    "request": {
+      "bankBin": "970422",
+      "accountNo": "056789799999",
+      "amount": 9999999999999
+    }
+  },
+  {
+    "id": "amount-over13",
+    "kind": "payload",
+    "operation": "request",
+    "request": {
+      "bankBin": "970422",
+      "accountNo": "056789799999",
+      "amount": 10000000000000
+    }
+  },
+  {
+    "id": "amount-out-of-int64",
+    "kind": "payload",
+    "operation": "request",
+    "request": {
+      "bankBin": "970422",
+      "accountNo": "056789799999",
+      "amount": 1e+20
+    }
+  },
+  {
+    "id": "amount-NaN",
+    "kind": "payload",
+    "operation": "request",
+    "request": {
+      "bankBin": "970422",
+      "accountNo": "056789799999"
+    },
+    "amountSpecial": "NaN"
+  },
+  {
+    "id": "amount-Infinity",
+    "kind": "payload",
+    "operation": "request",
+    "request": {
+      "bankBin": "970422",
+      "accountNo": "056789799999"
+    },
+    "amountSpecial": "Infinity"
+  },
+  {
+    "id": "amount--Infinity",
+    "kind": "payload",
+    "operation": "request",
+    "request": {
+      "bankBin": "970422",
+      "accountNo": "056789799999"
+    },
+    "amountSpecial": "-Infinity"
+  },
+  {
+    "id": "explicit-dynamic-missing",
+    "kind": "payload",
+    "operation": "request",
+    "request": {
+      "bankBin": "970422",
+      "accountNo": "056789799999",
+      "qrType": "dynamic"
+    }
+  },
+  {
+    "id": "explicit-dynamic-zero",
+    "kind": "payload",
+    "operation": "request",
+    "request": {
+      "bankBin": "970422",
+      "accountNo": "056789799999",
+      "qrType": "dynamic",
+      "amount": 0
+    }
+  },
+  {
+    "id": "explicit-dynamic-negative",
+    "kind": "payload",
+    "operation": "request",
+    "request": {
+      "bankBin": "970422",
+      "accountNo": "056789799999",
+      "qrType": "dynamic",
+      "amount": -1
+    }
+  },
+  {
+    "id": "explicit-static-positive",
+    "kind": "payload",
+    "operation": "request",
+    "request": {
+      "bankBin": "970422",
+      "accountNo": "056789799999",
+      "qrType": "static",
+      "amount": 2000
+    }
+  },
+  {
+    "id": "bill-static-inferred",
+    "kind": "payload",
+    "operation": "request",
+    "request": {
+      "bankBin": "970422",
+      "accountNo": "056789799999",
+      "billNumber": "INV-123"
+    }
+  },
+  {
+    "id": "bill-dynamic",
+    "kind": "payload",
+    "operation": "request",
+    "request": {
+      "bankBin": "970422",
+      "accountNo": "056789799999",
+      "amount": 2000,
+      "billNumber": "HD Đ123"
+    }
+  },
+  {
+    "id": "reference-static-inferred",
+    "kind": "payload",
+    "operation": "extended",
+    "request": {
+      "bankBin": "970422",
+      "accountNo": "056789799999",
+      "referenceLabel": "Đơn 123"
+    }
+  },
+  {
+    "id": "reference-dynamic",
+    "kind": "payload",
+    "operation": "extended",
+    "request": {
+      "bankBin": "970422",
+      "accountNo": "056789799999",
+      "amount": 2000,
+      "referenceLabel": "REF-123"
+    }
+  },
+  {
+    "id": "description-vietnamese",
+    "kind": "payload",
+    "operation": "request",
+    "request": {
+      "bankBin": "970422",
+      "accountNo": "056789799999",
+      "description": "Thanh toán đơn hàng Đ123 đ/Đ"
+    }
+  },
+  {
+    "id": "description-decomposed",
+    "kind": "payload",
+    "operation": "request",
+    "request": {
+      "bankBin": "970422",
+      "accountNo": "056789799999",
+      "description": "Thanh toán đơn hàng"
+    }
+  },
+  {
+    "id": "description-emoji",
+    "kind": "payload",
+    "operation": "request",
+    "request": {
+      "bankBin": "970422",
+      "accountNo": "056789799999",
+      "description": "Pay 😀 now"
+    }
+  },
+  {
+    "id": "description-chinese",
+    "kind": "payload",
+    "operation": "request",
+    "request": {
+      "bankBin": "970422",
+      "accountNo": "056789799999",
+      "description": "中"
+    }
+  },
+  {
+    "id": "description-spaces",
+    "kind": "payload",
+    "operation": "request",
+    "request": {
+      "bankBin": "970422",
+      "accountNo": "056789799999",
+      "description": "  noi dung  "
+    }
+  },
+  {
+    "id": "description-tab",
+    "kind": "payload",
+    "operation": "request",
+    "request": {
+      "bankBin": "970422",
+      "accountNo": "056789799999",
+      "description": "a\tb"
+    }
+  },
+  {
+    "id": "description-newline",
+    "kind": "payload",
+    "operation": "request",
+    "request": {
+      "bankBin": "970422",
+      "accountNo": "056789799999",
+      "description": "a\nb"
+    }
+  },
+  {
+    "id": "description-forty",
+    "kind": "payload",
+    "operation": "request",
+    "request": {
+      "bankBin": "970422",
+      "accountNo": "056789799999",
+      "description": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+    }
+  },
+  {
+    "id": "description-surrogate-boundary",
+    "kind": "payload",
+    "operation": "request",
+    "request": {
+      "bankBin": "970422",
+      "accountNo": "056789799999",
+      "description": "xxxxxxxxxxxxxxxxxxxxxxxx😀"
+    }
+  },
+  {
+    "id": "description-control-only",
+    "kind": "payload",
+    "operation": "request",
+    "request": {
+      "bankBin": "970422",
+      "accountNo": "056789799999",
+      "description": "\u0001"
+    }
+  },
+  {
+    "id": "merchant-both",
+    "kind": "payload",
+    "operation": "extended",
+    "request": {
+      "bankBin": "970422",
+      "accountNo": "056789799999",
+      "merchantName": "Cửa hàng Đẹp",
+      "merchantCity": "Hồ Chí Minh"
+    }
+  },
+  {
+    "id": "merchant-name-default-city",
+    "kind": "payload",
+    "operation": "extended",
+    "request": {
+      "bankBin": "970422",
+      "accountNo": "056789799999",
+      "merchantName": "Đặng Văn A"
+    }
+  },
+  {
+    "id": "merchant-city-only",
+    "kind": "payload",
+    "operation": "extended",
+    "request": {
+      "bankBin": "970422",
+      "accountNo": "056789799999",
+      "merchantCity": "Đà Nẵng"
+    }
+  },
+  {
+    "id": "merchant-truncation",
+    "kind": "payload",
+    "operation": "extended",
+    "request": {
+      "bankBin": "970422",
+      "accountNo": "056789799999",
+      "merchantName": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "merchantCity": "bbbbbbbbbbbbbbbbbbbb"
+    }
+  },
+  {
+    "id": "invalid-bin-short",
+    "kind": "payload",
+    "operation": "request",
+    "request": {
+      "bankBin": "97042",
+      "accountNo": "056789799999"
+    }
+  },
+  {
+    "id": "invalid-bin-alpha",
+    "kind": "payload",
+    "operation": "request",
+    "request": {
+      "bankBin": "abcdef",
+      "accountNo": "056789799999"
+    }
+  },
+  {
+    "id": "invalid-account-empty",
+    "kind": "payload",
+    "operation": "request",
+    "request": {
+      "bankBin": "970422",
+      "accountNo": ""
+    }
+  },
+  {
+    "id": "invalid-account-long",
+    "kind": "payload",
+    "operation": "request",
+    "request": {
+      "bankBin": "970422",
+      "accountNo": "11111111111111111111111111"
+    }
+  },
+  {
+    "id": "beneficiary-trim",
+    "kind": "payload",
+    "operation": "request",
+    "request": {
+      "bankBin": " 970422 ",
+      "accountNo": " 056789799999 "
+    }
+  },
+  {
+    "id": "tag62-all-25",
+    "kind": "payload",
+    "operation": "extended",
+    "request": {
+      "bankBin": "970422",
+      "accountNo": "056789799999",
+      "billNumber": "bbbbbbbbbbbbbbbbbbbbbbbbb",
+      "referenceLabel": "rrrrrrrrrrrrrrrrrrrrrrrrr",
+      "description": "ppppppppppppppppppppppppp"
+    }
+  },
+  {
+    "id": "merchant-invariant-uppercase",
+    "kind": "payload",
+    "operation": "extended",
+    "request": {
+      "bankBin": "970422",
+      "accountNo": "056789799999",
+      "merchantName": "Straße ı ﬃ"
+    }
+  },
+  {
+    "id": "parse-surrounding-whitespace",
+    "kind": "parse",
+    "payloadCase": "readme",
+    "transform": "surroundWhitespace"
+  },
+  {
+    "id": "parse-lowercase-crc",
+    "kind": "parse",
+    "payloadCase": "readme",
+    "transform": "lowercaseCrc"
+  }
+]
