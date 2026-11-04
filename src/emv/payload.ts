@@ -22,7 +22,7 @@ function trim(value: string): string {
   return value.replace(/^[\u0009-\u000d\u0085\p{Zs}\p{Zl}\p{Zp}]+|[\u0009-\u000d\u0085\p{Zs}\p{Zl}\p{Zp}]+$/gu, '');
 }
 // .NET invariant casing uses simple mappings, not JS full-case expansions.
-function upperInvariant(value: string): string {
+export function upperInvariant(value: string): string {
   return Array.from(value, char => {
     const upper = char.toUpperCase();
     return char === '\u0131' || upper.length !== char.length ? char : upper;

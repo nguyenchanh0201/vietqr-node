@@ -3,6 +3,7 @@ import { readAsset } from '../assets';
 import type { ServiceType } from '../emv/payload';
 import { VietQrError } from '../errors';
 import { assertImageBytes, assertRenderSize, assertSurface, decodeBase64Logo } from '../image/limits';
+import { drawCard } from './card';
 import { drawQrOnly, qrOnlySvg } from './qr-only';
 
 export { buildMatrix } from './qr-matrix';
@@ -48,7 +49,12 @@ export async function render(payload: string, opts: RenderOptions = {}): Promise
   const custom = typeof opts.centerLogo === 'string' ? opts.centerLogo.trim() : opts.centerLogo;
   const logo = custom?.length ? validatedImage(custom) : { bytes: readAsset('vietqr_icon.png'), mime: MIME.png };
 
-  if (template !== 'qr_only') throw new VietQrError('qr.invalid_template'); // card templates land in Task 8
+  if (template !== 'qr_only') {
+    const bankLogo = opts.bankLogo?.length ? validatedImage(opts.bankLogo).bytes : undefined;
+    const { canvas } = await drawCard(payload, { ...opts, template, bankLogo, centerLogo: logo.bytes }, format === 'svg' ? 'svg' : 'raster');
+    if ('getContent' in canvas) return canvas.getContent().toString('utf8');
+    return encode(canvas, format, quality);
+  }
   assertSurface(size, size);
   if (format === 'svg') return qrOnlySvg(payload, size, logo.bytes, logo.mime, ratio);
   return encode(await drawQrOnly(payload, size, logo.bytes, ratio), format, quality);
