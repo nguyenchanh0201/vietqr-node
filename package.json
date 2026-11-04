@@ -1,0 +1,39 @@
+{
+  "name": "vietqr-node",
+  "version": "0.1.0",
+  "type": "module",
+  "license": "MIT",
+  "engines": { "node": ">=20" },
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": { "types": "./dist/index.d.ts", "default": "./dist/index.js" },
+      "require": { "types": "./dist/index.d.cts", "default": "./dist/index.cjs" }
+    }
+  },
+  "files": ["dist", "assets", "LICENSE", "DISCLAIMER.md"],
+  "scripts": { "test": "vitest run", "build": "tsup" },
+  "dependencies": {
+    "@napi-rs/canvas": "1.1.0",
+    "qrcode": "1.5.4",
+    "zxing-wasm": "3.1.6"
+  },
+  "peerDependencies": {
+    "@nestjs/common": "^10.0.0 || ^11.0.0",
+    "@nestjs/core": "^10.0.0 || ^11.0.0",
+    "reflect-metadata": "^0.1.12 || ^0.2.0"
+  },
+  "peerDependenciesMeta": {
+    "@nestjs/common": { "optional": true },
+    "@nestjs/core": { "optional": true },
+    "reflect-metadata": { "optional": true }
+  },
+  "devDependencies": {
+    "@types/node": "^20.19.0",
+    "tsup": "8.5.0",
+    "typescript": "5.9.3",
+    "vitest": "4.1.12"
+  }
+}
