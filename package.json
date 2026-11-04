@@ -15,6 +15,10 @@
     "./deeplink": {
       "import": { "types": "./dist/deeplink/index.d.ts", "default": "./dist/deeplink/index.js" },
       "require": { "types": "./dist/deeplink/index.d.cts", "default": "./dist/deeplink/index.cjs" }
+    },
+    "./nestjs": {
+      "import": { "types": "./dist/nestjs/index.d.ts", "default": "./dist/nestjs/index.js" },
+      "require": { "types": "./dist/nestjs/index.d.cts", "default": "./dist/nestjs/index.cjs" }
     }
   },
   "files": ["dist", "assets", "LICENSE", "DISCLAIMER.md"],
@@ -35,7 +39,11 @@
     "reflect-metadata": { "optional": true }
   },
   "devDependencies": {
+    "@nestjs/common": "11.1.29",
+    "@nestjs/core": "11.1.29",
+    "@nestjs/testing": "11.1.29",
     "@types/node": "^20.19.0",
+    "reflect-metadata": "0.2.2",
     "tsup": "8.5.0",
     "typescript": "5.9.3",
     "vitest": "4.1.12"
