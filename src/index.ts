@@ -12,3 +12,4 @@ export {
 } from './emv/payload';
 export { parse, tryParse, type VietQrInfo, type ParseOptions, type AdditionalDataOptions } from './parse/parser';
 export { render, renderDataUrl, buildMatrix, type RenderOptions, type Template, type ImageFormat } from './render';
+export { decodeImage, readQrText } from './decode/decoder';

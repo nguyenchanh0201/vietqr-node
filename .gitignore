@@ -6,3 +6,4 @@ coverage/
 spike/
 tools/upstream-fixtures/bin/
 tools/upstream-fixtures/obj/
+assets/zxing_reader.wasm
