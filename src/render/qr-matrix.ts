@@ -1,9 +1,15 @@
 import QRCode from 'qrcode';
 import type { SKRSContext2D } from '@napi-rs/canvas';
+import { VietQrError } from '../errors';
 
 /** Module matrix without quiet zone, ECC level Q (upstream QRCoder `ECCLevel.Q`). */
 export function buildMatrix(payload: string): boolean[][] {
-  const { modules } = QRCode.create(payload, { errorCorrectionLevel: 'Q' });
+  let modules: ReturnType<typeof QRCode.create>['modules'];
+  try {
+    ({ modules } = QRCode.create(payload, { errorCorrectionLevel: 'Q' }));
+  } catch {
+    throw new VietQrError('qr.invalid_payload'); // e.g. data too big for any QR version
+  }
   return Array.from({ length: modules.size }, (_, r) => Array.from({ length: modules.size }, (_, c) => Boolean(modules.get(r, c))));
 }
 

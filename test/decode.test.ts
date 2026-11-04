@@ -59,6 +59,32 @@ describe('render → decodeImage round-trip', () => {
   }
 });
 
+// APP1 Exif segment (big-endian TIFF, one IFD entry: Orientation 0x0112 SHORT = `orientation`), spliced right after SOI.
+function withOrientation(jpeg: Buffer, orientation: number): Buffer {
+  const tiff = Buffer.from([0x4d, 0x4d, 0, 0x2a, 0, 0, 0, 8, 0, 1, 0x01, 0x12, 0, 3, 0, 0, 0, 1, 0, orientation, 0, 0, 0, 0, 0, 0]);
+  const body = Buffer.concat([Buffer.from('Exif\0\0', 'latin1'), tiff]);
+  const app1 = Buffer.concat([Buffer.from([0xff, 0xe1, (body.length + 2) >> 8, (body.length + 2) & 0xff]), body]);
+  return Buffer.concat([jpeg.subarray(0, 2), app1, jpeg.subarray(2)]);
+}
+
+describe('EXIF orientation (upstream SKBitmap.Decode ignores it)', () => {
+  for (const orientation of [6, 8]) {
+    it(`print jpeg with Orientation=${orientation} still decodes`, async () => {
+      const jpeg = (await render(payloads.account, { template: 'print', format: 'jpeg', bankBin: '970422' })) as Buffer;
+      const rotated = withOrientation(jpeg, orientation);
+      expect(await readQrText(rotated)).toBe(payloads.account);
+      expect((await decodeImage(rotated)).rawPayload).toBe(payloads.account);
+    });
+  }
+
+  it('any other decoded-size mismatch is still rejected', async () => {
+    const png = (await render(payloads.account, { template: 'qr_only' })) as Buffer;
+    const other = createCanvas(300, 500);
+    vi.mocked(loadImage).mockResolvedValueOnce(other as unknown as Awaited<ReturnType<typeof loadImage>>);
+    expect(await code(readQrText(png))).toBe('qr.image_decode_failed');
+  });
+});
+
 describe('upstream examples', () => {
   const dir = join(__dirname, 'fixtures/upstream-examples');
   it.each(readdirSync(dir))('%s decodes to a CRC-valid payload', async (name) => {

@@ -147,7 +147,7 @@ All failures throw `VietQrError` with a stable `code` and upstream's Vietnamese 
 | `qr.bank_not_found` | bank not in the NAPAS catalog |
 | `qr.invalid_template` | template is not `compact`, `print` or `qr_only` |
 | `qr.system_error` | internal error |
-| `qr.invalid_payload` | not EMVCo TLV, or longer than `maxPayloadLength` |
+| `qr.invalid_payload` | not EMVCo TLV, longer than `maxPayloadLength`, or too long to fit in a QR code (render) |
 | `qr.invalid_crc` | tag 63 CRC mismatch (with `strictCrc`) |
 | `qr.not_vietqr` | no tag 38 / NAPAS AID `A000000727` |
 | `qr.image_decode_failed` | image could not be decoded or holds no QR code |

@@ -121,6 +121,29 @@ it('custom bankLogo bytes replace the catalog logo', async () => {
   expect(loaded().some((arg) => Buffer.isBuffer(arg) && arg.equals(getBankLogo('970422')!))).toBe(false);
 });
 
+// Upstream draws a white 58px rounded square (r=5) under the 46px center icon; sample a strip 2px inside its top and left edges.
+async function backingRing(out: Buffer | string, box: number, icon: number, boxX: number, boxY: number): Promise<number[]> {
+  const img = await loadImage(typeof out === 'string' ? Buffer.from(out) : out);
+  const c = createCanvas(img.width, img.height).getContext('2d');
+  c.drawImage(img, 0, 0);
+  const inset = (box - icon) / 2;
+  const top = c.getImageData(boxX + inset, boxY + 2, icon, 1).data;
+  const left = c.getImageData(boxX + 2, boxY + inset, 1, icon).data;
+  return [...top, ...left];
+}
+
+describe('center logo white backing (upstream DrawRoundRect under the icon)', () => {
+  for (const [template, frameY, width] of [['compact', 84, 540], ['print', 96, 600]] as const) {
+    for (const format of ['png', 'svg'] as const) {
+      it(`${template} ${format}`, async () => {
+        const out = await render(account, { ...details, template, format });
+        const px = await backingRing(out, 58, 46, Math.trunc((width - 58) / 2), frameY + Math.trunc((374 - 58) / 2));
+        expect(Math.min(...px)).toBeGreaterThanOrEqual(250);
+      });
+    }
+  }
+});
+
 describe('public boundary: rejected images never reach loadImage', () => {
   const oversized = fixture('png-60000x60000.png');
   const bad: Array<[string, Uint8Array | string, string]> = [
@@ -131,14 +154,15 @@ describe('public boundary: rejected images never reach loadImage', () => {
   for (const template of ['compact', 'print'] as const) {
     for (const format of ['png', 'jpeg', 'webp', 'svg'] as const) {
       it.each(bad)(`${template}/${format} bankLogo: %s`, async (_n, bankLogo, expected) => {
-        expect(await code(render(account, { template, format, bankLogo: bankLogo as Uint8Array }))).toBe(expected);
-        expect(loaded()).not.toContain(bankLogo);
-        for (const arg of loaded()) expect(Buffer.from(arg as Uint8Array).equals(oversized)).toBe(false);
+        const got = await code(render(account, { template, format, bankLogo: bankLogo as Uint8Array }));
+        expect(loadImage).not.toHaveBeenCalled(); // validation runs before any drawing
+        expect(got).toBe(expected);
       });
       it.each([...bad, ['oversized base64', oversized.toString('base64'), 'qr.image_too_large']] as typeof bad)(
         `${template}/${format} centerLogo: %s`, async (_n, centerLogo, expected) => {
-          expect(await code(render(account, { template, format, centerLogo }))).toBe(expected);
-          for (const arg of loaded()) expect(Buffer.from(arg as Uint8Array).equals(oversized)).toBe(false);
+          const got = await code(render(account, { template, format, centerLogo }));
+          expect(loadImage).not.toHaveBeenCalled();
+          expect(got).toBe(expected);
         });
     }
   }

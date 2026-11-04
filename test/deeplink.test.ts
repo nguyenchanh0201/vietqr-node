@@ -91,6 +91,13 @@ describe('results', () => {
       appCode: 'mb', bin: '970422', shortName: 'MB', appName: 'MB Bank', logo: 'x', supportsAutofill: false, supportsIos: true, supportsAndroid: true,
     }]);
   });
+  it('malformed apps entries never throw: null entries skipped, non-object entries → [] (upstream JSON type error)', async () => {
+    const app = { appCode: 'mb', shortName: 'MB', appName: 'MB Bank', logo: 'x' };
+    const apps = (data: unknown[]) => client((url) => (url === DISCOVERY ? json({ gateway: 'https://gw.test' }) : json({ data }))).c.getSupportedApps();
+    expect(await apps([null])).toEqual([]);
+    expect((await apps([null, app])).map((a) => a.appCode)).toEqual(['mb']);
+    for (const bad of [1, 'x', true, [app]]) expect(await apps([app, bad])).toEqual([]);
+  });
   it('bad CRC or blank input → null without fetching', async () => {
     const { fetch, c } = client(gateway());
     expect(await c.createIntent('mb', qr.slice(0, -1) + (qr.endsWith('0') ? '1' : '0'))).toBeNull();

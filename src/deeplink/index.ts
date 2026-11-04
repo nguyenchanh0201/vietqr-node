@@ -49,9 +49,7 @@ export class VietQrDeeplinkClient {
 
   async getSupportedApps(signal?: AbortSignal): Promise<DeeplinkBankAppInfo[]> {
     if (!this.isConfigured) return [];
-    const body = await this.call('v1/apps', undefined, signal);
-    const data = (body as { data?: unknown } | null)?.data;
-    return Array.isArray(data) ? data.map(toApp) : [];
+    return (await this.call('v1/apps', undefined, signal, toApps)) ?? [];
   }
 
   async createIntent(appCode: string, qrContent: string, signal?: AbortSignal): Promise<DeeplinkIntentResult | null> {
@@ -63,13 +61,13 @@ export class VietQrDeeplinkClient {
     return data ? { url: String(data.url ?? ''), expiresInSeconds: Number(data.expiresInSeconds ?? 0) } : null;
   }
 
-  /** Resolves the gateway, then requests `path`; returns parsed JSON or null. Rethrows only the caller's abort. */
-  private async call(path: string, init: RequestInit | undefined, signal?: AbortSignal): Promise<unknown> {
+  /** Resolves the gateway, then requests `path`; returns `map`(parsed JSON) or null. Rethrows only the caller's abort. */
+  private async call<T = unknown>(path: string, init: RequestInit | undefined, signal?: AbortSignal, map = (body: unknown) => body as T): Promise<T | null> {
     try {
       const base = await this.resolveBaseUrl(signal);
       if (blank(base)) return null;
       const timeoutMs = this.opts.timeoutSeconds > 0 ? this.opts.timeoutSeconds * 1000 : undefined;
-      return await this.fetchJson(new URL(path, `${base}/`).toString(), init, timeoutMs, signal);
+      return map(await this.fetchJson(new URL(path, `${base}/`).toString(), init, timeoutMs, signal));
     } catch {
       if (signal?.aborted) throw signal.reason;
       return null;
@@ -116,7 +114,14 @@ export class VietQrDeeplinkClient {
   }
 }
 
+/** Upstream STJ: a null entry stays null (dropped here); any other non-object entry fails the whole list (thrown, caught by call → []). */
+function toApps(body: unknown): DeeplinkBankAppInfo[] {
+  const data = (body as { data?: unknown } | null)?.data;
+  return Array.isArray(data) ? data.filter((d) => d !== null).map(toApp) : [];
+}
+
 function toApp(raw: Record<string, unknown>): DeeplinkBankAppInfo {
+  if (typeof raw !== 'object' || Array.isArray(raw)) throw new TypeError('app entry is not an object');
   const str = (v: unknown) => (typeof v === 'string' ? v : '');
   return {
     appCode: str(raw.appCode), bin: typeof raw.bin === 'string' ? raw.bin : null, shortName: str(raw.shortName),

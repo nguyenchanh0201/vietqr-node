@@ -5,7 +5,7 @@ vi.mock('@napi-rs/canvas', async (original) => {
   return { ...actual, loadImage: vi.fn(actual.loadImage) };
 });
 
-import { loadImage } from '@napi-rs/canvas';
+import { createCanvas, loadImage } from '@napi-rs/canvas';
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { readAsset } from '../src/assets';
@@ -27,6 +27,24 @@ describe('buildMatrix', () => {
     expect(m.length).toBeGreaterThanOrEqual(21);
     expect(m.every((row) => row.length === m.length)).toBe(true);
     expect(m[0].slice(0, 7)).toEqual([true, true, true, true, true, true, true]); // finder pattern
+  });
+});
+
+describe('payload too long for a QR code', () => {
+  it.each(['qr_only', 'compact', 'print'] as const)('%s → qr.invalid_payload', async (template) => {
+    await expect(render('A'.repeat(5000), { template })).rejects.toMatchObject({ name: 'VietQrError', code: 'qr.invalid_payload' });
+  });
+});
+
+describe('center logo white backing (upstream rounded rect under the logo)', () => {
+  // size 500, ratio 0.18: raster box 86 at 207 (icon 70 at 215); SVG bg rect 203.16..296.84, logo 207.16..292.84.
+  it.each([['png', 209, 215, 70], ['svg', 205, 210, 80]] as const)('%s', async (format, edge, from, len) => {
+    const out = await render(payload, { template: 'qr_only', format });
+    const img = await loadImage(typeof out === 'string' ? Buffer.from(out) : out);
+    const c = createCanvas(img.width, img.height).getContext('2d');
+    c.drawImage(img, 0, 0);
+    const px = [...c.getImageData(from, edge, len, 1).data, ...c.getImageData(edge, from, 1, len).data];
+    expect(Math.min(...px)).toBeGreaterThanOrEqual(250);
   });
 });
 
@@ -121,9 +139,9 @@ describe('public boundary: custom logos never reach loadImage when rejected', ()
   ];
   for (const format of ['png', 'jpeg', 'webp', 'svg'] as const) {
     it.each(cases)(`${format}: %s`, async (_name, centerLogo, expected) => {
-      expect(await code(render(payload, { template: 'qr_only', format, centerLogo }))).toBe(expected);
-      for (const arg of loaded()) expect(Buffer.from(arg as Uint8Array).equals(Buffer.from(oversizedHeader))).toBe(false);
-      if (typeof centerLogo !== 'string') expect(loaded()).not.toContain(centerLogo);
+      const got = await code(render(payload, { template: 'qr_only', format, centerLogo }));
+      expect(loadImage).not.toHaveBeenCalled(); // validation runs before any drawing
+      expect(got).toBe(expected);
     });
   }
 });
