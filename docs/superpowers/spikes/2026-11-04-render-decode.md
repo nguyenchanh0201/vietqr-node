@@ -39,7 +39,7 @@ Lockfile (`package-lock.json`) resolved versions match exactly: `@napi-rs/canvas
 
 Declared `engines`: `@napi-rs/canvas` `>= 10`, `qrcode` `>=10.13.0`, `zxing-wasm` none. Licenses: all three MIT.
 
-**Every snippet in this record was executed on both v24.22.1 and v20.20.2 with identical results.** Node 20 was installed for this check; no code path needed changing.
+**The original spike snippets were executed on both v24.22.1 and v20.20.2 with identical results.** Node 20 was installed for that check. Review-round changes and their narrower fresh verification are recorded below; the future `readAsset` integration is prescribed, not yet implemented or tested.
 
 ### Notes for Task 2 (package.json)
 
@@ -77,7 +77,9 @@ path element count = 24
 
 ### Vietnamese diacritics — the real check
 
-`read_image` is unavailable to this model, so "by eye" was replaced by a stronger, mechanical check that measures exactly what the eye would. For every character in `"NGUYỄN VĂN ĐỨC – Số thẻ"`, the direct glyph raster and the raster of the exported SVG were compared:
+**Review-round visual check (2026-11-04): PASS.** Reproduced only the SVG→PNG round trip with pinned `@napi-rs/canvas@1.1.0`, upstream `GoogleSans-Regular.ttf` and bank logo `Resources/logos/970422.png`. Used `read_image` on the 1000×280 raster: the full text `NGUYỄN VĂN ĐỨC – Số thẻ` is legible, the circumflex/tilde on `Ễ`, breve on `Ă`, stroke on `Đ`, horn/acute on `Ứ`, circumflex/acute on `ố`, hook on `ẻ`, and en dash are visible without clipping or tofu; the MB logo is intact. Original SVG and PNG are preserved in ignored `.superpowers/sdd/2026-11-04-vietqr-node/task-1-review-visual.{svg,png}`. The controller independently inspected the PNG with `read_image` and explicitly accepted the full text, accents, en dash and intact MB logo with no tofu or clipping.
+
+The original run did **not** perform the required by-eye check. Its following per-glyph comparisons are supplementary mechanical evidence, not equivalent to visual inspection:
 
 ```
 char | code   | ink | top | bottom | diacriticInk | residual(0-1) | bestOffset
@@ -243,11 +245,11 @@ bomb loadImage threw: Error Unsupported image type
 - **`0×0` is ambiguous** between "not an image" and "a legitimately empty image".
 - The success case works, but it is an accident of the DOM-compatible API rather than a documented metadata API, and the brief's expected answer ("does not reliably expose dimensions") is borne out.
 
-So: **parse the header ourselves.** It is ~0.6 µs per call, needs only the first ~30 bytes, cannot allocate a raster, and yields the format.
+So: **parse the header ourselves.** The measured simple-header cases took ~0.6 µs per call and cannot allocate a raster. PNG and these WebP layouts need only 24–30 bytes; JPEG must walk markers to SOF, potentially past 60 KB APP segments (tested below), bounded by the caller's **10 MiB encoded-input cap**. Never slice every format to 30 bytes before inspecting it.
 
-### The parser Task 6 must implement
+### Tested parser sketch for Task 6
 
-Exact byte layouts, all verified against real encodings plus adversarial inputs. Returns `null` for anything it does not recognise; the caller converts `null` into the appropriate `VietQrError` before allocating anything.
+This is a tested internal sketch, not the public interface or a complete image validator. Returns `null` for unrecognised/truncated headers; a plausible header still needs native decode validation. Task 6 must implement the binding public `inspectImageHeader(bytes)` wrapper, translating invalid headers into `VietQrError` with `qr.invalid_image`, plus `assertImageBytes(bytes)` enforcing the 10 MiB cap before inspection and dimension limits with `qr.image_too_large` before pixel allocation. Preserve those published interfaces, not this helper's nullable return type. The review regressions extract and execute this code block verbatim (only removing TypeScript syntax).
 
 ```ts
 export interface ImageSize {
@@ -257,7 +259,7 @@ export interface ImageSize {
 }
 
 /**
- * Reads image dimensions from the first bytes only. Never decodes pixels.
+ * Reads header dimensions only; JPEG may scan to SOF. Never decodes pixels.
  * Returns null for unrecognised, truncated or malformed input.
  * Callers must treat null as a malformed-image error, and must reject
  * dimensions outside the limits (<= 8192 per axis, <= 16_000_000 pixels,
@@ -292,15 +294,18 @@ export function sniffImageSize(buf: Uint8Array): ImageSize | null {
   if (buf[0] === 0xff && buf[1] === 0xd8) {
     const view = new DataView(buf.buffer, buf.byteOffset, buf.byteLength)
     let off = 2
-    while (off + 9 < buf.length) {
+    while (off < buf.length) {
       if (buf[off] !== 0xff) return null
-      let marker = buf[off + 1]
-      while (marker === 0xff) { off++; marker = buf[off + 1] }
-      off += 2
-      if (marker === 0xd8 || marker === 0xd9 || (marker >= 0xd0 && marker <= 0xd7)) continue
+      while (off < buf.length && buf[off] === 0xff) off++
+      if (off >= buf.length) return null // padding must end in a marker
+      const marker = buf[off++]
+      if (marker === 0xd9 || marker === 0xda) return null // no SOF before EOI/SOS
+      if (marker === 0xd8 || marker === 0x01 || (marker >= 0xd0 && marker <= 0xd7)) continue
+      if (marker === 0 || off + 2 > buf.length) return null
       const len = view.getUint16(off)
       if (len < 2 || off + len > buf.length) return null
       if (marker >= 0xc0 && marker <= 0xcf && marker !== 0xc4 && marker !== 0xc8 && marker !== 0xcc) {
+        if (len < 7) return null // length + precision + height + width must be inside segment
         // `off` points at the 2-byte segment length; payload starts at off + 2.
         // payload+1..2 = height, payload+3..4 = width  =>  off+3 and off+5.
         return { format: 'jpeg', width: view.getUint16(off + 5), height: view.getUint16(off + 3) }
@@ -356,7 +361,9 @@ Notes on the code above (all of these bit me during the spike):
 
 ### Validation evidence
 
-Real encodings, dimensions chosen to be wrong if the offsets are wrong (1234×567):
+**Review round 1 — JPEG bounds regression (test first):** extracted the published `sniffImageSize` block and removed only its TypeScript signature for execution. Ran `node --test jpeg-review.test.mjs` from ignored `spike/` before editing: **exit 1, 3 tests, 1 pass, 2 fail**. `FF D8` plus ten `FF` padding bytes threw `RangeError: Offset is outside the bounds of the DataView`; SOF with declared length 2 incorrectly returned 300×200 from bytes outside that segment. Fixed padding/marker/length-field bounds and required SOF length ≥ 7 for the fields this sketch reads. It is not full JPEG conformance validation. The same command then passed: **exit 0, 3 tests, 3 pass, 0 fail**, including a real canvas JPEG and the same JPEG with a 60 KB APP1 segment. No production files were introduced; Task 6 must retain these regressions for its public wrapper.
+
+Original spike real encodings, dimensions chosen to be wrong if the offsets are wrong (1234×567):
 
 ```
 png 1234x567: bytes=7541 chunk@12="IHDR" => {"format":"png","width":1234,"height":567}
@@ -423,33 +430,36 @@ node_modules/zxing-wasm/dist/reader/zxing_reader.wasm
 
 `zxing-wasm` also exports `ZXING_WASM_VERSION` (`"3.1.6"`) and `ZXING_WASM_SHA256` from `zxing-wasm/reader`, which is a convenient runtime assertion that the shipped WASM matches the JS.
 
-**Resolving it — the only two network-free ways:**
+**Native spike resolution probes — separate ESM and CJS calls:**
 
-```ts
-// ESM, no bundler
-const wasmUrl = import.meta.resolve('zxing-wasm/reader/zxing_reader.wasm')  // file:// URL
-// => file:///.../node_modules/zxing-wasm/dist/reader/zxing_reader.wasm
-
-// ESM or CJS, works under tsup's CJS output too
+```js
+// Native ESM (.mjs), no bundler:
 import { createRequire } from 'node:module'
 const require = createRequire(import.meta.url)
 const wasmPath = require.resolve('zxing-wasm/reader/zxing_reader.wasm')
-// => /.../node_modules/zxing-wasm/dist/reader/zxing_reader.wasm  (a plain path)
+// Or, in native ESM only:
+const wasmUrl = import.meta.resolve('zxing-wasm/reader/zxing_reader.wasm')
 ```
 
-Both were verified to yield the same file. **`require.resolve` is the one to use in package code**, because it is identical in ESM and CJS builds and returns a path that `fs.readFileSync` takes directly; `import.meta.resolve` does not exist in CJS output. Confirmed working under Node 20 in a `.cjs` file through `require('zxing-wasm/reader')`.
+```js
+// Native CJS (.cjs), a DIFFERENT call site using native require:
+const { prepareZXingModule, readBarcodes } = require('zxing-wasm/reader')
+const wasmPath = require.resolve('zxing-wasm/reader/zxing_reader.wasm')
+```
 
-If the WASM is instead **copied into the package's own assets** (the spec lists it under "Assets shipped in the package"), resolve it relative to the built module with `new URL('./assets/zxing_reader.wasm', import.meta.url)` for ESM and `path.join(__dirname, 'assets', ...)` for CJS, never `process.cwd()`. Either strategy is network-free; picking one is a Task 2/Task 9 packaging decision. **The rest of this record assumes the `zxing-wasm` subpath**, since it needs no build-step copy and cannot drift from the pinned JS version.
+The native probes resolve the same on-disk file. The original Node 20 `.cjs` probe verified **native `require`**, not `createRequire(import.meta.url)` transpiled to CJS. Raw `import.meta.url` is ESM-only; it does not work in native CJS, and these probes provide **no evidence of tsup CJS compatibility** for that expression.
+
+**Binding Task 9 packaging mechanism:** copy the version-matched `zxing_reader.wasm` from the pinned dependency into the package assets at build time, then load it with `readAsset('zxing_reader.wasm')`. This is required, not an optional alternative to runtime dependency-subpath resolution. Task 2's asset helper must resolve relative to the built module (`new URL('./assets/...', import.meta.url)` in ESM, `path.join(__dirname, 'assets', ...)` in CJS), never `process.cwd()`; the built ESM/CJS release smoke tests must verify both outputs. The native probes above are spike evidence only, not the production asset-loading prescription.
 
 ### The exact init and decode calls
 
+The original native-ESM spike used `readFileSync(require.resolve(...))` with the ESM `createRequire` call above; native CJS used its own `require`. Both proved the `wasmBinary` init API, not a dual-build asset helper. Task 9 must substitute the binding copied-asset call below (integration is verified in Tasks 2/9, not claimed tested by this spike):
+
 ```ts
-import { readFileSync } from 'node:fs'
-import { createRequire } from 'node:module'
+import { readAsset } from './assets'
 import { prepareZXingModule, readBarcodes } from 'zxing-wasm/reader'
 
-const require = createRequire(import.meta.url)
-const wasmBinary = readFileSync(require.resolve('zxing-wasm/reader/zxing_reader.wasm'))
+const wasmBinary = readAsset('zxing_reader.wasm')
 
 // Module-level singleton. `fireImmediately: true` is REQUIRED for this overload to
 // return a promise; without it prepareZXingModule returns void and instantiation is
@@ -631,11 +641,11 @@ K) decode after purge valid = true
 5. **`@napi-rs/canvas` encodes WebP as `VP8X`**, so the `VP8 `/`VP8L` header branches could only be validated with synthetic buffers. Flagged for whoever reviews the parser.
 6. **Node 20 is not the machine default** (v24.22.1 is). Node 20.20.2 was installed via nvm and every spike was re-run on it; results matched. The only observable difference: `globalThis.ImageData` is undefined on Node 20 (harmless — zxing duck-types), and `purgeZXingModule` + re-init was 29 ms versus 4 ms (irrelevant, not on any real path).
 7. **Memory measurement is noisy without isolation.** The first attempt to measure `loadImage`'s allocation in one process gave nonsense because the source canvas was still alive. Re-measured in three separate processes with `--expose-gc`, which produced the clean 48 / 58 / 119 MiB figures.
-8. **`read_image` is unavailable to this model**, so the brief's "by eye" check was replaced with per-glyph ink, bounding-box and alignment-residual measurement. It is a stricter check than eyeballing but it is not a human's judgement — if the controller wants a literal visual confirmation, the artefacts (in the deleted `spike/`) can be regenerated from the snippets above.
+8. **The original run omitted the required by-eye check** and deleted its images. Mechanical glyph comparisons did not satisfy that requirement. Review round 1 regenerated the SVG/PNG with pinned canvas and upstream assets; the implementer and controller both used `read_image` and accepted the visible text/diacritics/logo. The original review artifacts remain in ignored SDD storage, not in deleted scratch.
 
 ## Things later tasks must know that the above does not already say
 
-- **Asset resolution rule, restated for these two assets.** The font and logos resolve relative to the built module (`new URL('./assets/...', import.meta.url)` in ESM, `path.join(__dirname, 'assets', ...)` in CJS), never `process.cwd()`. The WASM either comes from `require.resolve('zxing-wasm/reader/zxing_reader.wasm')` (no copy needed, always version-matched) or from a copied asset resolved the same way. Pick one in Task 2 and record it in the build config, because the published-package smoke test (release gate) runs with the process cwd outside the package.
+- **Asset resolution rule.** Font, logos and the build-copied, version-matched WASM must all use the module-relative `readAsset` mechanism. Task 9 loads `readAsset('zxing_reader.wasm')`; runtime dependency-subpath resolution is not an alternative. The release gate must exercise ESM and CJS with cwd outside the package. Raw `import.meta.url` belongs only in the ESM resolution branch, never unmodified CJS.
 - **`decodeImage` order of operations** (Task 6 + Task 9): bound the encoded input at 10 MiB → `sniffImageSize` → reject `null` as unsupported/malformed → apply the dimension limits → only then `loadImage` → draw to a canvas → `getImageData` → `readBarcodes`. Nothing allocates before the limits check.
 - **AVIF and GIF will be rejected** by this parser even though `@napi-rs/canvas` could decode them. That is the intended narrowing; state it in the `decodeImage` / custom-logo docs and give it a stable error code rather than a generic "unsupported".
 - **`qr_only` SVG remains hand-written.** Decision 1 only covers `compact`/`print`. Do not route `qr_only` through an `SvgCanvas` — upstream's own `qr_only` SVG is a different code path and the spec pins it.
