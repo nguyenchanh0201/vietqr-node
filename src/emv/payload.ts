@@ -122,7 +122,7 @@ export function extractBinFromEmvCo(payload: string): string | null {
       if (bank != null && trim(bank)) return trim(bank);
     }
   }
-  const aid = payload.toUpperCase().indexOf('A000000727');
+  const aid = payload.search(/A000000727/i);
   if (aid >= 0) {
     const sub = payload.indexOf('0006', aid + 10);
     if (sub >= 0 && sub + 10 <= payload.length) {

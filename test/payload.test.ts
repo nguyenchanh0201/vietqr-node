@@ -69,6 +69,13 @@ test('extracts BIN from payloads without requiring valid CRC and supports upstre
   expect(api.extractBinFromEmvCo('')).toBeNull();
   expect(api.extractBinFromEmvCo('not a payload')).toBeNull();
 });
+for (const prefix of ['ß', 'ﬃ']) {
+  for (const aid of ['A000000727', 'a000000727']) {
+    test(`fallback preserves original offsets after ${prefix} before ${aid}`, () => {
+      expect(api.extractBinFromEmvCo(`${prefix}${aid}0006970422`)).toBe('970422');
+    });
+  }
+}
 test('extraction prefers parsed nested bank over substring collisions', () => {
   expect(api).toHaveProperty('extractBinFromEmvCo');
   // A valid root has a misleading AID/0006 in tag00; nested bank need not be six digits.
