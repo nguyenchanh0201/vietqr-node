@@ -1,0 +1,7 @@
+{
+  "name": "vietqr-node-express-example",
+  "private": true,
+  "type": "module",
+  "scripts": { "start": "node --experimental-strip-types server.ts" },
+  "dependencies": { "express": "^5.1.0", "vietqr-node": "file:../.." }
+}
