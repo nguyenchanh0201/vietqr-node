@@ -19,6 +19,7 @@ Console.WriteLine("Lossless UTF-16 serializer assertions passed (pair, lone high
 var directory = args.Length > 0 ? args[0] : "test/fixtures/upstream";
 using var document = JsonDocument.Parse(File.ReadAllText(Path.Combine(directory, "cases.json")));
 var outputs = new Dictionary<string, object>();
+var successfulPayloads = new Dictionary<string, string>();
 foreach (var item in document.RootElement.EnumerateArray())
 {
     if (item.GetProperty("kind").GetString() != "payload") continue;
@@ -27,7 +28,7 @@ foreach (var item in document.RootElement.EnumerateArray())
     try
     {
         var raw = item.GetProperty("request");
-        string? Get(string key) => raw.TryGetProperty(key, out var value) ? value.GetString() : null;
+        string? Get(string key) => raw.TryGetProperty(key, out var value) ? ReadUtf16String(value) : null;
         long? amount = null;
         if (item.TryGetProperty("amountSpecial", out _) ||
             (raw.TryGetProperty("amount", out var number) && number.ValueKind != JsonValueKind.Null &&
@@ -67,6 +68,7 @@ foreach (var item in document.RootElement.EnumerateArray())
             default: throw new InvalidOperationException("Unknown oracle operation.");
         }
         outputs[id] = new { ok = true, payload };
+        successfulPayloads[id] = payload;
         // Diagnostics do not change the observed string or its JSON serialization.
         for (var i = 0; i < payload.Length; i++)
         {
@@ -88,6 +90,87 @@ foreach (var item in document.RootElement.EnumerateArray())
 var outputPath = Path.Combine(directory, "payloads.json");
 File.WriteAllText(outputPath, JsonSerializer.Serialize(outputs, jsonOptions) + "\n");
 Console.WriteLine($"Wrote {outputs.Count} upstream/adapter observations to {outputPath}.");
+
+// Parse inputs use a code-unit reader, never JsonElement.GetString on payloads.
+foreach (var input in new[] { "😀", "\uD83D", "\uDE00", "\n\t\"\\" })
+{
+    using var assertion = JsonDocument.Parse(JsonSerializer.Serialize(input, jsonOptions));
+    if (ReadUtf16String(assertion.RootElement) != input)
+        throw new InvalidOperationException("Lossless UTF-16 reader assertion failed.");
+}
+Console.WriteLine("Lossless UTF-16 reader assertions passed (pair, lone high/low, controls, quotes, backslash).");
+var parseOutputs = new Dictionary<string, object>();
+foreach (var item in document.RootElement.EnumerateArray())
+{
+    if (item.GetProperty("kind").GetString() != "parse") continue;
+    var id = item.GetProperty("id").GetString()!;
+    var payload = item.TryGetProperty("payload", out var literal)
+        ? ReadUtf16String(literal)!
+        : successfulPayloads[item.GetProperty("payloadCase").GetString()!];
+    if (item.TryGetProperty("transform", out var transform))
+        payload = transform.GetString() switch {
+            "surroundWhitespace" => " \t\n" + payload + "\r\n ",
+            "lowercaseCrc" => payload[..^4] + payload[^4..].ToLowerInvariant(),
+            "badCrc" => payload[..^4] + (payload[^4..] == "0000" ? "0001" : "0000"),
+            _ => throw new InvalidOperationException("Unknown parse transform.")
+        };
+    if (item.TryGetProperty("transform", out var crcTransform) && crcTransform.GetString() == "lowercaseCrc" &&
+        !payload[^4..].Any(unit => unit >= 'a' && unit <= 'f'))
+        throw new InvalidOperationException("Lowercase CRC case must exercise a-f, not a digit-only no-op.");
+    var options = new VietQrParseOptions();
+    if (item.TryGetProperty("options", out var rawOptions))
+    {
+        if (rawOptions.TryGetProperty("strictCrc", out var strict)) options.StrictCrc = strict.GetBoolean();
+        if (rawOptions.TryGetProperty("maxPayloadLength", out var maximum)) options.MaxPayloadLength = maximum.GetInt32();
+    }
+    var result = VietQrParser.Parse(payload, options);
+    object observation;
+    if (!result.IsSuccess)
+        observation = new { ok = false, error = result.Error.Code, message = result.Error.Message };
+    else
+    {
+        var info = result.Value!;
+        observation = new { ok = true, info = new {
+            bankBin = info.BankBin, bankInfo = info.BankInfo?.Bin, accountNo = info.AccountNo,
+            serviceType = info.ServiceType == VietQrServiceType.Card ? "card" : "account",
+            qrType = info.QrType == VietQrType.Dynamic ? "dynamic" : "static", isDynamic = info.IsDynamic,
+            amount = info.Amount, currency = info.Currency, countryCode = info.CountryCode,
+            description = info.Description, billNumber = info.BillNumber, referenceLabel = info.ReferenceLabel,
+            merchantName = info.MerchantName, merchantCity = info.MerchantCity,
+            additionalData = info.AdditionalData == null ? null : new {
+                billNumber = info.AdditionalData.BillNumber, referenceLabel = info.AdditionalData.ReferenceLabel,
+                purpose = info.AdditionalData.Purpose },
+            crc = info.Crc, isValidCrc = info.IsValidCrc, rawTags = info.RawTags, rawPayload = info.RawPayload
+        } };
+    }
+    parseOutputs[id] = new { payload, options = new { strictCrc = options.StrictCrc, maxPayloadLength = options.MaxPayloadLength }, result = observation };
+}
+var parsePath = Path.Combine(directory, "parse.json");
+File.WriteAllText(parsePath, JsonSerializer.Serialize(parseOutputs, jsonOptions) + "\n");
+Console.WriteLine($"Wrote {parseOutputs.Count} upstream parse observations to {parsePath}.");
+
+static string? ReadUtf16String(JsonElement element)
+{
+    if (element.ValueKind == JsonValueKind.Null) return null;
+    if (element.ValueKind != JsonValueKind.String) throw new JsonException("Expected a string.");
+    var raw = element.GetRawText();
+    var value = new StringBuilder();
+    for (var i = 1; i < raw.Length - 1; i++)
+    {
+        if (raw[i] != '\\') { value.Append(raw[i]); continue; }
+        var escape = raw[++i];
+        if (escape == 'u')
+        {
+            value.Append((char)ushort.Parse(raw.AsSpan(i + 1, 4), NumberStyles.HexNumber, CultureInfo.InvariantCulture));
+            i += 4;
+        }
+        else value.Append(escape switch {
+            '"' => '"', '\\' => '\\', '/' => '/', 'b' => '\b', 'f' => '\f',
+            'n' => '\n', 'r' => '\r', 't' => '\t', _ => throw new JsonException("Invalid escape.")
+        });
+    }
+    return value.ToString();
+}
 
 sealed class Utf16StringConverter : JsonConverter<string>
 {

@@ -1,0 +1,2431 @@
+{
+  "parse-surrounding-whitespace": {
+    "payload": " \u0009\u000A00020101021238560010A0000007270126000697042201120567897999990208QRIBFTTA5303704540420005802VN62190815Thanh toan cafe63046302\u000D\u000A ",
+    "options": {
+      "strictCrc": true,
+      "maxPayloadLength": 1024
+    },
+    "result": {
+      "ok": false,
+      "error": "qr.invalid_crc",
+      "message": "M\u00E3 ki\u1EC3m tra CRC16 (Tag 63) kh\u00F4ng kh\u1EDBp v\u1EDBi n\u1ED9i dung d\u1EEF li\u1EC7u m\u00E3 QR."
+    }
+  },
+  "parse-lowercase-crc": {
+    "payload": "00020101021138560010A0000007270126000697042201120567897999990208QRIBFTTA53037045802VN6304cad2",
+    "options": {
+      "strictCrc": true,
+      "maxPayloadLength": 1024
+    },
+    "result": {
+      "ok": true,
+      "info": {
+        "bankBin": "970422",
+        "bankInfo": "970422",
+        "accountNo": "056789799999",
+        "serviceType": "account",
+        "qrType": "static",
+        "isDynamic": false,
+        "amount": null,
+        "currency": "704",
+        "countryCode": "VN",
+        "description": null,
+        "billNumber": null,
+        "referenceLabel": null,
+        "merchantName": null,
+        "merchantCity": null,
+        "additionalData": null,
+        "crc": "cad2",
+        "isValidCrc": true,
+        "rawTags": {
+          "00": "01",
+          "01": "11",
+          "38": "0010A0000007270126000697042201120567897999990208QRIBFTTA",
+          "53": "704",
+          "58": "VN",
+          "63": "cad2"
+        },
+        "rawPayload": "00020101021138560010A0000007270126000697042201120567897999990208QRIBFTTA53037045802VN6304cad2"
+      }
+    }
+  },
+  "parse-build-account-static": {
+    "payload": "00020101021138560010A0000007270126000697042201120567897999990208QRIBFTTA53037045802VN6304CAD2",
+    "options": {
+      "strictCrc": true,
+      "maxPayloadLength": 1024
+    },
+    "result": {
+      "ok": true,
+      "info": {
+        "bankBin": "970422",
+        "bankInfo": "970422",
+        "accountNo": "056789799999",
+        "serviceType": "account",
+        "qrType": "static",
+        "isDynamic": false,
+        "amount": null,
+        "currency": "704",
+        "countryCode": "VN",
+        "description": null,
+        "billNumber": null,
+        "referenceLabel": null,
+        "merchantName": null,
+        "merchantCity": null,
+        "additionalData": null,
+        "crc": "CAD2",
+        "isValidCrc": true,
+        "rawTags": {
+          "00": "01",
+          "01": "11",
+          "38": "0010A0000007270126000697042201120567897999990208QRIBFTTA",
+          "53": "704",
+          "58": "VN",
+          "63": "CAD2"
+        },
+        "rawPayload": "00020101021138560010A0000007270126000697042201120567897999990208QRIBFTTA53037045802VN6304CAD2"
+      }
+    }
+  },
+  "parse-build-account-dynamic": {
+    "payload": "00020101021238560010A0000007270126000697042201120567897999990208QRIBFTTA5303704540420005802VN6304C809",
+    "options": {
+      "strictCrc": true,
+      "maxPayloadLength": 1024
+    },
+    "result": {
+      "ok": true,
+      "info": {
+        "bankBin": "970422",
+        "bankInfo": "970422",
+        "accountNo": "056789799999",
+        "serviceType": "account",
+        "qrType": "dynamic",
+        "isDynamic": true,
+        "amount": 2000,
+        "currency": "704",
+        "countryCode": "VN",
+        "description": null,
+        "billNumber": null,
+        "referenceLabel": null,
+        "merchantName": null,
+        "merchantCity": null,
+        "additionalData": null,
+        "crc": "C809",
+        "isValidCrc": true,
+        "rawTags": {
+          "00": "01",
+          "01": "12",
+          "38": "0010A0000007270126000697042201120567897999990208QRIBFTTA",
+          "53": "704",
+          "54": "2000",
+          "58": "VN",
+          "63": "C809"
+        },
+        "rawPayload": "00020101021238560010A0000007270126000697042201120567897999990208QRIBFTTA5303704540420005802VN6304C809"
+      }
+    }
+  },
+  "parse-build-card-static": {
+    "payload": "00020101021138560010A0000007270126000697042201120567897999990208QRIBFTTC53037045802VN63043A91",
+    "options": {
+      "strictCrc": true,
+      "maxPayloadLength": 1024
+    },
+    "result": {
+      "ok": true,
+      "info": {
+        "bankBin": "970422",
+        "bankInfo": "970422",
+        "accountNo": "056789799999",
+        "serviceType": "card",
+        "qrType": "static",
+        "isDynamic": false,
+        "amount": null,
+        "currency": "704",
+        "countryCode": "VN",
+        "description": null,
+        "billNumber": null,
+        "referenceLabel": null,
+        "merchantName": null,
+        "merchantCity": null,
+        "additionalData": null,
+        "crc": "3A91",
+        "isValidCrc": true,
+        "rawTags": {
+          "00": "01",
+          "01": "11",
+          "38": "0010A0000007270126000697042201120567897999990208QRIBFTTC",
+          "53": "704",
+          "58": "VN",
+          "63": "3A91"
+        },
+        "rawPayload": "00020101021138560010A0000007270126000697042201120567897999990208QRIBFTTC53037045802VN63043A91"
+      }
+    }
+  },
+  "parse-build-card-dynamic": {
+    "payload": "00020101021238560010A0000007270126000697042201120567897999990208QRIBFTTC5303704540420005802VN630480EA",
+    "options": {
+      "strictCrc": true,
+      "maxPayloadLength": 1024
+    },
+    "result": {
+      "ok": true,
+      "info": {
+        "bankBin": "970422",
+        "bankInfo": "970422",
+        "accountNo": "056789799999",
+        "serviceType": "card",
+        "qrType": "dynamic",
+        "isDynamic": true,
+        "amount": 2000,
+        "currency": "704",
+        "countryCode": "VN",
+        "description": null,
+        "billNumber": null,
+        "referenceLabel": null,
+        "merchantName": null,
+        "merchantCity": null,
+        "additionalData": null,
+        "crc": "80EA",
+        "isValidCrc": true,
+        "rawTags": {
+          "00": "01",
+          "01": "12",
+          "38": "0010A0000007270126000697042201120567897999990208QRIBFTTC",
+          "53": "704",
+          "54": "2000",
+          "58": "VN",
+          "63": "80EA"
+        },
+        "rawPayload": "00020101021238560010A0000007270126000697042201120567897999990208QRIBFTTC5303704540420005802VN630480EA"
+      }
+    }
+  },
+  "parse-build-readme": {
+    "payload": "00020101021238560010A0000007270126000697042201120567897999990208QRIBFTTA5303704540420005802VN62190815Thanh toan cafe63046302",
+    "options": {
+      "strictCrc": true,
+      "maxPayloadLength": 1024
+    },
+    "result": {
+      "ok": true,
+      "info": {
+        "bankBin": "970422",
+        "bankInfo": "970422",
+        "accountNo": "056789799999",
+        "serviceType": "account",
+        "qrType": "dynamic",
+        "isDynamic": true,
+        "amount": 2000,
+        "currency": "704",
+        "countryCode": "VN",
+        "description": "Thanh toan cafe",
+        "billNumber": null,
+        "referenceLabel": null,
+        "merchantName": null,
+        "merchantCity": null,
+        "additionalData": {
+          "billNumber": null,
+          "referenceLabel": null,
+          "purpose": "Thanh toan cafe"
+        },
+        "crc": "6302",
+        "isValidCrc": true,
+        "rawTags": {
+          "00": "01",
+          "01": "12",
+          "38": "0010A0000007270126000697042201120567897999990208QRIBFTTA",
+          "53": "704",
+          "54": "2000",
+          "58": "VN",
+          "62": "0815Thanh toan cafe",
+          "63": "6302"
+        },
+        "rawPayload": "00020101021238560010A0000007270126000697042201120567897999990208QRIBFTTA5303704540420005802VN62190815Thanh toan cafe63046302"
+      }
+    }
+  },
+  "parse-build-amount-missing": {
+    "payload": "00020101021138560010A0000007270126000697042201120567897999990208QRIBFTTA53037045802VN6304CAD2",
+    "options": {
+      "strictCrc": true,
+      "maxPayloadLength": 1024
+    },
+    "result": {
+      "ok": true,
+      "info": {
+        "bankBin": "970422",
+        "bankInfo": "970422",
+        "accountNo": "056789799999",
+        "serviceType": "account",
+        "qrType": "static",
+        "isDynamic": false,
+        "amount": null,
+        "currency": "704",
+        "countryCode": "VN",
+        "description": null,
+        "billNumber": null,
+        "referenceLabel": null,
+        "merchantName": null,
+        "merchantCity": null,
+        "additionalData": null,
+        "crc": "CAD2",
+        "isValidCrc": true,
+        "rawTags": {
+          "00": "01",
+          "01": "11",
+          "38": "0010A0000007270126000697042201120567897999990208QRIBFTTA",
+          "53": "704",
+          "58": "VN",
+          "63": "CAD2"
+        },
+        "rawPayload": "00020101021138560010A0000007270126000697042201120567897999990208QRIBFTTA53037045802VN6304CAD2"
+      }
+    }
+  },
+  "parse-build-amount-zero": {
+    "payload": "00020101021138560010A0000007270126000697042201120567897999990208QRIBFTTA53037045802VN6304CAD2",
+    "options": {
+      "strictCrc": true,
+      "maxPayloadLength": 1024
+    },
+    "result": {
+      "ok": true,
+      "info": {
+        "bankBin": "970422",
+        "bankInfo": "970422",
+        "accountNo": "056789799999",
+        "serviceType": "account",
+        "qrType": "static",
+        "isDynamic": false,
+        "amount": null,
+        "currency": "704",
+        "countryCode": "VN",
+        "description": null,
+        "billNumber": null,
+        "referenceLabel": null,
+        "merchantName": null,
+        "merchantCity": null,
+        "additionalData": null,
+        "crc": "CAD2",
+        "isValidCrc": true,
+        "rawTags": {
+          "00": "01",
+          "01": "11",
+          "38": "0010A0000007270126000697042201120567897999990208QRIBFTTA",
+          "53": "704",
+          "58": "VN",
+          "63": "CAD2"
+        },
+        "rawPayload": "00020101021138560010A0000007270126000697042201120567897999990208QRIBFTTA53037045802VN6304CAD2"
+      }
+    }
+  },
+  "parse-build-amount-negative": {
+    "payload": "00020101021138560010A0000007270126000697042201120567897999990208QRIBFTTA53037045802VN6304CAD2",
+    "options": {
+      "strictCrc": true,
+      "maxPayloadLength": 1024
+    },
+    "result": {
+      "ok": true,
+      "info": {
+        "bankBin": "970422",
+        "bankInfo": "970422",
+        "accountNo": "056789799999",
+        "serviceType": "account",
+        "qrType": "static",
+        "isDynamic": false,
+        "amount": null,
+        "currency": "704",
+        "countryCode": "VN",
+        "description": null,
+        "billNumber": null,
+        "referenceLabel": null,
+        "merchantName": null,
+        "merchantCity": null,
+        "additionalData": null,
+        "crc": "CAD2",
+        "isValidCrc": true,
+        "rawTags": {
+          "00": "01",
+          "01": "11",
+          "38": "0010A0000007270126000697042201120567897999990208QRIBFTTA",
+          "53": "704",
+          "58": "VN",
+          "63": "CAD2"
+        },
+        "rawPayload": "00020101021138560010A0000007270126000697042201120567897999990208QRIBFTTA53037045802VN6304CAD2"
+      }
+    }
+  },
+  "parse-build-amount-max13": {
+    "payload": "00020101021238560010A0000007270126000697042201120567897999990208QRIBFTTA5303704541399999999999995802VN6304443C",
+    "options": {
+      "strictCrc": true,
+      "maxPayloadLength": 1024
+    },
+    "result": {
+      "ok": true,
+      "info": {
+        "bankBin": "970422",
+        "bankInfo": "970422",
+        "accountNo": "056789799999",
+        "serviceType": "account",
+        "qrType": "dynamic",
+        "isDynamic": true,
+        "amount": 9999999999999,
+        "currency": "704",
+        "countryCode": "VN",
+        "description": null,
+        "billNumber": null,
+        "referenceLabel": null,
+        "merchantName": null,
+        "merchantCity": null,
+        "additionalData": null,
+        "crc": "443C",
+        "isValidCrc": true,
+        "rawTags": {
+          "00": "01",
+          "01": "12",
+          "38": "0010A0000007270126000697042201120567897999990208QRIBFTTA",
+          "53": "704",
+          "54": "9999999999999",
+          "58": "VN",
+          "63": "443C"
+        },
+        "rawPayload": "00020101021238560010A0000007270126000697042201120567897999990208QRIBFTTA5303704541399999999999995802VN6304443C"
+      }
+    }
+  },
+  "parse-build-explicit-static-positive": {
+    "payload": "00020101021138560010A0000007270126000697042201120567897999990208QRIBFTTA5303704540420005802VN6304BBDF",
+    "options": {
+      "strictCrc": true,
+      "maxPayloadLength": 1024
+    },
+    "result": {
+      "ok": true,
+      "info": {
+        "bankBin": "970422",
+        "bankInfo": "970422",
+        "accountNo": "056789799999",
+        "serviceType": "account",
+        "qrType": "static",
+        "isDynamic": false,
+        "amount": 2000,
+        "currency": "704",
+        "countryCode": "VN",
+        "description": null,
+        "billNumber": null,
+        "referenceLabel": null,
+        "merchantName": null,
+        "merchantCity": null,
+        "additionalData": null,
+        "crc": "BBDF",
+        "isValidCrc": true,
+        "rawTags": {
+          "00": "01",
+          "01": "11",
+          "38": "0010A0000007270126000697042201120567897999990208QRIBFTTA",
+          "53": "704",
+          "54": "2000",
+          "58": "VN",
+          "63": "BBDF"
+        },
+        "rawPayload": "00020101021138560010A0000007270126000697042201120567897999990208QRIBFTTA5303704540420005802VN6304BBDF"
+      }
+    }
+  },
+  "parse-build-bill-static-inferred": {
+    "payload": "00020101021138560010A0000007270126000697042201120567897999990208QRIBFTTA53037045802VN62110107INV-12363044472",
+    "options": {
+      "strictCrc": true,
+      "maxPayloadLength": 1024
+    },
+    "result": {
+      "ok": true,
+      "info": {
+        "bankBin": "970422",
+        "bankInfo": "970422",
+        "accountNo": "056789799999",
+        "serviceType": "account",
+        "qrType": "static",
+        "isDynamic": false,
+        "amount": null,
+        "currency": "704",
+        "countryCode": "VN",
+        "description": null,
+        "billNumber": "INV-123",
+        "referenceLabel": null,
+        "merchantName": null,
+        "merchantCity": null,
+        "additionalData": {
+          "billNumber": "INV-123",
+          "referenceLabel": null,
+          "purpose": null
+        },
+        "crc": "4472",
+        "isValidCrc": true,
+        "rawTags": {
+          "00": "01",
+          "01": "11",
+          "38": "0010A0000007270126000697042201120567897999990208QRIBFTTA",
+          "53": "704",
+          "58": "VN",
+          "62": "0107INV-123",
+          "63": "4472"
+        },
+        "rawPayload": "00020101021138560010A0000007270126000697042201120567897999990208QRIBFTTA53037045802VN62110107INV-12363044472"
+      }
+    }
+  },
+  "parse-build-bill-dynamic": {
+    "payload": "00020101021238560010A0000007270126000697042201120567897999990208QRIBFTTA5303704540420005802VN62110107HD D1236304BC3F",
+    "options": {
+      "strictCrc": true,
+      "maxPayloadLength": 1024
+    },
+    "result": {
+      "ok": true,
+      "info": {
+        "bankBin": "970422",
+        "bankInfo": "970422",
+        "accountNo": "056789799999",
+        "serviceType": "account",
+        "qrType": "dynamic",
+        "isDynamic": true,
+        "amount": 2000,
+        "currency": "704",
+        "countryCode": "VN",
+        "description": null,
+        "billNumber": "HD D123",
+        "referenceLabel": null,
+        "merchantName": null,
+        "merchantCity": null,
+        "additionalData": {
+          "billNumber": "HD D123",
+          "referenceLabel": null,
+          "purpose": null
+        },
+        "crc": "BC3F",
+        "isValidCrc": true,
+        "rawTags": {
+          "00": "01",
+          "01": "12",
+          "38": "0010A0000007270126000697042201120567897999990208QRIBFTTA",
+          "53": "704",
+          "54": "2000",
+          "58": "VN",
+          "62": "0107HD D123",
+          "63": "BC3F"
+        },
+        "rawPayload": "00020101021238560010A0000007270126000697042201120567897999990208QRIBFTTA5303704540420005802VN62110107HD D1236304BC3F"
+      }
+    }
+  },
+  "parse-build-reference-static-inferred": {
+    "payload": "00020101021138560010A0000007270126000697042201120567897999990208QRIBFTTA53037045802VN62110507Don 12363044F86",
+    "options": {
+      "strictCrc": true,
+      "maxPayloadLength": 1024
+    },
+    "result": {
+      "ok": true,
+      "info": {
+        "bankBin": "970422",
+        "bankInfo": "970422",
+        "accountNo": "056789799999",
+        "serviceType": "account",
+        "qrType": "static",
+        "isDynamic": false,
+        "amount": null,
+        "currency": "704",
+        "countryCode": "VN",
+        "description": null,
+        "billNumber": null,
+        "referenceLabel": "Don 123",
+        "merchantName": null,
+        "merchantCity": null,
+        "additionalData": {
+          "billNumber": null,
+          "referenceLabel": "Don 123",
+          "purpose": null
+        },
+        "crc": "4F86",
+        "isValidCrc": true,
+        "rawTags": {
+          "00": "01",
+          "01": "11",
+          "38": "0010A0000007270126000697042201120567897999990208QRIBFTTA",
+          "53": "704",
+          "58": "VN",
+          "62": "0507Don 123",
+          "63": "4F86"
+        },
+        "rawPayload": "00020101021138560010A0000007270126000697042201120567897999990208QRIBFTTA53037045802VN62110507Don 12363044F86"
+      }
+    }
+  },
+  "parse-build-reference-dynamic": {
+    "payload": "00020101021238560010A0000007270126000697042201120567897999990208QRIBFTTA5303704540420005802VN62110507REF-12363040FC3",
+    "options": {
+      "strictCrc": true,
+      "maxPayloadLength": 1024
+    },
+    "result": {
+      "ok": true,
+      "info": {
+        "bankBin": "970422",
+        "bankInfo": "970422",
+        "accountNo": "056789799999",
+        "serviceType": "account",
+        "qrType": "dynamic",
+        "isDynamic": true,
+        "amount": 2000,
+        "currency": "704",
+        "countryCode": "VN",
+        "description": null,
+        "billNumber": null,
+        "referenceLabel": "REF-123",
+        "merchantName": null,
+        "merchantCity": null,
+        "additionalData": {
+          "billNumber": null,
+          "referenceLabel": "REF-123",
+          "purpose": null
+        },
+        "crc": "0FC3",
+        "isValidCrc": true,
+        "rawTags": {
+          "00": "01",
+          "01": "12",
+          "38": "0010A0000007270126000697042201120567897999990208QRIBFTTA",
+          "53": "704",
+          "54": "2000",
+          "58": "VN",
+          "62": "0507REF-123",
+          "63": "0FC3"
+        },
+        "rawPayload": "00020101021238560010A0000007270126000697042201120567897999990208QRIBFTTA5303704540420005802VN62110507REF-12363040FC3"
+      }
+    }
+  },
+  "parse-build-description-vietnamese": {
+    "payload": "00020101021138560010A0000007270126000697042201120567897999990208QRIBFTTA53037045802VN62290825Thanh toan don hang D123 630430BB",
+    "options": {
+      "strictCrc": true,
+      "maxPayloadLength": 1024
+    },
+    "result": {
+      "ok": true,
+      "info": {
+        "bankBin": "970422",
+        "bankInfo": "970422",
+        "accountNo": "056789799999",
+        "serviceType": "account",
+        "qrType": "static",
+        "isDynamic": false,
+        "amount": null,
+        "currency": "704",
+        "countryCode": "VN",
+        "description": "Thanh toan don hang D123",
+        "billNumber": null,
+        "referenceLabel": null,
+        "merchantName": null,
+        "merchantCity": null,
+        "additionalData": {
+          "billNumber": null,
+          "referenceLabel": null,
+          "purpose": "Thanh toan don hang D123"
+        },
+        "crc": "30BB",
+        "isValidCrc": true,
+        "rawTags": {
+          "00": "01",
+          "01": "11",
+          "38": "0010A0000007270126000697042201120567897999990208QRIBFTTA",
+          "53": "704",
+          "58": "VN",
+          "62": "0825Thanh toan don hang D123 ",
+          "63": "30BB"
+        },
+        "rawPayload": "00020101021138560010A0000007270126000697042201120567897999990208QRIBFTTA53037045802VN62290825Thanh toan don hang D123 630430BB"
+      }
+    }
+  },
+  "parse-build-description-decomposed": {
+    "payload": "00020101021138560010A0000007270126000697042201120567897999990208QRIBFTTA53037045802VN62230819Thanh toan don hang6304B0C4",
+    "options": {
+      "strictCrc": true,
+      "maxPayloadLength": 1024
+    },
+    "result": {
+      "ok": true,
+      "info": {
+        "bankBin": "970422",
+        "bankInfo": "970422",
+        "accountNo": "056789799999",
+        "serviceType": "account",
+        "qrType": "static",
+        "isDynamic": false,
+        "amount": null,
+        "currency": "704",
+        "countryCode": "VN",
+        "description": "Thanh toan don hang",
+        "billNumber": null,
+        "referenceLabel": null,
+        "merchantName": null,
+        "merchantCity": null,
+        "additionalData": {
+          "billNumber": null,
+          "referenceLabel": null,
+          "purpose": "Thanh toan don hang"
+        },
+        "crc": "B0C4",
+        "isValidCrc": true,
+        "rawTags": {
+          "00": "01",
+          "01": "11",
+          "38": "0010A0000007270126000697042201120567897999990208QRIBFTTA",
+          "53": "704",
+          "58": "VN",
+          "62": "0819Thanh toan don hang",
+          "63": "B0C4"
+        },
+        "rawPayload": "00020101021138560010A0000007270126000697042201120567897999990208QRIBFTTA53037045802VN62230819Thanh toan don hang6304B0C4"
+      }
+    }
+  },
+  "parse-build-description-emoji": {
+    "payload": "00020101021138560010A0000007270126000697042201120567897999990208QRIBFTTA53037045802VN62140810Pay \uD83D\uDE00 now6304C4E7",
+    "options": {
+      "strictCrc": true,
+      "maxPayloadLength": 1024
+    },
+    "result": {
+      "ok": false,
+      "error": "qr.invalid_payload",
+      "message": "Chu\u1ED7i m\u00E3 QR kh\u00F4ng \u0111\u00FAng \u0111\u1ECBnh d\u1EA1ng EMVCo TLV ho\u1EB7c v\u01B0\u1EE3t qu\u00E1 \u0111\u1ED9 d\u00E0i cho ph\u00E9p."
+    }
+  },
+  "parse-build-description-chinese": {
+    "payload": "00020101021138560010A0000007270126000697042201120567897999990208QRIBFTTA53037045802VN62050801\u4E2D6304882C",
+    "options": {
+      "strictCrc": true,
+      "maxPayloadLength": 1024
+    },
+    "result": {
+      "ok": false,
+      "error": "qr.invalid_payload",
+      "message": "Chu\u1ED7i m\u00E3 QR kh\u00F4ng \u0111\u00FAng \u0111\u1ECBnh d\u1EA1ng EMVCo TLV ho\u1EB7c v\u01B0\u1EE3t qu\u00E1 \u0111\u1ED9 d\u00E0i cho ph\u00E9p."
+    }
+  },
+  "parse-build-description-spaces": {
+    "payload": "00020101021138560010A0000007270126000697042201120567897999990208QRIBFTTA53037045802VN62120808noi dung63042B8C",
+    "options": {
+      "strictCrc": true,
+      "maxPayloadLength": 1024
+    },
+    "result": {
+      "ok": true,
+      "info": {
+        "bankBin": "970422",
+        "bankInfo": "970422",
+        "accountNo": "056789799999",
+        "serviceType": "account",
+        "qrType": "static",
+        "isDynamic": false,
+        "amount": null,
+        "currency": "704",
+        "countryCode": "VN",
+        "description": "noi dung",
+        "billNumber": null,
+        "referenceLabel": null,
+        "merchantName": null,
+        "merchantCity": null,
+        "additionalData": {
+          "billNumber": null,
+          "referenceLabel": null,
+          "purpose": "noi dung"
+        },
+        "crc": "2B8C",
+        "isValidCrc": true,
+        "rawTags": {
+          "00": "01",
+          "01": "11",
+          "38": "0010A0000007270126000697042201120567897999990208QRIBFTTA",
+          "53": "704",
+          "58": "VN",
+          "62": "0808noi dung",
+          "63": "2B8C"
+        },
+        "rawPayload": "00020101021138560010A0000007270126000697042201120567897999990208QRIBFTTA53037045802VN62120808noi dung63042B8C"
+      }
+    }
+  },
+  "parse-build-description-tab": {
+    "payload": "00020101021138560010A0000007270126000697042201120567897999990208QRIBFTTA53037045802VN62060802ab63043E39",
+    "options": {
+      "strictCrc": true,
+      "maxPayloadLength": 1024
+    },
+    "result": {
+      "ok": true,
+      "info": {
+        "bankBin": "970422",
+        "bankInfo": "970422",
+        "accountNo": "056789799999",
+        "serviceType": "account",
+        "qrType": "static",
+        "isDynamic": false,
+        "amount": null,
+        "currency": "704",
+        "countryCode": "VN",
+        "description": "ab",
+        "billNumber": null,
+        "referenceLabel": null,
+        "merchantName": null,
+        "merchantCity": null,
+        "additionalData": {
+          "billNumber": null,
+          "referenceLabel": null,
+          "purpose": "ab"
+        },
+        "crc": "3E39",
+        "isValidCrc": true,
+        "rawTags": {
+          "00": "01",
+          "01": "11",
+          "38": "0010A0000007270126000697042201120567897999990208QRIBFTTA",
+          "53": "704",
+          "58": "VN",
+          "62": "0802ab",
+          "63": "3E39"
+        },
+        "rawPayload": "00020101021138560010A0000007270126000697042201120567897999990208QRIBFTTA53037045802VN62060802ab63043E39"
+      }
+    }
+  },
+  "parse-build-description-newline": {
+    "payload": "00020101021138560010A0000007270126000697042201120567897999990208QRIBFTTA53037045802VN62060802ab63043E39",
+    "options": {
+      "strictCrc": true,
+      "maxPayloadLength": 1024
+    },
+    "result": {
+      "ok": true,
+      "info": {
+        "bankBin": "970422",
+        "bankInfo": "970422",
+        "accountNo": "056789799999",
+        "serviceType": "account",
+        "qrType": "static",
+        "isDynamic": false,
+        "amount": null,
+        "currency": "704",
+        "countryCode": "VN",
+        "description": "ab",
+        "billNumber": null,
+        "referenceLabel": null,
+        "merchantName": null,
+        "merchantCity": null,
+        "additionalData": {
+          "billNumber": null,
+          "referenceLabel": null,
+          "purpose": "ab"
+        },
+        "crc": "3E39",
+        "isValidCrc": true,
+        "rawTags": {
+          "00": "01",
+          "01": "11",
+          "38": "0010A0000007270126000697042201120567897999990208QRIBFTTA",
+          "53": "704",
+          "58": "VN",
+          "62": "0802ab",
+          "63": "3E39"
+        },
+        "rawPayload": "00020101021138560010A0000007270126000697042201120567897999990208QRIBFTTA53037045802VN62060802ab63043E39"
+      }
+    }
+  },
+  "parse-build-description-forty": {
+    "payload": "00020101021138560010A0000007270126000697042201120567897999990208QRIBFTTA53037045802VN62290825xxxxxxxxxxxxxxxxxxxxxxxxx6304940D",
+    "options": {
+      "strictCrc": true,
+      "maxPayloadLength": 1024
+    },
+    "result": {
+      "ok": true,
+      "info": {
+        "bankBin": "970422",
+        "bankInfo": "970422",
+        "accountNo": "056789799999",
+        "serviceType": "account",
+        "qrType": "static",
+        "isDynamic": false,
+        "amount": null,
+        "currency": "704",
+        "countryCode": "VN",
+        "description": "xxxxxxxxxxxxxxxxxxxxxxxxx",
+        "billNumber": null,
+        "referenceLabel": null,
+        "merchantName": null,
+        "merchantCity": null,
+        "additionalData": {
+          "billNumber": null,
+          "referenceLabel": null,
+          "purpose": "xxxxxxxxxxxxxxxxxxxxxxxxx"
+        },
+        "crc": "940D",
+        "isValidCrc": true,
+        "rawTags": {
+          "00": "01",
+          "01": "11",
+          "38": "0010A0000007270126000697042201120567897999990208QRIBFTTA",
+          "53": "704",
+          "58": "VN",
+          "62": "0825xxxxxxxxxxxxxxxxxxxxxxxxx",
+          "63": "940D"
+        },
+        "rawPayload": "00020101021138560010A0000007270126000697042201120567897999990208QRIBFTTA53037045802VN62290825xxxxxxxxxxxxxxxxxxxxxxxxx6304940D"
+      }
+    }
+  },
+  "parse-build-description-surrogate-boundary": {
+    "payload": "00020101021138560010A0000007270126000697042201120567897999990208QRIBFTTA53037045802VN62290825xxxxxxxxxxxxxxxxxxxxxxxx\uD83D6304A632",
+    "options": {
+      "strictCrc": true,
+      "maxPayloadLength": 1024
+    },
+    "result": {
+      "ok": false,
+      "error": "qr.invalid_payload",
+      "message": "Chu\u1ED7i m\u00E3 QR kh\u00F4ng \u0111\u00FAng \u0111\u1ECBnh d\u1EA1ng EMVCo TLV ho\u1EB7c v\u01B0\u1EE3t qu\u00E1 \u0111\u1ED9 d\u00E0i cho ph\u00E9p."
+    }
+  },
+  "parse-build-description-control-only": {
+    "payload": "00020101021138560010A0000007270126000697042201120567897999990208QRIBFTTA53037045802VN62040800630428B0",
+    "options": {
+      "strictCrc": true,
+      "maxPayloadLength": 1024
+    },
+    "result": {
+      "ok": true,
+      "info": {
+        "bankBin": "970422",
+        "bankInfo": "970422",
+        "accountNo": "056789799999",
+        "serviceType": "account",
+        "qrType": "static",
+        "isDynamic": false,
+        "amount": null,
+        "currency": "704",
+        "countryCode": "VN",
+        "description": "",
+        "billNumber": null,
+        "referenceLabel": null,
+        "merchantName": null,
+        "merchantCity": null,
+        "additionalData": {
+          "billNumber": null,
+          "referenceLabel": null,
+          "purpose": ""
+        },
+        "crc": "28B0",
+        "isValidCrc": true,
+        "rawTags": {
+          "00": "01",
+          "01": "11",
+          "38": "0010A0000007270126000697042201120567897999990208QRIBFTTA",
+          "53": "704",
+          "58": "VN",
+          "62": "0800",
+          "63": "28B0"
+        },
+        "rawPayload": "00020101021138560010A0000007270126000697042201120567897999990208QRIBFTTA53037045802VN62040800630428B0"
+      }
+    }
+  },
+  "parse-build-merchant-both": {
+    "payload": "00020101021138560010A0000007270126000697042201120567897999990208QRIBFTTA53037045802VN5912CUA HANG DEP6011HO CHI MINH630429B0",
+    "options": {
+      "strictCrc": true,
+      "maxPayloadLength": 1024
+    },
+    "result": {
+      "ok": true,
+      "info": {
+        "bankBin": "970422",
+        "bankInfo": "970422",
+        "accountNo": "056789799999",
+        "serviceType": "account",
+        "qrType": "static",
+        "isDynamic": false,
+        "amount": null,
+        "currency": "704",
+        "countryCode": "VN",
+        "description": null,
+        "billNumber": null,
+        "referenceLabel": null,
+        "merchantName": "CUA HANG DEP",
+        "merchantCity": "HO CHI MINH",
+        "additionalData": null,
+        "crc": "29B0",
+        "isValidCrc": true,
+        "rawTags": {
+          "00": "01",
+          "01": "11",
+          "38": "0010A0000007270126000697042201120567897999990208QRIBFTTA",
+          "53": "704",
+          "58": "VN",
+          "59": "CUA HANG DEP",
+          "60": "HO CHI MINH",
+          "63": "29B0"
+        },
+        "rawPayload": "00020101021138560010A0000007270126000697042201120567897999990208QRIBFTTA53037045802VN5912CUA HANG DEP6011HO CHI MINH630429B0"
+      }
+    }
+  },
+  "parse-build-merchant-name-default-city": {
+    "payload": "00020101021138560010A0000007270126000697042201120567897999990208QRIBFTTA53037045802VN5910DANG VAN A6005HANOI6304A23A",
+    "options": {
+      "strictCrc": true,
+      "maxPayloadLength": 1024
+    },
+    "result": {
+      "ok": true,
+      "info": {
+        "bankBin": "970422",
+        "bankInfo": "970422",
+        "accountNo": "056789799999",
+        "serviceType": "account",
+        "qrType": "static",
+        "isDynamic": false,
+        "amount": null,
+        "currency": "704",
+        "countryCode": "VN",
+        "description": null,
+        "billNumber": null,
+        "referenceLabel": null,
+        "merchantName": "DANG VAN A",
+        "merchantCity": "HANOI",
+        "additionalData": null,
+        "crc": "A23A",
+        "isValidCrc": true,
+        "rawTags": {
+          "00": "01",
+          "01": "11",
+          "38": "0010A0000007270126000697042201120567897999990208QRIBFTTA",
+          "53": "704",
+          "58": "VN",
+          "59": "DANG VAN A",
+          "60": "HANOI",
+          "63": "A23A"
+        },
+        "rawPayload": "00020101021138560010A0000007270126000697042201120567897999990208QRIBFTTA53037045802VN5910DANG VAN A6005HANOI6304A23A"
+      }
+    }
+  },
+  "parse-build-merchant-city-only": {
+    "payload": "00020101021138560010A0000007270126000697042201120567897999990208QRIBFTTA53037045802VN6007DA NANG630441F9",
+    "options": {
+      "strictCrc": true,
+      "maxPayloadLength": 1024
+    },
+    "result": {
+      "ok": true,
+      "info": {
+        "bankBin": "970422",
+        "bankInfo": "970422",
+        "accountNo": "056789799999",
+        "serviceType": "account",
+        "qrType": "static",
+        "isDynamic": false,
+        "amount": null,
+        "currency": "704",
+        "countryCode": "VN",
+        "description": null,
+        "billNumber": null,
+        "referenceLabel": null,
+        "merchantName": null,
+        "merchantCity": "DA NANG",
+        "additionalData": null,
+        "crc": "41F9",
+        "isValidCrc": true,
+        "rawTags": {
+          "00": "01",
+          "01": "11",
+          "38": "0010A0000007270126000697042201120567897999990208QRIBFTTA",
+          "53": "704",
+          "58": "VN",
+          "60": "DA NANG",
+          "63": "41F9"
+        },
+        "rawPayload": "00020101021138560010A0000007270126000697042201120567897999990208QRIBFTTA53037045802VN6007DA NANG630441F9"
+      }
+    }
+  },
+  "parse-build-merchant-truncation": {
+    "payload": "00020101021138560010A0000007270126000697042201120567897999990208QRIBFTTA53037045802VN5925AAAAAAAAAAAAAAAAAAAAAAAAA6015BBBBBBBBBBBBBBB63042A7F",
+    "options": {
+      "strictCrc": true,
+      "maxPayloadLength": 1024
+    },
+    "result": {
+      "ok": true,
+      "info": {
+        "bankBin": "970422",
+        "bankInfo": "970422",
+        "accountNo": "056789799999",
+        "serviceType": "account",
+        "qrType": "static",
+        "isDynamic": false,
+        "amount": null,
+        "currency": "704",
+        "countryCode": "VN",
+        "description": null,
+        "billNumber": null,
+        "referenceLabel": null,
+        "merchantName": "AAAAAAAAAAAAAAAAAAAAAAAAA",
+        "merchantCity": "BBBBBBBBBBBBBBB",
+        "additionalData": null,
+        "crc": "2A7F",
+        "isValidCrc": true,
+        "rawTags": {
+          "00": "01",
+          "01": "11",
+          "38": "0010A0000007270126000697042201120567897999990208QRIBFTTA",
+          "53": "704",
+          "58": "VN",
+          "59": "AAAAAAAAAAAAAAAAAAAAAAAAA",
+          "60": "BBBBBBBBBBBBBBB",
+          "63": "2A7F"
+        },
+        "rawPayload": "00020101021138560010A0000007270126000697042201120567897999990208QRIBFTTA53037045802VN5925AAAAAAAAAAAAAAAAAAAAAAAAA6015BBBBBBBBBBBBBBB63042A7F"
+      }
+    }
+  },
+  "parse-build-beneficiary-trim": {
+    "payload": "00020101021138560010A0000007270126000697042201120567897999990208QRIBFTTA53037045802VN6304CAD2",
+    "options": {
+      "strictCrc": true,
+      "maxPayloadLength": 1024
+    },
+    "result": {
+      "ok": true,
+      "info": {
+        "bankBin": "970422",
+        "bankInfo": "970422",
+        "accountNo": "056789799999",
+        "serviceType": "account",
+        "qrType": "static",
+        "isDynamic": false,
+        "amount": null,
+        "currency": "704",
+        "countryCode": "VN",
+        "description": null,
+        "billNumber": null,
+        "referenceLabel": null,
+        "merchantName": null,
+        "merchantCity": null,
+        "additionalData": null,
+        "crc": "CAD2",
+        "isValidCrc": true,
+        "rawTags": {
+          "00": "01",
+          "01": "11",
+          "38": "0010A0000007270126000697042201120567897999990208QRIBFTTA",
+          "53": "704",
+          "58": "VN",
+          "63": "CAD2"
+        },
+        "rawPayload": "00020101021138560010A0000007270126000697042201120567897999990208QRIBFTTA53037045802VN6304CAD2"
+      }
+    }
+  },
+  "parse-build-tag62-all-25": {
+    "payload": "00020101021138560010A0000007270126000697042201120567897999990208QRIBFTTA53037045802VN62870125bbbbbbbbbbbbbbbbbbbbbbbbb0525rrrrrrrrrrrrrrrrrrrrrrrrr0825ppppppppppppppppppppppppp630437D3",
+    "options": {
+      "strictCrc": true,
+      "maxPayloadLength": 1024
+    },
+    "result": {
+      "ok": true,
+      "info": {
+        "bankBin": "970422",
+        "bankInfo": "970422",
+        "accountNo": "056789799999",
+        "serviceType": "account",
+        "qrType": "static",
+        "isDynamic": false,
+        "amount": null,
+        "currency": "704",
+        "countryCode": "VN",
+        "description": "ppppppppppppppppppppppppp",
+        "billNumber": "bbbbbbbbbbbbbbbbbbbbbbbbb",
+        "referenceLabel": "rrrrrrrrrrrrrrrrrrrrrrrrr",
+        "merchantName": null,
+        "merchantCity": null,
+        "additionalData": {
+          "billNumber": "bbbbbbbbbbbbbbbbbbbbbbbbb",
+          "referenceLabel": "rrrrrrrrrrrrrrrrrrrrrrrrr",
+          "purpose": "ppppppppppppppppppppppppp"
+        },
+        "crc": "37D3",
+        "isValidCrc": true,
+        "rawTags": {
+          "00": "01",
+          "01": "11",
+          "38": "0010A0000007270126000697042201120567897999990208QRIBFTTA",
+          "53": "704",
+          "58": "VN",
+          "62": "0125bbbbbbbbbbbbbbbbbbbbbbbbb0525rrrrrrrrrrrrrrrrrrrrrrrrr0825ppppppppppppppppppppppppp",
+          "63": "37D3"
+        },
+        "rawPayload": "00020101021138560010A0000007270126000697042201120567897999990208QRIBFTTA53037045802VN62870125bbbbbbbbbbbbbbbbbbbbbbbbb0525rrrrrrrrrrrrrrrrrrrrrrrrr0825ppppppppppppppppppppppppp630437D3"
+      }
+    }
+  },
+  "parse-build-merchant-invariant-uppercase": {
+    "payload": "00020101021138560010A0000007270126000697042201120567897999990208QRIBFTTA53037045802VN5910STRA\u00DFE \u0131 \uFB036005HANOI6304176A",
+    "options": {
+      "strictCrc": true,
+      "maxPayloadLength": 1024
+    },
+    "result": {
+      "ok": false,
+      "error": "qr.invalid_payload",
+      "message": "Chu\u1ED7i m\u00E3 QR kh\u00F4ng \u0111\u00FAng \u0111\u1ECBnh d\u1EA1ng EMVCo TLV ho\u1EB7c v\u01B0\u1EE3t qu\u00E1 \u0111\u1ED9 d\u00E0i cho ph\u00E9p."
+    }
+  },
+  "parse-bad-crc-true": {
+    "payload": "00020101021238560010A0000007270126000697042201120567897999990208QRIBFTTA5303704540420005802VN62190815Thanh toan cafe63040000",
+    "options": {
+      "strictCrc": true,
+      "maxPayloadLength": 1024
+    },
+    "result": {
+      "ok": false,
+      "error": "qr.invalid_crc",
+      "message": "M\u00E3 ki\u1EC3m tra CRC16 (Tag 63) kh\u00F4ng kh\u1EDBp v\u1EDBi n\u1ED9i dung d\u1EEF li\u1EC7u m\u00E3 QR."
+    }
+  },
+  "parse-bad-crc-false": {
+    "payload": "00020101021238560010A0000007270126000697042201120567897999990208QRIBFTTA5303704540420005802VN62190815Thanh toan cafe63040000",
+    "options": {
+      "strictCrc": false,
+      "maxPayloadLength": 1024
+    },
+    "result": {
+      "ok": true,
+      "info": {
+        "bankBin": "970422",
+        "bankInfo": "970422",
+        "accountNo": "056789799999",
+        "serviceType": "account",
+        "qrType": "dynamic",
+        "isDynamic": true,
+        "amount": 2000,
+        "currency": "704",
+        "countryCode": "VN",
+        "description": "Thanh toan cafe",
+        "billNumber": null,
+        "referenceLabel": null,
+        "merchantName": null,
+        "merchantCity": null,
+        "additionalData": {
+          "billNumber": null,
+          "referenceLabel": null,
+          "purpose": "Thanh toan cafe"
+        },
+        "crc": "0000",
+        "isValidCrc": false,
+        "rawTags": {
+          "00": "01",
+          "01": "12",
+          "38": "0010A0000007270126000697042201120567897999990208QRIBFTTA",
+          "53": "704",
+          "54": "2000",
+          "58": "VN",
+          "62": "0815Thanh toan cafe",
+          "63": "0000"
+        },
+        "rawPayload": "00020101021238560010A0000007270126000697042201120567897999990208QRIBFTTA5303704540420005802VN62190815Thanh toan cafe63040000"
+      }
+    }
+  },
+  "parse-oversize": {
+    "payload": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+    "options": {
+      "strictCrc": true,
+      "maxPayloadLength": 1024
+    },
+    "result": {
+      "ok": false,
+      "error": "qr.invalid_payload",
+      "message": "Chu\u1ED7i m\u00E3 QR kh\u00F4ng \u0111\u00FAng \u0111\u1ECBnh d\u1EA1ng EMVCo TLV ho\u1EB7c v\u01B0\u1EE3t qu\u00E1 \u0111\u1ED9 d\u00E0i cho ph\u00E9p."
+    }
+  },
+  "parse-garbage-strict": {
+    "payload": "not TLV",
+    "options": {
+      "strictCrc": true,
+      "maxPayloadLength": 1024
+    },
+    "result": {
+      "ok": false,
+      "error": "qr.invalid_crc",
+      "message": "M\u00E3 ki\u1EC3m tra CRC16 (Tag 63) kh\u00F4ng kh\u1EDBp v\u1EDBi n\u1ED9i dung d\u1EEF li\u1EC7u m\u00E3 QR."
+    }
+  },
+  "parse-garbage-nonstrict": {
+    "payload": "not TLV",
+    "options": {
+      "strictCrc": false,
+      "maxPayloadLength": 1024
+    },
+    "result": {
+      "ok": false,
+      "error": "qr.invalid_payload",
+      "message": "Chu\u1ED7i m\u00E3 QR kh\u00F4ng \u0111\u00FAng \u0111\u1ECBnh d\u1EA1ng EMVCo TLV ho\u1EB7c v\u01B0\u1EE3t qu\u00E1 \u0111\u1ED9 d\u00E0i cho ph\u00E9p."
+    }
+  },
+  "parse-empty": {
+    "payload": "",
+    "options": {
+      "strictCrc": true,
+      "maxPayloadLength": 1024
+    },
+    "result": {
+      "ok": false,
+      "error": "qr.invalid_payload",
+      "message": "Chu\u1ED7i m\u00E3 QR kh\u00F4ng \u0111\u00FAng \u0111\u1ECBnh d\u1EA1ng EMVCo TLV ho\u1EB7c v\u01B0\u1EE3t qu\u00E1 \u0111\u1ED9 d\u00E0i cho ph\u00E9p."
+    }
+  },
+  "parse-blank": {
+    "payload": " \u0009\u000A",
+    "options": {
+      "strictCrc": true,
+      "maxPayloadLength": 1024
+    },
+    "result": {
+      "ok": false,
+      "error": "qr.invalid_payload",
+      "message": "Chu\u1ED7i m\u00E3 QR kh\u00F4ng \u0111\u00FAng \u0111\u1ECBnh d\u1EA1ng EMVCo TLV ho\u1EB7c v\u01B0\u1EE3t qu\u00E1 \u0111\u1ED9 d\u00E0i cho ph\u00E9p."
+    }
+  },
+  "parse-no-tag38": {
+    "payload": "00020101021153037046304188F",
+    "options": {
+      "strictCrc": true,
+      "maxPayloadLength": 1024
+    },
+    "result": {
+      "ok": false,
+      "error": "qr.not_vietqr",
+      "message": "M\u00E3 QR kh\u00F4ng ph\u1EA3i l\u00E0 m\u00E3 thanh to\u00E1n VietQR h\u1EE3p l\u1EC7 (thi\u1EBFu Tag 38 ho\u1EB7c AID A000000727)."
+    }
+  },
+  "parse-wrong-aid": {
+    "payload": "00020101021138540010B00000072701240006970422011001234567890208QRIBFTTA63043EC5",
+    "options": {
+      "strictCrc": true,
+      "maxPayloadLength": 1024
+    },
+    "result": {
+      "ok": false,
+      "error": "qr.not_vietqr",
+      "message": "M\u00E3 QR kh\u00F4ng ph\u1EA3i l\u00E0 m\u00E3 thanh to\u00E1n VietQR h\u1EE3p l\u1EC7 (thi\u1EBFu Tag 38 ho\u1EB7c AID A000000727)."
+    }
+  },
+  "parse-independent-merchant-reference": {
+    "payload": "00020101021138540010A00000072701240006970422011001234567890208QRIBFTTA53037045802VN5911COFFEE SHOP6006SAIGON62330107BILL-420508ORDER-420806Coffee6304A207",
+    "options": {
+      "strictCrc": true,
+      "maxPayloadLength": 1024
+    },
+    "result": {
+      "ok": true,
+      "info": {
+        "bankBin": "970422",
+        "bankInfo": "970422",
+        "accountNo": "0123456789",
+        "serviceType": "account",
+        "qrType": "static",
+        "isDynamic": false,
+        "amount": null,
+        "currency": "704",
+        "countryCode": "VN",
+        "description": "Coffee",
+        "billNumber": "BILL-42",
+        "referenceLabel": "ORDER-42",
+        "merchantName": "COFFEE SHOP",
+        "merchantCity": "SAIGON",
+        "additionalData": {
+          "billNumber": "BILL-42",
+          "referenceLabel": "ORDER-42",
+          "purpose": "Coffee"
+        },
+        "crc": "A207",
+        "isValidCrc": true,
+        "rawTags": {
+          "00": "01",
+          "01": "11",
+          "38": "0010A00000072701240006970422011001234567890208QRIBFTTA",
+          "53": "704",
+          "58": "VN",
+          "59": "COFFEE SHOP",
+          "60": "SAIGON",
+          "62": "0107BILL-420508ORDER-420806Coffee",
+          "63": "A207"
+        },
+        "rawPayload": "00020101021138540010A00000072701240006970422011001234567890208QRIBFTTA53037045802VN5911COFFEE SHOP6006SAIGON62330107BILL-420508ORDER-420806Coffee6304A207"
+      }
+    }
+  },
+  "parse-minimal-null-fields": {
+    "payload": "00020101021138540010A00000072701240006970422011001234567890208QRIBFTTA63048A4D",
+    "options": {
+      "strictCrc": true,
+      "maxPayloadLength": 1024
+    },
+    "result": {
+      "ok": true,
+      "info": {
+        "bankBin": "970422",
+        "bankInfo": "970422",
+        "accountNo": "0123456789",
+        "serviceType": "account",
+        "qrType": "static",
+        "isDynamic": false,
+        "amount": null,
+        "currency": null,
+        "countryCode": null,
+        "description": null,
+        "billNumber": null,
+        "referenceLabel": null,
+        "merchantName": null,
+        "merchantCity": null,
+        "additionalData": null,
+        "crc": "8A4D",
+        "isValidCrc": true,
+        "rawTags": {
+          "00": "01",
+          "01": "11",
+          "38": "0010A00000072701240006970422011001234567890208QRIBFTTA",
+          "63": "8A4D"
+        },
+        "rawPayload": "00020101021138540010A00000072701240006970422011001234567890208QRIBFTTA63048A4D"
+      }
+    }
+  },
+  "parse-empty-fields": {
+    "payload": "00020101021138540010A00000072701240006970422011001234567890208QRIBFTTA530058005900600062120100050008006304DACA",
+    "options": {
+      "strictCrc": true,
+      "maxPayloadLength": 1024
+    },
+    "result": {
+      "ok": true,
+      "info": {
+        "bankBin": "970422",
+        "bankInfo": "970422",
+        "accountNo": "0123456789",
+        "serviceType": "account",
+        "qrType": "static",
+        "isDynamic": false,
+        "amount": null,
+        "currency": "",
+        "countryCode": "",
+        "description": "",
+        "billNumber": "",
+        "referenceLabel": "",
+        "merchantName": "",
+        "merchantCity": "",
+        "additionalData": {
+          "billNumber": "",
+          "referenceLabel": "",
+          "purpose": ""
+        },
+        "crc": "DACA",
+        "isValidCrc": true,
+        "rawTags": {
+          "00": "01",
+          "01": "11",
+          "38": "0010A00000072701240006970422011001234567890208QRIBFTTA",
+          "53": "",
+          "58": "",
+          "59": "",
+          "60": "",
+          "62": "010005000800",
+          "63": "DACA"
+        },
+        "rawPayload": "00020101021138540010A00000072701240006970422011001234567890208QRIBFTTA530058005900600062120100050008006304DACA"
+      }
+    }
+  },
+  "parse-literal-surrogate-reader": {
+    "payload": "00020101021138560010A0000007270126000697042201120567897999990208QRIBFTTA53037045802VN62290825xxxxxxxxxxxxxxxxxxxxxxxx\uD83D6304A632",
+    "options": {
+      "strictCrc": true,
+      "maxPayloadLength": 1024
+    },
+    "result": {
+      "ok": false,
+      "error": "qr.invalid_payload",
+      "message": "Chu\u1ED7i m\u00E3 QR kh\u00F4ng \u0111\u00FAng \u0111\u1ECBnh d\u1EA1ng EMVCo TLV ho\u1EB7c v\u01B0\u1EE3t qu\u00E1 \u0111\u1ED9 d\u00E0i cho ph\u00E9p."
+    }
+  },
+  "parse-custom-max-length": {
+    "payload": "00020101021238560010A0000007270126000697042201120567897999990208QRIBFTTA5303704540420005802VN62190815Thanh toan cafe63046302",
+    "options": {
+      "strictCrc": true,
+      "maxPayloadLength": 10
+    },
+    "result": {
+      "ok": false,
+      "error": "qr.invalid_payload",
+      "message": "Chu\u1ED7i m\u00E3 QR kh\u00F4ng \u0111\u00FAng \u0111\u1ECBnh d\u1EA1ng EMVCo TLV ho\u1EB7c v\u01B0\u1EE3t qu\u00E1 \u0111\u1ED9 d\u00E0i cho ph\u00E9p."
+    }
+  },
+  "parse-unknown-bank": {
+    "payload": "00020101021138350010A00000072701170006999999010312363045FBD",
+    "options": {
+      "strictCrc": true,
+      "maxPayloadLength": 1024
+    },
+    "result": {
+      "ok": true,
+      "info": {
+        "bankBin": "999999",
+        "bankInfo": null,
+        "accountNo": "123",
+        "serviceType": "account",
+        "qrType": "static",
+        "isDynamic": false,
+        "amount": null,
+        "currency": null,
+        "countryCode": null,
+        "description": null,
+        "billNumber": null,
+        "referenceLabel": null,
+        "merchantName": null,
+        "merchantCity": null,
+        "additionalData": null,
+        "crc": "5FBD",
+        "isValidCrc": true,
+        "rawTags": {
+          "00": "01",
+          "01": "11",
+          "38": "0010A000000727011700069999990103123",
+          "63": "5FBD"
+        },
+        "rawPayload": "00020101021138350010A00000072701170006999999010312363045FBD"
+      }
+    }
+  },
+  "parse-missing-account-service-and-point": {
+    "payload": "38280010A000000727011000069704226304F61E",
+    "options": {
+      "strictCrc": true,
+      "maxPayloadLength": 1024
+    },
+    "result": {
+      "ok": true,
+      "info": {
+        "bankBin": "970422",
+        "bankInfo": "970422",
+        "accountNo": "",
+        "serviceType": "account",
+        "qrType": "static",
+        "isDynamic": false,
+        "amount": null,
+        "currency": null,
+        "countryCode": null,
+        "description": null,
+        "billNumber": null,
+        "referenceLabel": null,
+        "merchantName": null,
+        "merchantCity": null,
+        "additionalData": null,
+        "crc": "F61E",
+        "isValidCrc": true,
+        "rawTags": {
+          "38": "0010A00000072701100006970422",
+          "63": "F61E"
+        },
+        "rawPayload": "38280010A000000727011000069704226304F61E"
+      }
+    }
+  },
+  "parse-missing-aid": {
+    "payload": "000201010211382801240006970422011001234567896304C826",
+    "options": {
+      "strictCrc": true,
+      "maxPayloadLength": 1024
+    },
+    "result": {
+      "ok": false,
+      "error": "qr.not_vietqr",
+      "message": "M\u00E3 QR kh\u00F4ng ph\u1EA3i l\u00E0 m\u00E3 thanh to\u00E1n VietQR h\u1EE3p l\u1EC7 (thi\u1EBFu Tag 38 ho\u1EB7c AID A000000727)."
+    }
+  },
+  "parse-missing-beneficiary": {
+    "payload": "00020101021138140010A00000072763049905",
+    "options": {
+      "strictCrc": true,
+      "maxPayloadLength": 1024
+    },
+    "result": {
+      "ok": false,
+      "error": "qr.not_vietqr",
+      "message": "M\u00E3 QR kh\u00F4ng ph\u1EA3i l\u00E0 m\u00E3 thanh to\u00E1n VietQR h\u1EE3p l\u1EC7 (thi\u1EBFu Tag 38 ho\u1EB7c AID A000000727)."
+    }
+  },
+  "parse-missing-bin": {
+    "payload": "00020101021138250010A000000727010701031236304CEBA",
+    "options": {
+      "strictCrc": true,
+      "maxPayloadLength": 1024
+    },
+    "result": {
+      "ok": false,
+      "error": "qr.not_vietqr",
+      "message": "M\u00E3 QR kh\u00F4ng ph\u1EA3i l\u00E0 m\u00E3 thanh to\u00E1n VietQR h\u1EE3p l\u1EC7 (thi\u1EBFu Tag 38 ho\u1EB7c AID A000000727)."
+    }
+  },
+  "parse-blank-bin": {
+    "payload": "00020101021138240010A00000072701060002  6304E703",
+    "options": {
+      "strictCrc": true,
+      "maxPayloadLength": 1024
+    },
+    "result": {
+      "ok": false,
+      "error": "qr.not_vietqr",
+      "message": "M\u00E3 QR kh\u00F4ng ph\u1EA3i l\u00E0 m\u00E3 thanh to\u00E1n VietQR h\u1EE3p l\u1EC7 (thi\u1EBFu Tag 38 ho\u1EB7c AID A000000727)."
+    }
+  },
+  "parse-malformed-tag38": {
+    "payload": "00020101021138140011A000000727630437F9",
+    "options": {
+      "strictCrc": true,
+      "maxPayloadLength": 1024
+    },
+    "result": {
+      "ok": false,
+      "error": "qr.invalid_payload",
+      "message": "Chu\u1ED7i m\u00E3 QR kh\u00F4ng \u0111\u00FAng \u0111\u1ECBnh d\u1EA1ng EMVCo TLV ho\u1EB7c v\u01B0\u1EE3t qu\u00E1 \u0111\u1ED9 d\u00E0i cho ph\u00E9p."
+    }
+  },
+  "parse-malformed-beneficiary": {
+    "payload": "00020101021138280010A00000072701100009970422630479BA",
+    "options": {
+      "strictCrc": true,
+      "maxPayloadLength": 1024
+    },
+    "result": {
+      "ok": false,
+      "error": "qr.invalid_payload",
+      "message": "Chu\u1ED7i m\u00E3 QR kh\u00F4ng \u0111\u00FAng \u0111\u1ECBnh d\u1EA1ng EMVCo TLV ho\u1EB7c v\u01B0\u1EE3t qu\u00E1 \u0111\u1ED9 d\u00E0i cho ph\u00E9p."
+    }
+  },
+  "parse-short-root-tail": {
+    "payload": "00020101021138540010A00000072701240006970422011001234567890208QRIBFTTA763048895",
+    "options": {
+      "strictCrc": true,
+      "maxPayloadLength": 1024
+    },
+    "result": {
+      "ok": false,
+      "error": "qr.invalid_payload",
+      "message": "Chu\u1ED7i m\u00E3 QR kh\u00F4ng \u0111\u00FAng \u0111\u1ECBnh d\u1EA1ng EMVCo TLV ho\u1EB7c v\u01B0\u1EE3t qu\u00E1 \u0111\u1ED9 d\u00E0i cho ph\u00E9p."
+    }
+  },
+  "parse-invalid-root-header": {
+    "payload": "00020101021138540010A00000072701240006970422011001234567890208QRIBFTTAXX0063046C32",
+    "options": {
+      "strictCrc": true,
+      "maxPayloadLength": 1024
+    },
+    "result": {
+      "ok": false,
+      "error": "qr.invalid_payload",
+      "message": "Chu\u1ED7i m\u00E3 QR kh\u00F4ng \u0111\u00FAng \u0111\u1ECBnh d\u1EA1ng EMVCo TLV ho\u1EB7c v\u01B0\u1EE3t qu\u00E1 \u0111\u1ED9 d\u00E0i cho ph\u00E9p."
+    }
+  },
+  "parse-malformed-additional-is-ignored": {
+    "payload": "00020101021138540010A00000072701240006970422011001234567890208QRIBFTTA62070809abc630430E2",
+    "options": {
+      "strictCrc": true,
+      "maxPayloadLength": 1024
+    },
+    "result": {
+      "ok": true,
+      "info": {
+        "bankBin": "970422",
+        "bankInfo": "970422",
+        "accountNo": "0123456789",
+        "serviceType": "account",
+        "qrType": "static",
+        "isDynamic": false,
+        "amount": null,
+        "currency": null,
+        "countryCode": null,
+        "description": null,
+        "billNumber": null,
+        "referenceLabel": null,
+        "merchantName": null,
+        "merchantCity": null,
+        "additionalData": null,
+        "crc": "30E2",
+        "isValidCrc": true,
+        "rawTags": {
+          "00": "01",
+          "01": "11",
+          "38": "0010A00000072701240006970422011001234567890208QRIBFTTA",
+          "62": "0809abc",
+          "63": "30E2"
+        },
+        "rawPayload": "00020101021138540010A00000072701240006970422011001234567890208QRIBFTTA62070809abc630430E2"
+      }
+    }
+  },
+  "parse-empty-additional": {
+    "payload": "00020101021138540010A00000072701240006970422011001234567890208QRIBFTTA620063043FCF",
+    "options": {
+      "strictCrc": true,
+      "maxPayloadLength": 1024
+    },
+    "result": {
+      "ok": true,
+      "info": {
+        "bankBin": "970422",
+        "bankInfo": "970422",
+        "accountNo": "0123456789",
+        "serviceType": "account",
+        "qrType": "static",
+        "isDynamic": false,
+        "amount": null,
+        "currency": null,
+        "countryCode": null,
+        "description": null,
+        "billNumber": null,
+        "referenceLabel": null,
+        "merchantName": null,
+        "merchantCity": null,
+        "additionalData": {
+          "billNumber": null,
+          "referenceLabel": null,
+          "purpose": null
+        },
+        "crc": "3FCF",
+        "isValidCrc": true,
+        "rawTags": {
+          "00": "01",
+          "01": "11",
+          "38": "0010A00000072701240006970422011001234567890208QRIBFTTA",
+          "62": "",
+          "63": "3FCF"
+        },
+        "rawPayload": "00020101021138540010A00000072701240006970422011001234567890208QRIBFTTA620063043FCF"
+      }
+    }
+  },
+  "parse-unknown-additional": {
+    "payload": "00020101021138540010A00000072701240006970422011001234567890208QRIBFTTA62110907ignored6304525B",
+    "options": {
+      "strictCrc": true,
+      "maxPayloadLength": 1024
+    },
+    "result": {
+      "ok": true,
+      "info": {
+        "bankBin": "970422",
+        "bankInfo": "970422",
+        "accountNo": "0123456789",
+        "serviceType": "account",
+        "qrType": "static",
+        "isDynamic": false,
+        "amount": null,
+        "currency": null,
+        "countryCode": null,
+        "description": null,
+        "billNumber": null,
+        "referenceLabel": null,
+        "merchantName": null,
+        "merchantCity": null,
+        "additionalData": {
+          "billNumber": null,
+          "referenceLabel": null,
+          "purpose": null
+        },
+        "crc": "525B",
+        "isValidCrc": true,
+        "rawTags": {
+          "00": "01",
+          "01": "11",
+          "38": "0010A00000072701240006970422011001234567890208QRIBFTTA",
+          "62": "0907ignored",
+          "63": "525B"
+        },
+        "rawPayload": "00020101021138540010A00000072701240006970422011001234567890208QRIBFTTA62110907ignored6304525B"
+      }
+    }
+  },
+  "parse-trim-fields-and-case-insensitive-service": {
+    "payload": "38510010a00000072701210008 970422 0105 123 0208qribfttc0104 12 5305 704 5804 VN 5908\u0085SHOP\u00856010\uFEFFCITY\uFEFF62210103 B 0503 R 0803 P 63048765",
+    "options": {
+      "strictCrc": true,
+      "maxPayloadLength": 1024
+    },
+    "result": {
+      "ok": true,
+      "info": {
+        "bankBin": "970422",
+        "bankInfo": "970422",
+        "accountNo": "123",
+        "serviceType": "card",
+        "qrType": "dynamic",
+        "isDynamic": true,
+        "amount": null,
+        "currency": "704",
+        "countryCode": "VN",
+        "description": "P",
+        "billNumber": "B",
+        "referenceLabel": "R",
+        "merchantName": "SHOP",
+        "merchantCity": "\uFEFFCITY\uFEFF",
+        "additionalData": {
+          "billNumber": "B",
+          "referenceLabel": "R",
+          "purpose": "P"
+        },
+        "crc": "8765",
+        "isValidCrc": true,
+        "rawTags": {
+          "38": "0010a00000072701210008 970422 0105 123 0208qribfttc",
+          "01": " 12 ",
+          "53": " 704 ",
+          "58": " VN ",
+          "59": "\u0085SHOP\u0085",
+          "60": "\uFEFFCITY\uFEFF",
+          "62": "0103 B 0503 R 0803 P ",
+          "63": "8765"
+        },
+        "rawPayload": "38510010a00000072701210008 970422 0105 123 0208qribfttc0104 12 5305 704 5804 VN 5908\u0085SHOP\u00856010\uFEFFCITY\uFEFF62210103 B 0503 R 0803 P 63048765"
+      }
+    }
+  },
+  "parse-duplicate-root-last-wins": {
+    "payload": "00020101021138540010A00000072701240006970422011001234567890208QRIBFTTA5905FIRST5904LAST01021263041C6B",
+    "options": {
+      "strictCrc": true,
+      "maxPayloadLength": 1024
+    },
+    "result": {
+      "ok": true,
+      "info": {
+        "bankBin": "970422",
+        "bankInfo": "970422",
+        "accountNo": "0123456789",
+        "serviceType": "account",
+        "qrType": "dynamic",
+        "isDynamic": true,
+        "amount": null,
+        "currency": null,
+        "countryCode": null,
+        "description": null,
+        "billNumber": null,
+        "referenceLabel": null,
+        "merchantName": "LAST",
+        "merchantCity": null,
+        "additionalData": null,
+        "crc": "1C6B",
+        "isValidCrc": true,
+        "rawTags": {
+          "00": "01",
+          "01": "12",
+          "38": "0010A00000072701240006970422011001234567890208QRIBFTTA",
+          "59": "LAST",
+          "63": "1C6B"
+        },
+        "rawPayload": "00020101021138540010A00000072701240006970422011001234567890208QRIBFTTA5905FIRST5904LAST01021263041C6B"
+      }
+    }
+  },
+  "parse-amount-fractional": {
+    "payload": "00020101021138540010A00000072701240006970422011001234567890208QRIBFTTA5406123.4563045638",
+    "options": {
+      "strictCrc": true,
+      "maxPayloadLength": 1024
+    },
+    "result": {
+      "ok": true,
+      "info": {
+        "bankBin": "970422",
+        "bankInfo": "970422",
+        "accountNo": "0123456789",
+        "serviceType": "account",
+        "qrType": "static",
+        "isDynamic": false,
+        "amount": 123.45,
+        "currency": null,
+        "countryCode": null,
+        "description": null,
+        "billNumber": null,
+        "referenceLabel": null,
+        "merchantName": null,
+        "merchantCity": null,
+        "additionalData": null,
+        "crc": "5638",
+        "isValidCrc": true,
+        "rawTags": {
+          "00": "01",
+          "01": "11",
+          "38": "0010A00000072701240006970422011001234567890208QRIBFTTA",
+          "54": "123.45",
+          "63": "5638"
+        },
+        "rawPayload": "00020101021138540010A00000072701240006970422011001234567890208QRIBFTTA5406123.4563045638"
+      }
+    }
+  },
+  "parse-amount-grouped": {
+    "payload": "00020101021138540010A00000072701240006970422011001234567890208QRIBFTTA54081,234.5063047E91",
+    "options": {
+      "strictCrc": true,
+      "maxPayloadLength": 1024
+    },
+    "result": {
+      "ok": true,
+      "info": {
+        "bankBin": "970422",
+        "bankInfo": "970422",
+        "accountNo": "0123456789",
+        "serviceType": "account",
+        "qrType": "static",
+        "isDynamic": false,
+        "amount": 1234.50,
+        "currency": null,
+        "countryCode": null,
+        "description": null,
+        "billNumber": null,
+        "referenceLabel": null,
+        "merchantName": null,
+        "merchantCity": null,
+        "additionalData": null,
+        "crc": "7E91",
+        "isValidCrc": true,
+        "rawTags": {
+          "00": "01",
+          "01": "11",
+          "38": "0010A00000072701240006970422011001234567890208QRIBFTTA",
+          "54": "1,234.50",
+          "63": "7E91"
+        },
+        "rawPayload": "00020101021138540010A00000072701240006970422011001234567890208QRIBFTTA54081,234.5063047E91"
+      }
+    }
+  },
+  "parse-amount-exponent": {
+    "payload": "00020101021138540010A00000072701240006970422011001234567890208QRIBFTTA54061.25e26304D9B1",
+    "options": {
+      "strictCrc": true,
+      "maxPayloadLength": 1024
+    },
+    "result": {
+      "ok": true,
+      "info": {
+        "bankBin": "970422",
+        "bankInfo": "970422",
+        "accountNo": "0123456789",
+        "serviceType": "account",
+        "qrType": "static",
+        "isDynamic": false,
+        "amount": 125,
+        "currency": null,
+        "countryCode": null,
+        "description": null,
+        "billNumber": null,
+        "referenceLabel": null,
+        "merchantName": null,
+        "merchantCity": null,
+        "additionalData": null,
+        "crc": "D9B1",
+        "isValidCrc": true,
+        "rawTags": {
+          "00": "01",
+          "01": "11",
+          "38": "0010A00000072701240006970422011001234567890208QRIBFTTA",
+          "54": "1.25e2",
+          "63": "D9B1"
+        },
+        "rawPayload": "00020101021138540010A00000072701240006970422011001234567890208QRIBFTTA54061.25e26304D9B1"
+      }
+    }
+  },
+  "parse-amount-negative": {
+    "payload": "00020101021138540010A00000072701240006970422011001234567890208QRIBFTTA5406(12.5)630447E6",
+    "options": {
+      "strictCrc": true,
+      "maxPayloadLength": 1024
+    },
+    "result": {
+      "ok": true,
+      "info": {
+        "bankBin": "970422",
+        "bankInfo": "970422",
+        "accountNo": "0123456789",
+        "serviceType": "account",
+        "qrType": "static",
+        "isDynamic": false,
+        "amount": -12.5,
+        "currency": null,
+        "countryCode": null,
+        "description": null,
+        "billNumber": null,
+        "referenceLabel": null,
+        "merchantName": null,
+        "merchantCity": null,
+        "additionalData": null,
+        "crc": "47E6",
+        "isValidCrc": true,
+        "rawTags": {
+          "00": "01",
+          "01": "11",
+          "38": "0010A00000072701240006970422011001234567890208QRIBFTTA",
+          "54": "(12.5)",
+          "63": "47E6"
+        },
+        "rawPayload": "00020101021138540010A00000072701240006970422011001234567890208QRIBFTTA5406(12.5)630447E6"
+      }
+    }
+  },
+  "parse-amount-trailingSign": {
+    "payload": "00020101021138540010A00000072701240006970422011001234567890208QRIBFTTA540312-630457D5",
+    "options": {
+      "strictCrc": true,
+      "maxPayloadLength": 1024
+    },
+    "result": {
+      "ok": true,
+      "info": {
+        "bankBin": "970422",
+        "bankInfo": "970422",
+        "accountNo": "0123456789",
+        "serviceType": "account",
+        "qrType": "static",
+        "isDynamic": false,
+        "amount": -12,
+        "currency": null,
+        "countryCode": null,
+        "description": null,
+        "billNumber": null,
+        "referenceLabel": null,
+        "merchantName": null,
+        "merchantCity": null,
+        "additionalData": null,
+        "crc": "57D5",
+        "isValidCrc": true,
+        "rawTags": {
+          "00": "01",
+          "01": "11",
+          "38": "0010A00000072701240006970422011001234567890208QRIBFTTA",
+          "54": "12-",
+          "63": "57D5"
+        },
+        "rawPayload": "00020101021138540010A00000072701240006970422011001234567890208QRIBFTTA540312-630457D5"
+      }
+    }
+  },
+  "parse-amount-currency": {
+    "payload": "00020101021138540010A00000072701240006970422011001234567890208QRIBFTTA5410\u00A41,234.50630453FA",
+    "options": {
+      "strictCrc": true,
+      "maxPayloadLength": 1024
+    },
+    "result": {
+      "ok": true,
+      "info": {
+        "bankBin": "970422",
+        "bankInfo": "970422",
+        "accountNo": "0123456789",
+        "serviceType": "account",
+        "qrType": "static",
+        "isDynamic": false,
+        "amount": 1234.50,
+        "currency": null,
+        "countryCode": null,
+        "description": null,
+        "billNumber": null,
+        "referenceLabel": null,
+        "merchantName": null,
+        "merchantCity": null,
+        "additionalData": null,
+        "crc": "53FA",
+        "isValidCrc": true,
+        "rawTags": {
+          "00": "01",
+          "01": "11",
+          "38": "0010A00000072701240006970422011001234567890208QRIBFTTA",
+          "54": "\u00A41,234.50",
+          "63": "53FA"
+        },
+        "rawPayload": "00020101021138540010A00000072701240006970422011001234567890208QRIBFTTA5410\u00A41,234.50630453FA"
+      }
+    }
+  },
+  "parse-amount-invalid": {
+    "payload": "00020101021138540010A00000072701240006970422011001234567890208QRIBFTTA5403NaN63041027",
+    "options": {
+      "strictCrc": true,
+      "maxPayloadLength": 1024
+    },
+    "result": {
+      "ok": true,
+      "info": {
+        "bankBin": "970422",
+        "bankInfo": "970422",
+        "accountNo": "0123456789",
+        "serviceType": "account",
+        "qrType": "static",
+        "isDynamic": false,
+        "amount": null,
+        "currency": null,
+        "countryCode": null,
+        "description": null,
+        "billNumber": null,
+        "referenceLabel": null,
+        "merchantName": null,
+        "merchantCity": null,
+        "additionalData": null,
+        "crc": "1027",
+        "isValidCrc": true,
+        "rawTags": {
+          "00": "01",
+          "01": "11",
+          "38": "0010A00000072701240006970422011001234567890208QRIBFTTA",
+          "54": "NaN",
+          "63": "1027"
+        },
+        "rawPayload": "00020101021138540010A00000072701240006970422011001234567890208QRIBFTTA5403NaN63041027"
+      }
+    }
+  },
+  "parse-amount-overflow": {
+    "payload": "00020101021138540010A00000072701240006970422011001234567890208QRIBFTTA5429792281625142643375935439503366304B9C0",
+    "options": {
+      "strictCrc": true,
+      "maxPayloadLength": 1024
+    },
+    "result": {
+      "ok": true,
+      "info": {
+        "bankBin": "970422",
+        "bankInfo": "970422",
+        "accountNo": "0123456789",
+        "serviceType": "account",
+        "qrType": "static",
+        "isDynamic": false,
+        "amount": null,
+        "currency": null,
+        "countryCode": null,
+        "description": null,
+        "billNumber": null,
+        "referenceLabel": null,
+        "merchantName": null,
+        "merchantCity": null,
+        "additionalData": null,
+        "crc": "B9C0",
+        "isValidCrc": true,
+        "rawTags": {
+          "00": "01",
+          "01": "11",
+          "38": "0010A00000072701240006970422011001234567890208QRIBFTTA",
+          "54": "79228162514264337593543950336",
+          "63": "B9C0"
+        },
+        "rawPayload": "00020101021138540010A00000072701240006970422011001234567890208QRIBFTTA5429792281625142643375935439503366304B9C0"
+      }
+    }
+  },
+  "parse-amount-empty": {
+    "payload": "00020101021138540010A00000072701240006970422011001234567890208QRIBFTTA54006304569F",
+    "options": {
+      "strictCrc": true,
+      "maxPayloadLength": 1024
+    },
+    "result": {
+      "ok": true,
+      "info": {
+        "bankBin": "970422",
+        "bankInfo": "970422",
+        "accountNo": "0123456789",
+        "serviceType": "account",
+        "qrType": "static",
+        "isDynamic": false,
+        "amount": null,
+        "currency": null,
+        "countryCode": null,
+        "description": null,
+        "billNumber": null,
+        "referenceLabel": null,
+        "merchantName": null,
+        "merchantCity": null,
+        "additionalData": null,
+        "crc": "569F",
+        "isValidCrc": true,
+        "rawTags": {
+          "00": "01",
+          "01": "11",
+          "38": "0010A00000072701240006970422011001234567890208QRIBFTTA",
+          "54": "",
+          "63": "569F"
+        },
+        "rawPayload": "00020101021138540010A00000072701240006970422011001234567890208QRIBFTTA54006304569F"
+      }
+    }
+  },
+  "parse-amount-zero": {
+    "payload": "00020101021138540010A00000072701240006970422011001234567890208QRIBFTTA5401063047210",
+    "options": {
+      "strictCrc": true,
+      "maxPayloadLength": 1024
+    },
+    "result": {
+      "ok": true,
+      "info": {
+        "bankBin": "970422",
+        "bankInfo": "970422",
+        "accountNo": "0123456789",
+        "serviceType": "account",
+        "qrType": "static",
+        "isDynamic": false,
+        "amount": 0,
+        "currency": null,
+        "countryCode": null,
+        "description": null,
+        "billNumber": null,
+        "referenceLabel": null,
+        "merchantName": null,
+        "merchantCity": null,
+        "additionalData": null,
+        "crc": "7210",
+        "isValidCrc": true,
+        "rawTags": {
+          "00": "01",
+          "01": "11",
+          "38": "0010A00000072701240006970422011001234567890208QRIBFTTA",
+          "54": "0",
+          "63": "7210"
+        },
+        "rawPayload": "00020101021138540010A00000072701240006970422011001234567890208QRIBFTTA5401063047210"
+      }
+    }
+  },
+  "parse-no-crc-nonstrict": {
+    "payload": "00020101021138540010A00000072701240006970422011001234567890208QRIBFTTA",
+    "options": {
+      "strictCrc": false,
+      "maxPayloadLength": 1024
+    },
+    "result": {
+      "ok": true,
+      "info": {
+        "bankBin": "970422",
+        "bankInfo": "970422",
+        "accountNo": "0123456789",
+        "serviceType": "account",
+        "qrType": "static",
+        "isDynamic": false,
+        "amount": null,
+        "currency": null,
+        "countryCode": null,
+        "description": null,
+        "billNumber": null,
+        "referenceLabel": null,
+        "merchantName": null,
+        "merchantCity": null,
+        "additionalData": null,
+        "crc": null,
+        "isValidCrc": false,
+        "rawTags": {
+          "00": "01",
+          "01": "11",
+          "38": "0010A00000072701240006970422011001234567890208QRIBFTTA"
+        },
+        "rawPayload": "00020101021138540010A00000072701240006970422011001234567890208QRIBFTTA"
+      }
+    }
+  },
+  "parse-whitespace-nonstrict": {
+    "payload": " \u0009\u000A00020101021238560010A0000007270126000697042201120567897999990208QRIBFTTA5303704540420005802VN62190815Thanh toan cafe63046302\u000D\u000A ",
+    "options": {
+      "strictCrc": false,
+      "maxPayloadLength": 1024
+    },
+    "result": {
+      "ok": false,
+      "error": "qr.invalid_payload",
+      "message": "Chu\u1ED7i m\u00E3 QR kh\u00F4ng \u0111\u00FAng \u0111\u1ECBnh d\u1EA1ng EMVCo TLV ho\u1EB7c v\u01B0\u1EE3t qu\u00E1 \u0111\u1ED9 d\u00E0i cho ph\u00E9p."
+    }
+  },
+  "parse-exact-max-length": {
+    "payload": "00020101021138540010A00000072701240006970422011001234567890208QRIBFTTA9999xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx9999xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx9999xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx9999xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx9999xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx9999xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx9999xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx9999xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx9999xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx9915xxxxxxxxxxxxxxx63041023",
+    "options": {
+      "strictCrc": true,
+      "maxPayloadLength": 1024
+    },
+    "result": {
+      "ok": true,
+      "info": {
+        "bankBin": "970422",
+        "bankInfo": "970422",
+        "accountNo": "0123456789",
+        "serviceType": "account",
+        "qrType": "static",
+        "isDynamic": false,
+        "amount": null,
+        "currency": null,
+        "countryCode": null,
+        "description": null,
+        "billNumber": null,
+        "referenceLabel": null,
+        "merchantName": null,
+        "merchantCity": null,
+        "additionalData": null,
+        "crc": "1023",
+        "isValidCrc": true,
+        "rawTags": {
+          "00": "01",
+          "01": "11",
+          "38": "0010A00000072701240006970422011001234567890208QRIBFTTA",
+          "99": "xxxxxxxxxxxxxxx",
+          "63": "1023"
+        },
+        "rawPayload": "00020101021138540010A00000072701240006970422011001234567890208QRIBFTTA9999xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx9999xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx9999xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx9999xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx9999xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx9999xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx9999xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx9999xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx9999xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx9915xxxxxxxxxxxxxxx63041023"
+      }
+    }
+  },
+  "parse-service-dotless-i-not-card": {
+    "payload": "00020101021138570010A0000007270126000697042201120567897999990209QR\u0131BFTTC53037045802VN63040000",
+    "options": {
+      "strictCrc": false,
+      "maxPayloadLength": 1024
+    },
+    "result": {
+      "ok": true,
+      "info": {
+        "bankBin": "970422",
+        "bankInfo": "970422",
+        "accountNo": "056789799999",
+        "serviceType": "account",
+        "qrType": "static",
+        "isDynamic": false,
+        "amount": null,
+        "currency": "704",
+        "countryCode": "VN",
+        "description": null,
+        "billNumber": null,
+        "referenceLabel": null,
+        "merchantName": null,
+        "merchantCity": null,
+        "additionalData": null,
+        "crc": "0000",
+        "isValidCrc": false,
+        "rawTags": {
+          "00": "01",
+          "01": "11",
+          "38": "0010A0000007270126000697042201120567897999990209QR\u0131BFTTC",
+          "53": "704",
+          "58": "VN",
+          "63": "0000"
+        },
+        "rawPayload": "00020101021138570010A0000007270126000697042201120567897999990209QR\u0131BFTTC53037045802VN63040000"
+      }
+    }
+  },
+  "parse-amount-space-after-leading-paren": {
+    "payload": "00020101021238560010A0000007270126000697042201120567897999990208QRIBFTTA53037045404( 5)5802VN63040000",
+    "options": {
+      "strictCrc": false,
+      "maxPayloadLength": 1024
+    },
+    "result": {
+      "ok": true,
+      "info": {
+        "bankBin": "970422",
+        "bankInfo": "970422",
+        "accountNo": "056789799999",
+        "serviceType": "account",
+        "qrType": "dynamic",
+        "isDynamic": true,
+        "amount": null,
+        "currency": "704",
+        "countryCode": "VN",
+        "description": null,
+        "billNumber": null,
+        "referenceLabel": null,
+        "merchantName": null,
+        "merchantCity": null,
+        "additionalData": null,
+        "crc": "0000",
+        "isValidCrc": false,
+        "rawTags": {
+          "00": "01",
+          "01": "12",
+          "38": "0010A0000007270126000697042201120567897999990208QRIBFTTA",
+          "53": "704",
+          "54": "( 5)",
+          "58": "VN",
+          "63": "0000"
+        },
+        "rawPayload": "00020101021238560010A0000007270126000697042201120567897999990208QRIBFTTA53037045404( 5)5802VN63040000"
+      }
+    }
+  },
+  "parse-amount-space-after-currency-and-sign": {
+    "payload": "00020101021238560010A0000007270126000697042201120567897999990208QRIBFTTA53037045406\u00A4 - 55802VN63040000",
+    "options": {
+      "strictCrc": false,
+      "maxPayloadLength": 1024
+    },
+    "result": {
+      "ok": true,
+      "info": {
+        "bankBin": "970422",
+        "bankInfo": "970422",
+        "accountNo": "056789799999",
+        "serviceType": "account",
+        "qrType": "dynamic",
+        "isDynamic": true,
+        "amount": -5,
+        "currency": "704",
+        "countryCode": "VN",
+        "description": null,
+        "billNumber": null,
+        "referenceLabel": null,
+        "merchantName": null,
+        "merchantCity": null,
+        "additionalData": null,
+        "crc": "0000",
+        "isValidCrc": false,
+        "rawTags": {
+          "00": "01",
+          "01": "12",
+          "38": "0010A0000007270126000697042201120567897999990208QRIBFTTA",
+          "53": "704",
+          "54": "\u00A4 - 5",
+          "58": "VN",
+          "63": "0000"
+        },
+        "rawPayload": "00020101021238560010A0000007270126000697042201120567897999990208QRIBFTTA53037045406\u00A4 - 55802VN63040000"
+      }
+    }
+  }
+}
