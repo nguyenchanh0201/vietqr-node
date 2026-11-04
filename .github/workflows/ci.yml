@@ -1,0 +1,76 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+    tags: ['v*']
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    name: test (${{ matrix.os }}, node ${{ matrix.node }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+        node: [20, 22]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+          cache: npm
+      - run: npm ci
+      - run: npx tsc --noEmit
+      - run: npx vitest run
+      # Builds, packs, installs the exact tarball into clean consumers with network blocked.
+      - name: Pack smoke test
+        run: node test/smoke/run.mjs
+        env:
+          SMOKE_PACK_DIR: ${{ runner.temp }}/pack
+      # The one tarball that is published: packed and smoke-tested in this designated job.
+      - name: Checksum tested tarball
+        if: matrix.os == 'ubuntu-latest' && matrix.node == 22
+        working-directory: ${{ runner.temp }}/pack
+        run: sha256sum *.tgz > SHA256SUMS && cat SHA256SUMS
+      - name: Upload tested tarball
+        if: matrix.os == 'ubuntu-latest' && matrix.node == 22
+        uses: actions/upload-artifact@v4
+        with:
+          name: package-tarball
+          path: ${{ runner.temp }}/pack/
+          if-no-files-found: error
+
+  publish:
+    if: startsWith(github.ref, 'refs/tags/v')
+    needs: test
+    runs-on: ubuntu-latest
+    environment: npm-publish
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          registry-url: https://registry.npmjs.org
+      - uses: actions/download-artifact@v4
+        with:
+          name: package-tarball
+          path: pack
+      - name: Verify checksum and version
+        working-directory: pack
+        run: |
+          sha256sum -c SHA256SUMS
+          tarball=$(ls *.tgz)
+          version=$(tar -xOzf "$tarball" package/package.json | node -p "JSON.parse(require('fs').readFileSync(0, 'utf8')).version")
+          test "v$version" = "$GITHUB_REF_NAME" || { echo "tarball version $version does not match tag $GITHUB_REF_NAME"; exit 1; }
+          echo "TARBALL=$PWD/$tarball" >> "$GITHUB_ENV"
+      - name: Publish the tested tarball
+        run: npm publish "$TARBALL" --provenance --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

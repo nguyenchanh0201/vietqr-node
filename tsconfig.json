@@ -10,5 +10,6 @@
     "noEmit": true,
     "paths": { "vietqr-node": ["./src/index.ts"], "vietqr-node/deeplink": ["./src/deeplink/index.ts"] }
   },
-  "include": ["src", "test", "scripts", "examples", "tsup.config.ts", "vitest.config.ts"]
+  "include": ["src", "test", "scripts", "examples", "tsup.config.ts", "vitest.config.ts"],
+  "exclude": ["test/smoke"]
 }
