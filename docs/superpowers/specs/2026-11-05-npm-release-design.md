@@ -72,8 +72,10 @@ Add the following. Use the exact `repository.url` form shown: provenance and tru
 "repository": { "type": "git", "url": "git+https://github.com/nguyenchanh0201/vietqr-node.git" },
 "homepage": "https://github.com/nguyenchanh0201/vietqr-node#readme",
 "bugs": { "url": "https://github.com/nguyenchanh0201/vietqr-node/issues" },
-"publishConfig": { "access": "public", "provenance": true }
+"publishConfig": { "access": "public" }
 ```
+
+No `provenance` key: OIDC adds provenance automatically, and the same tarball is published once from a laptop (step 10), where a forced provenance flag would make npm refuse the publish.
 
 Runtime `dependencies` are already exact (`1.1.0`, `1.5.4`, `3.1.6`). Leave them that way and keep the lockfile committed.
 
@@ -82,6 +84,7 @@ Runtime `dependencies` are already exact (`1.1.0`, `1.5.4`, `3.1.6`). Leave them
 - **Test job:** `npm ci` becomes `npm ci --ignore-scripts`. Leave the rest unchanged.
   - The builder must confirm that tsc, vitest, tsup and the smoke test still pass. Known candidate to check: `esbuild`, used by tsup, has a postinstall. It normally works without it through its platform optional dependency.
   - If some dependency genuinely needs its script, run only that one explicitly (for example `npm rebuild <pkg>`) and record why in a comment. Do not drop the flag.
+- **Smoke test:** the consumer installs in `test/smoke/run.mjs` (line 30) also get `--ignore-scripts`. The tarball is packed before those installs, so they can't change it, but no install in the publishing job may run scripts. If `@napi-rs/canvas` or `zxing-wasm` fail to load without their scripts, stop and report back instead of working around it.
 - **Publish job:**
   - Delete the `NODE_AUTH_TOKEN` / `secrets.NPM_TOKEN` env.
   - Keep `environment: npm-publish`, `id-token: write`, the artifact download, the checksum check and the tag-equals-version check.
@@ -102,7 +105,7 @@ Runtime `dependencies` are already exact (`1.1.0`, `1.5.4`, `3.1.6`). Leave them
   - Releases are published only from CI via trusted publishing.
   - Provenance applies from 0.1.1, and users can check it with `npm audit signatures`.
   - Runtime dependencies are pinned.
-- Add the two known parse caveats that were deferred earlier: the four UTF-16/UTF-8 inputs that parse rejects, and the `rawTags` key order.
+- The parse caveats are already in the README (lines 162–170), so no change is needed there.
 
 ### 5. `RELEASING.md` (new)
 
@@ -144,6 +147,7 @@ Claude can run the `gh` commands for steps 2–3 when the owner says so explicit
 2. Create the **public** repo `nguyenchanh0201/vietqr-node` and push `main` plus the feature branch.
 3. Open a PR from `feat/vietqr-node` to `main` and wait until CI passes on all four cells.
 4. **Bank-app scan gate.** Claude generates test QRs with the package: a dynamic account QR with an amount, a static account QR, and a card QR if a bank app supports it. The owner scans each with at least two different Vietnamese bank apps and confirms that the account name and amount appear, without paying.
+   - The QRs are generated with a one-off command from the scratchpad, using the owner's own account (and card) number, which the owner gives at that point. They are never committed, because the repo is public.
    - Any failure blocks the release.
 5. **mottanrung gate.** The Task 14 branch (`nguyenchanh0201/feat-vietqr-node`) passes its tests against the packed tarball.
 6. Merge the PR.
@@ -184,6 +188,8 @@ Claude can run the `gh` commands for steps 2–3 when the owner says so explicit
 - **SHA-pinning actions** in both workflows.
 - The `description` and `keywords` wording.
 - No changelog tooling yet.
+- **The `docs/superpowers/` plans, specs and spike notes stay public.** They mention mottanrung (the owner's own project) and they're already in the branch history, so hiding them would mean rewriting history or squashing into a fresh `main`. If the owner wants them private, decide before step 2: squash-merge into a new `main` without `docs/superpowers/`, and push only `main`.
+- **No `publishConfig.provenance`**, and the smoke-test consumer installs use `--ignore-scripts` (both from the builder check).
 
 ## Left to the builder
 
@@ -194,5 +200,6 @@ Claude can run the `gh` commands for steps 2–3 when the owner says so explicit
 ## Open risks
 
 - **First publish via OIDC.** The claim that the first publish can't use OIDC comes from community sources and the shape of the docs, not from an explicit statement. If npm turns out to allow it, the manual step is merely unnecessary, not harmful.
+- **Name check:** `vietqr-node` and the look-alikes (`vietqrnode`, `viet-qr-node`, `vietqr_node`, `vietqr.node`) all return 404 on npm as of 2026-11-05, so npm's name-similarity rule shouldn't block it.
 - **`--ignore-scripts` could break a dependency** we haven't checked; esbuild is the most likely. The builder verifies it.
 - **Not tested on Linux yet.** If a Linux-only failure shows up in step 3, it becomes a fix task before release.
