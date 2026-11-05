@@ -182,6 +182,10 @@ These are kept on purpose so that output stays identical to upstream:
 - The published tarball is the one CI tested and smoke-tested; the publish job installs nothing from the project.
 - Runtime dependencies are pinned to exact versions, and CI installs with `--ignore-scripts`.
 
+## Contributing and security
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) (Vietnamese). Report vulnerabilities privately as described in [SECURITY.md](SECURITY.md), not in public issues.
+
 ## Credits and license
 
 This package is a port of [vietqr-core](https://github.com/Ngochiendev/vietqr-core) by Ngochiendev, used under the MIT License.
