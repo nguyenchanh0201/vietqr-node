@@ -2,7 +2,7 @@
 
 [![CI](https://github.com/nguyenchanh0201/vietqr-node/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/nguyenchanh0201/vietqr-node/actions/workflows/ci.yml)
 [![npm](https://img.shields.io/npm/v/vietqr-node)](https://www.npmjs.com/package/vietqr-node)
-[![license](https://img.shields.io/npm/l/vietqr-node)](LICENSE)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green)](LICENSE)
 
 > **Tiếng Việt:** `vietqr-node` là bản port TypeScript của thư viện .NET [vietqr-core](https://github.com/Ngochiendev/vietqr-core) (MIT). Thư viện tạo và phân tích chuỗi VietQR/NAPAS247 (EMVCo), giải mã ảnh QR, vẽ thẻ thanh toán (PNG/JPEG/WebP/SVG) với logo ngân hàng, và gọi cổng deeplink mở app ngân hàng. Mọi thứ chạy trong tiến trình Node, không gọi mạng (trừ client deeplink), không cần api.vietqr.io. Đây **không** phải sản phẩm chính thức của NAPAS/VietQR.
 
@@ -184,8 +184,25 @@ These are kept on purpose so that output stays identical to upstream:
 
 ## Credits and license
 
-This package is a port of [vietqr-core](https://github.com/Ngochiendev/vietqr-core) by Ngochiendev, used under the MIT License. Bundled assets (bank catalog, bank logos, Google Sans font, VietQR/NAPAS247 logos) come from upstream. `zxing_reader.wasm` is from [zxing-wasm](https://github.com/Sec-ant/zxing-wasm) (MIT), built from [zxing-cpp](https://github.com/zxing-cpp/zxing-cpp) (Apache-2.0); see [assets/THIRD_PARTY_NOTICES.md](assets/THIRD_PARTY_NOTICES.md).
+This package is a port of [vietqr-core](https://github.com/Ngochiendev/vietqr-core) by Ngochiendev, used under the MIT License.
 
-MIT. See [LICENSE](LICENSE), which keeps upstream's `Copyright (c) 2026 Ngochiendev` notice alongside ours.
+**Code:** MIT. See [LICENSE](LICENSE), which keeps upstream's `Copyright (c) 2026 Ngochiendev` notice alongside ours.
 
-**Trademarks:** VietQR, NAPAS and NAPAS247 names and logos belong to NAPAS; bank logos belong to their banks. This is an independent project, not an official VietQR/NAPAS product and not made by upstream's author. Software is provided AS IS. See [DISCLAIMER.md](DISCLAIMER.md).
+**Bundled third-party files** (shipped in `assets/`; full texts in [assets/THIRD_PARTY_NOTICES.md](assets/THIRD_PARTY_NOTICES.md)):
+
+| What | From | License |
+|---|---|---|
+| Bank catalog, bank logos, VietQR/NAPAS247 logos | [vietqr-core](https://github.com/Ngochiendev/vietqr-core) `1b92450` | MIT (marks belong to their owners) |
+| `zxing_reader.wasm` | [zxing-wasm](https://github.com/Sec-ant/zxing-wasm) | MIT |
+| QR decoder compiled into the WASM | [zxing-cpp](https://github.com/zxing-cpp/zxing-cpp) | Apache-2.0 |
+| Google Sans font | [googlefonts/googlesans](https://github.com/googlefonts/googlesans) | SIL OFL 1.1 ([assets/fonts/OFL.txt](assets/fonts/OFL.txt)) |
+
+Runtime dependencies installed from npm (`@napi-rs/canvas`, `qrcode`, `zxing-wasm`) are MIT and carry their own license files.
+
+**Trademarks:** VietQR, NAPAS and NAPAS247 names and logos belong to NAPAS; bank logos belong to their banks; "Google Sans" is a trademark of Google LLC. This is an independent project, not an official VietQR/NAPAS product and not made by upstream's author. Software is provided AS IS. See [DISCLAIMER.md](DISCLAIMER.md).
+
+## Tuyên bố miễn trừ trách nhiệm & Giấy phép
+
+- **Thương hiệu:** `VietQR` và `NAPAS247` là nhãn hiệu thuộc quyền sở hữu của **NAPAS (Công ty Cổ phần Thanh toán Quốc gia Việt Nam)**; logo ngân hàng thuộc về các ngân hàng tương ứng. `vietqr-node` là thư viện mã nguồn mở độc lập, không phải sản phẩm chính thức của NAPAS, vietqr.io hay tác giả `vietqr-core`.
+- **Trách nhiệm giao dịch:** Thư viện được cung cấp "nguyên trạng" (AS IS) theo giấy phép MIT. Người sử dụng chịu hoàn toàn trách nhiệm về tính chính xác của dữ liệu thanh toán (số tài khoản, mã ngân hàng, số tiền) trước khi xuất mã QR. Tác giả không chịu trách nhiệm đối với sự cố chuyển nhầm, tổn thất tài chính hay gián đoạn phát sinh khi sử dụng thư viện. Chi tiết xem **[DISCLAIMER.md](DISCLAIMER.md)**.
+- **Giấy phép:** Mã nguồn phân phối theo **[MIT License](LICENSE)**, giữ nguyên bản quyền gốc © 2026 **Ngochiendev** cùng bản quyền của bản port. Các tệp bên thứ ba đi kèm (WASM, font, logo) theo giấy phép riêng, xem [assets/THIRD_PARTY_NOTICES.md](assets/THIRD_PARTY_NOTICES.md).
