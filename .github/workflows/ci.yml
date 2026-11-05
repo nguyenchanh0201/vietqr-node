@@ -74,4 +74,4 @@ jobs:
       - name: Upgrade npm for trusted publishing
         run: npm install -g --ignore-scripts npm@11.21.1
       - name: Publish the tested tarball
-        run: npm publish "$TARBALL" --access public
+        run: npm publish "$TARBALL" --provenance --access public

@@ -31,13 +31,16 @@ The one exception is the very first version (0.1.0). npm can only set up trusted
 
 - [ ] 8. Tag the release on `main` and push it:
   ```sh
+  git checkout main && git pull
   git tag v0.1.0 && git push origin v0.1.0
   ```
   CI builds the artifact `package-tarball`. The publish job waits for approval. **Reject it**: no trusted publisher exists yet, so it would fail.
-- [ ] 9. Download the `package-tarball` artifact from that run, then check it:
+- [ ] 9. Download the `package-tarball` artifact from that run into an empty folder, then check it:
   ```sh
+  gh run download <run-id> -n package-tarball -D vietqr-release && cd vietqr-release
   shasum -a 256 -c SHA256SUMS   # on Linux: sha256sum -c SHA256SUMS
   ```
+  (Downloading it from the GitHub web page gives a zip instead: unzip it first.)
 - [ ] 10. Publish it, confirming with 2FA:
   ```sh
   npm login
@@ -65,6 +68,7 @@ The one exception is the very first version (0.1.0). npm can only set up trusted
 2. Commit, open a PR, and merge it once CI is green.
 3. Tag `main` and push the tag:
    ```sh
+   git checkout main && git pull
    git tag v<x.y.z> && git push origin v<x.y.z>
    ```
 4. In GitHub Actions, approve the `npm-publish` deployment.
