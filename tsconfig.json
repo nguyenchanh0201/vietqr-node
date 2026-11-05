@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "types": ["node"],
+    "noEmit": true,
+    "paths": { "vietqr-node": ["./src/index.ts"], "vietqr-node/deeplink": ["./src/deeplink/index.ts"] }
+  },
+  "include": ["src", "test", "scripts", "examples", "tsup.config.ts", "vitest.config.ts"],
+  "exclude": ["test/smoke"]
+}

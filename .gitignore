@@ -2,3 +2,9 @@ node_modules/
 dist/
 coverage/
 .DS_Store
+.upstream/
+spike/
+tools/upstream-fixtures/bin/
+tools/upstream-fixtures/obj/
+assets/zxing_reader.wasm
+*.tgz

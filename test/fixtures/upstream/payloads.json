@@ -1,0 +1,217 @@
+{
+  "account-static": {
+    "ok": true,
+    "payload": "00020101021138560010A0000007270126000697042201120567897999990208QRIBFTTA53037045802VN6304CAD2"
+  },
+  "account-dynamic": {
+    "ok": true,
+    "payload": "00020101021238560010A0000007270126000697042201120567897999990208QRIBFTTA5303704540420005802VN6304C809"
+  },
+  "card-static": {
+    "ok": true,
+    "payload": "00020101021138560010A0000007270126000697042201120567897999990208QRIBFTTC53037045802VN63043A91"
+  },
+  "card-dynamic": {
+    "ok": true,
+    "payload": "00020101021238560010A0000007270126000697042201120567897999990208QRIBFTTC5303704540420005802VN630480EA"
+  },
+  "readme": {
+    "ok": true,
+    "payload": "00020101021238560010A0000007270126000697042201120567897999990208QRIBFTTA5303704540420005802VN62190815Thanh toan cafe63046302"
+  },
+  "amount-missing": {
+    "ok": true,
+    "payload": "00020101021138560010A0000007270126000697042201120567897999990208QRIBFTTA53037045802VN6304CAD2"
+  },
+  "amount-zero": {
+    "ok": true,
+    "payload": "00020101021138560010A0000007270126000697042201120567897999990208QRIBFTTA53037045802VN6304CAD2"
+  },
+  "amount-negative": {
+    "ok": true,
+    "payload": "00020101021138560010A0000007270126000697042201120567897999990208QRIBFTTA53037045802VN6304CAD2"
+  },
+  "amount-fractional": {
+    "ok": false,
+    "origin": "adapter",
+    "error": "InvalidAmount",
+    "paramName": "amount",
+    "message": "Amount must be a finite integral JS number representable as Int64. (Parameter 'amount')"
+  },
+  "amount-max13": {
+    "ok": true,
+    "payload": "00020101021238560010A0000007270126000697042201120567897999990208QRIBFTTA5303704541399999999999995802VN6304443C"
+  },
+  "amount-over13": {
+    "ok": false,
+    "origin": "upstream",
+    "error": "ArgumentException",
+    "paramName": "money",
+    "message": "Invalid amount - Tr\u01B0\u1EDDng ch\u1EC9 nh\u1EADp s\u1ED1, t\u1ED1i \u0111a 13 k\u00ED t\u1EF1 (Parameter 'money')"
+  },
+  "amount-out-of-int64": {
+    "ok": false,
+    "origin": "adapter",
+    "error": "InvalidAmount",
+    "paramName": "amount",
+    "message": "Amount must be a finite integral JS number representable as Int64. (Parameter 'amount')"
+  },
+  "amount-NaN": {
+    "ok": false,
+    "origin": "adapter",
+    "error": "InvalidAmount",
+    "paramName": "amount",
+    "message": "Amount must be a finite integral JS number representable as Int64. (Parameter 'amount')"
+  },
+  "amount-Infinity": {
+    "ok": false,
+    "origin": "adapter",
+    "error": "InvalidAmount",
+    "paramName": "amount",
+    "message": "Amount must be a finite integral JS number representable as Int64. (Parameter 'amount')"
+  },
+  "amount--Infinity": {
+    "ok": false,
+    "origin": "adapter",
+    "error": "InvalidAmount",
+    "paramName": "amount",
+    "message": "Amount must be a finite integral JS number representable as Int64. (Parameter 'amount')"
+  },
+  "explicit-dynamic-missing": {
+    "ok": false,
+    "origin": "upstream",
+    "error": "ArgumentOutOfRangeException",
+    "paramName": "amount",
+    "message": "M\u00E3 QR \u0111\u1ED9ng (VietQrType.Dynamic) b\u1EAFt bu\u1ED9c ph\u1EA3i c\u00F3 s\u1ED1 ti\u1EC1n l\u1EDBn h\u01A1n 0. (Parameter 'amount')"
+  },
+  "explicit-dynamic-zero": {
+    "ok": false,
+    "origin": "upstream",
+    "error": "ArgumentOutOfRangeException",
+    "paramName": "amount",
+    "message": "M\u00E3 QR \u0111\u1ED9ng (VietQrType.Dynamic) b\u1EAFt bu\u1ED9c ph\u1EA3i c\u00F3 s\u1ED1 ti\u1EC1n l\u1EDBn h\u01A1n 0. (Parameter 'amount')"
+  },
+  "explicit-dynamic-negative": {
+    "ok": false,
+    "origin": "upstream",
+    "error": "ArgumentOutOfRangeException",
+    "paramName": "amount",
+    "message": "M\u00E3 QR \u0111\u1ED9ng (VietQrType.Dynamic) b\u1EAFt bu\u1ED9c ph\u1EA3i c\u00F3 s\u1ED1 ti\u1EC1n l\u1EDBn h\u01A1n 0. (Parameter 'amount')"
+  },
+  "explicit-static-positive": {
+    "ok": true,
+    "payload": "00020101021138560010A0000007270126000697042201120567897999990208QRIBFTTA5303704540420005802VN6304BBDF"
+  },
+  "bill-static-inferred": {
+    "ok": true,
+    "payload": "00020101021138560010A0000007270126000697042201120567897999990208QRIBFTTA53037045802VN62110107INV-12363044472"
+  },
+  "bill-dynamic": {
+    "ok": true,
+    "payload": "00020101021238560010A0000007270126000697042201120567897999990208QRIBFTTA5303704540420005802VN62110107HD D1236304BC3F"
+  },
+  "reference-static-inferred": {
+    "ok": true,
+    "payload": "00020101021138560010A0000007270126000697042201120567897999990208QRIBFTTA53037045802VN62110507Don 12363044F86"
+  },
+  "reference-dynamic": {
+    "ok": true,
+    "payload": "00020101021238560010A0000007270126000697042201120567897999990208QRIBFTTA5303704540420005802VN62110507REF-12363040FC3"
+  },
+  "description-vietnamese": {
+    "ok": true,
+    "payload": "00020101021138560010A0000007270126000697042201120567897999990208QRIBFTTA53037045802VN62290825Thanh toan don hang D123 630430BB"
+  },
+  "description-decomposed": {
+    "ok": true,
+    "payload": "00020101021138560010A0000007270126000697042201120567897999990208QRIBFTTA53037045802VN62230819Thanh toan don hang6304B0C4"
+  },
+  "description-emoji": {
+    "ok": true,
+    "payload": "00020101021138560010A0000007270126000697042201120567897999990208QRIBFTTA53037045802VN62140810Pay \uD83D\uDE00 now6304C4E7"
+  },
+  "description-chinese": {
+    "ok": true,
+    "payload": "00020101021138560010A0000007270126000697042201120567897999990208QRIBFTTA53037045802VN62050801\u4E2D6304882C"
+  },
+  "description-spaces": {
+    "ok": true,
+    "payload": "00020101021138560010A0000007270126000697042201120567897999990208QRIBFTTA53037045802VN62120808noi dung63042B8C"
+  },
+  "description-tab": {
+    "ok": true,
+    "payload": "00020101021138560010A0000007270126000697042201120567897999990208QRIBFTTA53037045802VN62060802ab63043E39"
+  },
+  "description-newline": {
+    "ok": true,
+    "payload": "00020101021138560010A0000007270126000697042201120567897999990208QRIBFTTA53037045802VN62060802ab63043E39"
+  },
+  "description-forty": {
+    "ok": true,
+    "payload": "00020101021138560010A0000007270126000697042201120567897999990208QRIBFTTA53037045802VN62290825xxxxxxxxxxxxxxxxxxxxxxxxx6304940D"
+  },
+  "description-surrogate-boundary": {
+    "ok": true,
+    "payload": "00020101021138560010A0000007270126000697042201120567897999990208QRIBFTTA53037045802VN62290825xxxxxxxxxxxxxxxxxxxxxxxx\uD83D6304A632"
+  },
+  "description-control-only": {
+    "ok": true,
+    "payload": "00020101021138560010A0000007270126000697042201120567897999990208QRIBFTTA53037045802VN62040800630428B0"
+  },
+  "merchant-both": {
+    "ok": true,
+    "payload": "00020101021138560010A0000007270126000697042201120567897999990208QRIBFTTA53037045802VN5912CUA HANG DEP6011HO CHI MINH630429B0"
+  },
+  "merchant-name-default-city": {
+    "ok": true,
+    "payload": "00020101021138560010A0000007270126000697042201120567897999990208QRIBFTTA53037045802VN5910DANG VAN A6005HANOI6304A23A"
+  },
+  "merchant-city-only": {
+    "ok": true,
+    "payload": "00020101021138560010A0000007270126000697042201120567897999990208QRIBFTTA53037045802VN6007DA NANG630441F9"
+  },
+  "merchant-truncation": {
+    "ok": true,
+    "payload": "00020101021138560010A0000007270126000697042201120567897999990208QRIBFTTA53037045802VN5925AAAAAAAAAAAAAAAAAAAAAAAAA6015BBBBBBBBBBBBBBB63042A7F"
+  },
+  "invalid-bin-short": {
+    "ok": false,
+    "origin": "upstream",
+    "error": "ArgumentException",
+    "paramName": "raw",
+    "message": "BIN ph\u1EA3i g\u1ED3m \u0111\u00FAng 6 ch\u1EEF s\u1ED1. (Parameter 'raw')"
+  },
+  "invalid-bin-alpha": {
+    "ok": false,
+    "origin": "upstream",
+    "error": "ArgumentException",
+    "paramName": "raw",
+    "message": "BIN ph\u1EA3i g\u1ED3m \u0111\u00FAng 6 ch\u1EEF s\u1ED1. (Parameter 'raw')"
+  },
+  "invalid-account-empty": {
+    "ok": false,
+    "origin": "upstream",
+    "error": "ArgumentException",
+    "paramName": "consumerId",
+    "message": "S\u1ED1 t\u00E0i kho\u1EA3n/th\u1EBB (consumerId / accountNo) kh\u00F4ng \u0111\u01B0\u1EE3c r\u1ED7ng v\u00E0 t\u1ED1i \u0111a 25 k\u00FD t\u1EF1 theo chu\u1EA9n NAPAS / Virtual Account (nh\u1EADn \u0111\u01B0\u1EE3c: 0 k\u00FD t\u1EF1). (Parameter 'consumerId')"
+  },
+  "invalid-account-long": {
+    "ok": false,
+    "origin": "upstream",
+    "error": "ArgumentException",
+    "paramName": "consumerId",
+    "message": "S\u1ED1 t\u00E0i kho\u1EA3n/th\u1EBB (consumerId / accountNo) kh\u00F4ng \u0111\u01B0\u1EE3c r\u1ED7ng v\u00E0 t\u1ED1i \u0111a 25 k\u00FD t\u1EF1 theo chu\u1EA9n NAPAS / Virtual Account (nh\u1EADn \u0111\u01B0\u1EE3c: 26 k\u00FD t\u1EF1). (Parameter 'consumerId')"
+  },
+  "beneficiary-trim": {
+    "ok": true,
+    "payload": "00020101021138560010A0000007270126000697042201120567897999990208QRIBFTTA53037045802VN6304CAD2"
+  },
+  "tag62-all-25": {
+    "ok": true,
+    "payload": "00020101021138560010A0000007270126000697042201120567897999990208QRIBFTTA53037045802VN62870125bbbbbbbbbbbbbbbbbbbbbbbbb0525rrrrrrrrrrrrrrrrrrrrrrrrr0825ppppppppppppppppppppppppp630437D3"
+  },
+  "merchant-invariant-uppercase": {
+    "ok": true,
+    "payload": "00020101021138560010A0000007270126000697042201120567897999990208QRIBFTTA53037045802VN5910STRA\u00DFE \u0131 \uFB036005HANOI6304176A"
+  }
+}

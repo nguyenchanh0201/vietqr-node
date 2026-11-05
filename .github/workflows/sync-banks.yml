@@ -1,0 +1,155 @@
+name: Sync Bank Catalog
+
+on:
+  schedule:
+    - cron: "0 0 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+
+      - name: Setup Python
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5.6.0
+        with:
+          python-version: "3.11"
+
+      - name: Check and sync bank catalog
+        id: sync
+        run: |
+          python3 - <<'PY'
+          import json
+          import os
+          import sys
+          import urllib.request
+
+          API_URL = "https://api.vietqr.io/v2/banks"
+          BANKS_JSON_PATH = "assets/banks.json"
+          LOGOS_DIR = "assets/logos"
+
+          if not os.path.exists(BANKS_JSON_PATH):
+              print(f"Error: {BANKS_JSON_PATH} not found", file=sys.stderr)
+              sys.exit(1)
+
+          os.makedirs(LOGOS_DIR, exist_ok=True)
+
+          with open(BANKS_JSON_PATH, "r", encoding="utf-8") as f:
+              local_payload = json.load(f)
+
+          local_banks = local_payload.get("data", [])
+          local_bins = {b.get("bin") for b in local_banks if b.get("bin")}
+          print(f"Local catalog: {len(local_banks)} banks, {len(local_bins)} unique BINs.")
+
+          print(f"Fetching latest banks from {API_URL}...")
+          req = urllib.request.Request(
+              API_URL,
+              headers={"User-Agent": "VietQR-Core-SyncBot/1.0"}
+          )
+          try:
+              with urllib.request.urlopen(req, timeout=30) as res:
+                  remote_payload = json.loads(res.read().decode("utf-8"))
+          except Exception as e:
+              print(f"Error fetching API: {e}", file=sys.stderr)
+              sys.exit(1)
+
+          if remote_payload.get("code") != "00" or not isinstance(remote_payload.get("data"), list):
+              print(f"Invalid API response code: {remote_payload.get('code')}", file=sys.stderr)
+              sys.exit(1)
+
+          remote_banks = remote_payload.get("data", [])
+          print(f"Remote catalog: {len(remote_banks)} banks.")
+
+          new_banks = []
+          for b in remote_banks:
+              bin_code = str(b.get("bin") or "").strip()
+              # Bảo vệ chống Path Traversal: mã BIN bắt buộc chỉ chứa chữ số (6-8 ký tự)
+              if bin_code.isdigit() and 6 <= len(bin_code) <= 8 and bin_code not in local_bins:
+                  new_banks.append(b)
+
+          github_output = os.environ.get("GITHUB_OUTPUT")
+
+          if not new_banks:
+              print("No new banks detected. Catalog is up to date.")
+              if github_output:
+                  with open(github_output, "a", encoding="utf-8") as f:
+                      f.write("has_changes=false\n")
+              sys.exit(0)
+
+          print(f"Found {len(new_banks)} new bank(s):")
+          for b in new_banks:
+              bin_code = b.get("bin")
+              short_name = b.get("shortName") or bin_code
+              print(f"  + {short_name} ({b.get('name')}) - BIN: {bin_code}")
+
+              # Download logo if available
+              logo_url = b.get("logo")
+              if logo_url and bin_code:
+                  dest = os.path.join(LOGOS_DIR, f"{bin_code}.png")
+                  if not os.path.exists(dest):
+                      try:
+                          img_req = urllib.request.Request(
+                              logo_url,
+                              headers={"User-Agent": "Mozilla/5.0 (compatible; VietQR-Core-SyncBot/1.0)"}
+                          )
+                          with urllib.request.urlopen(img_req, timeout=15) as img_res:
+                              img_bytes = img_res.read()
+                              if len(img_bytes) > 100:
+                                  with open(dest, "wb") as img_file:
+                                      img_file.write(img_bytes)
+                                  print(f"    Downloaded logo -> {dest}")
+                      except Exception as ex:
+                          print(f"    Warning: Could not download logo for BIN {bin_code}: {ex}", file=sys.stderr)
+
+          # Cập nhật banks.json: Giữ nguyên 76 bank cũ, chỉ append ngân hàng mới vào để git diff gọn nhất
+          local_payload["data"].extend(new_banks)
+          local_payload["desc"] = f"Get Bank list successful! Total {len(local_payload['data'])} banks"
+          with open(BANKS_JSON_PATH, "w", encoding="utf-8") as f:
+              json.dump(local_payload, f, ensure_ascii=False, indent=2)
+              f.write("\n")
+          print(f"Updated {BANKS_JSON_PATH} successfully (Total {len(local_payload['data'])} banks).")
+
+          # Build commit message conforming to Conventional Commits
+          short_names = ", ".join(b.get("shortName") or b.get("code") or b.get("bin") for b in new_banks[:4])
+          if len(new_banks) > 4:
+              short_names += f" and {len(new_banks) - 4} more"
+
+          commit_title = f"feat(catalog): add {len(new_banks)} new bank(s) to catalog: {short_names}"
+
+          body_lines = [
+              commit_title,
+              "",
+              f"Automated daily sync detected {len(new_banks)} new bank(s) from VietQR API:",
+              ""
+          ]
+          for b in new_banks:
+              body_lines.append(f"* {b.get('shortName')} ({b.get('name')}) - BIN: {b.get('bin')}")
+          body_lines.append("")
+          body_lines.append(f"Total banks in catalog: {len(remote_banks)}")
+
+          # Hand title and message to the pull-request step
+          if github_output:
+              with open(github_output, "a", encoding="utf-8") as f:
+                  f.write("has_changes=true\n")
+                  f.write(f"title={commit_title}\n")
+                  f.write("message<<SYNC_EOF\n" + "\n".join(body_lines) + "\nSYNC_EOF\n")
+          PY
+
+      # Opens (or updates) a PR instead of pushing to main.
+      - name: Open pull request
+        if: steps.sync.outputs.has_changes == 'true'
+        uses: peter-evans/create-pull-request@22a9089034f40e5a961c8808d113e2c98fb63676 # v7.0.11
+        with:
+          branch: chore/sync-banks
+          title: ${{ steps.sync.outputs.title }}
+          commit-message: ${{ steps.sync.outputs.message }}
+          body: ${{ steps.sync.outputs.message }}
+          add-paths: |
+            assets/banks.json
+            assets/logos/

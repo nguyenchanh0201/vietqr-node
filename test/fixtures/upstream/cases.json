@@ -1,0 +1,874 @@
+[
+  {
+    "id": "account-static",
+    "kind": "payload",
+    "operation": "request",
+    "request": {
+      "bankBin": "970422",
+      "accountNo": "056789799999",
+      "serviceType": "account",
+      "qrType": "static"
+    }
+  },
+  {
+    "id": "account-dynamic",
+    "kind": "payload",
+    "operation": "request",
+    "request": {
+      "bankBin": "970422",
+      "accountNo": "056789799999",
+      "serviceType": "account",
+      "qrType": "dynamic",
+      "amount": 2000
+    }
+  },
+  {
+    "id": "card-static",
+    "kind": "payload",
+    "operation": "request",
+    "request": {
+      "bankBin": "970422",
+      "accountNo": "056789799999",
+      "serviceType": "card",
+      "qrType": "static"
+    }
+  },
+  {
+    "id": "card-dynamic",
+    "kind": "payload",
+    "operation": "request",
+    "request": {
+      "bankBin": "970422",
+      "accountNo": "056789799999",
+      "serviceType": "card",
+      "qrType": "dynamic",
+      "amount": 2000
+    }
+  },
+  {
+    "id": "readme",
+    "kind": "payload",
+    "operation": "request",
+    "request": {
+      "bankBin": "970422",
+      "accountNo": "056789799999",
+      "amount": 2000,
+      "description": "Thanh toan cafe"
+    }
+  },
+  {
+    "id": "amount-missing",
+    "kind": "payload",
+    "operation": "request",
+    "request": {
+      "bankBin": "970422",
+      "accountNo": "056789799999"
+    }
+  },
+  {
+    "id": "amount-zero",
+    "kind": "payload",
+    "operation": "request",
+    "request": {
+      "bankBin": "970422",
+      "accountNo": "056789799999",
+      "amount": 0
+    }
+  },
+  {
+    "id": "amount-negative",
+    "kind": "payload",
+    "operation": "request",
+    "request": {
+      "bankBin": "970422",
+      "accountNo": "056789799999",
+      "amount": -1
+    }
+  },
+  {
+    "id": "amount-fractional",
+    "kind": "payload",
+    "operation": "request",
+    "request": {
+      "bankBin": "970422",
+      "accountNo": "056789799999",
+      "amount": 1.5
+    }
+  },
+  {
+    "id": "amount-max13",
+    "kind": "payload",
+    "operation": "request",
+    "request": {
+      "bankBin": "970422",
+      "accountNo": "056789799999",
+      "amount": 9999999999999
+    }
+  },
+  {
+    "id": "amount-over13",
+    "kind": "payload",
+    "operation": "request",
+    "request": {
+      "bankBin": "970422",
+      "accountNo": "056789799999",
+      "amount": 10000000000000
+    }
+  },
+  {
+    "id": "amount-out-of-int64",
+    "kind": "payload",
+    "operation": "request",
+    "request": {
+      "bankBin": "970422",
+      "accountNo": "056789799999",
+      "amount": 1e+20
+    }
+  },
+  {
+    "id": "amount-NaN",
+    "kind": "payload",
+    "operation": "request",
+    "request": {
+      "bankBin": "970422",
+      "accountNo": "056789799999"
+    },
+    "amountSpecial": "NaN"
+  },
+  {
+    "id": "amount-Infinity",
+    "kind": "payload",
+    "operation": "request",
+    "request": {
+      "bankBin": "970422",
+      "accountNo": "056789799999"
+    },
+    "amountSpecial": "Infinity"
+  },
+  {
+    "id": "amount--Infinity",
+    "kind": "payload",
+    "operation": "request",
+    "request": {
+      "bankBin": "970422",
+      "accountNo": "056789799999"
+    },
+    "amountSpecial": "-Infinity"
+  },
+  {
+    "id": "explicit-dynamic-missing",
+    "kind": "payload",
+    "operation": "request",
+    "request": {
+      "bankBin": "970422",
+      "accountNo": "056789799999",
+      "qrType": "dynamic"
+    }
+  },
+  {
+    "id": "explicit-dynamic-zero",
+    "kind": "payload",
+    "operation": "request",
+    "request": {
+      "bankBin": "970422",
+      "accountNo": "056789799999",
+      "qrType": "dynamic",
+      "amount": 0
+    }
+  },
+  {
+    "id": "explicit-dynamic-negative",
+    "kind": "payload",
+    "operation": "request",
+    "request": {
+      "bankBin": "970422",
+      "accountNo": "056789799999",
+      "qrType": "dynamic",
+      "amount": -1
+    }
+  },
+  {
+    "id": "explicit-static-positive",
+    "kind": "payload",
+    "operation": "request",
+    "request": {
+      "bankBin": "970422",
+      "accountNo": "056789799999",
+      "qrType": "static",
+      "amount": 2000
+    }
+  },
+  {
+    "id": "bill-static-inferred",
+    "kind": "payload",
+    "operation": "request",
+    "request": {
+      "bankBin": "970422",
+      "accountNo": "056789799999",
+      "billNumber": "INV-123"
+    }
+  },
+  {
+    "id": "bill-dynamic",
+    "kind": "payload",
+    "operation": "request",
+    "request": {
+      "bankBin": "970422",
+      "accountNo": "056789799999",
+      "amount": 2000,
+      "billNumber": "HD Đ123"
+    }
+  },
+  {
+    "id": "reference-static-inferred",
+    "kind": "payload",
+    "operation": "extended",
+    "request": {
+      "bankBin": "970422",
+      "accountNo": "056789799999",
+      "referenceLabel": "Đơn 123"
+    }
+  },
+  {
+    "id": "reference-dynamic",
+    "kind": "payload",
+    "operation": "extended",
+    "request": {
+      "bankBin": "970422",
+      "accountNo": "056789799999",
+      "amount": 2000,
+      "referenceLabel": "REF-123"
+    }
+  },
+  {
+    "id": "description-vietnamese",
+    "kind": "payload",
+    "operation": "request",
+    "request": {
+      "bankBin": "970422",
+      "accountNo": "056789799999",
+      "description": "Thanh toán đơn hàng Đ123 đ/Đ"
+    }
+  },
+  {
+    "id": "description-decomposed",
+    "kind": "payload",
+    "operation": "request",
+    "request": {
+      "bankBin": "970422",
+      "accountNo": "056789799999",
+      "description": "Thanh toán đơn hàng"
+    }
+  },
+  {
+    "id": "description-emoji",
+    "kind": "payload",
+    "operation": "request",
+    "request": {
+      "bankBin": "970422",
+      "accountNo": "056789799999",
+      "description": "Pay 😀 now"
+    }
+  },
+  {
+    "id": "description-chinese",
+    "kind": "payload",
+    "operation": "request",
+    "request": {
+      "bankBin": "970422",
+      "accountNo": "056789799999",
+      "description": "中"
+    }
+  },
+  {
+    "id": "description-spaces",
+    "kind": "payload",
+    "operation": "request",
+    "request": {
+      "bankBin": "970422",
+      "accountNo": "056789799999",
+      "description": "  noi dung  "
+    }
+  },
+  {
+    "id": "description-tab",
+    "kind": "payload",
+    "operation": "request",
+    "request": {
+      "bankBin": "970422",
+      "accountNo": "056789799999",
+      "description": "a\tb"
+    }
+  },
+  {
+    "id": "description-newline",
+    "kind": "payload",
+    "operation": "request",
+    "request": {
+      "bankBin": "970422",
+      "accountNo": "056789799999",
+      "description": "a\nb"
+    }
+  },
+  {
+    "id": "description-forty",
+    "kind": "payload",
+    "operation": "request",
+    "request": {
+      "bankBin": "970422",
+      "accountNo": "056789799999",
+      "description": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+    }
+  },
+  {
+    "id": "description-surrogate-boundary",
+    "kind": "payload",
+    "operation": "request",
+    "request": {
+      "bankBin": "970422",
+      "accountNo": "056789799999",
+      "description": "xxxxxxxxxxxxxxxxxxxxxxxx😀"
+    }
+  },
+  {
+    "id": "description-control-only",
+    "kind": "payload",
+    "operation": "request",
+    "request": {
+      "bankBin": "970422",
+      "accountNo": "056789799999",
+      "description": "\u0001"
+    }
+  },
+  {
+    "id": "merchant-both",
+    "kind": "payload",
+    "operation": "extended",
+    "request": {
+      "bankBin": "970422",
+      "accountNo": "056789799999",
+      "merchantName": "Cửa hàng Đẹp",
+      "merchantCity": "Hồ Chí Minh"
+    }
+  },
+  {
+    "id": "merchant-name-default-city",
+    "kind": "payload",
+    "operation": "extended",
+    "request": {
+      "bankBin": "970422",
+      "accountNo": "056789799999",
+      "merchantName": "Đặng Văn A"
+    }
+  },
+  {
+    "id": "merchant-city-only",
+    "kind": "payload",
+    "operation": "extended",
+    "request": {
+      "bankBin": "970422",
+      "accountNo": "056789799999",
+      "merchantCity": "Đà Nẵng"
+    }
+  },
+  {
+    "id": "merchant-truncation",
+    "kind": "payload",
+    "operation": "extended",
+    "request": {
+      "bankBin": "970422",
+      "accountNo": "056789799999",
+      "merchantName": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "merchantCity": "bbbbbbbbbbbbbbbbbbbb"
+    }
+  },
+  {
+    "id": "invalid-bin-short",
+    "kind": "payload",
+    "operation": "request",
+    "request": {
+      "bankBin": "97042",
+      "accountNo": "056789799999"
+    }
+  },
+  {
+    "id": "invalid-bin-alpha",
+    "kind": "payload",
+    "operation": "request",
+    "request": {
+      "bankBin": "abcdef",
+      "accountNo": "056789799999"
+    }
+  },
+  {
+    "id": "invalid-account-empty",
+    "kind": "payload",
+    "operation": "request",
+    "request": {
+      "bankBin": "970422",
+      "accountNo": ""
+    }
+  },
+  {
+    "id": "invalid-account-long",
+    "kind": "payload",
+    "operation": "request",
+    "request": {
+      "bankBin": "970422",
+      "accountNo": "11111111111111111111111111"
+    }
+  },
+  {
+    "id": "beneficiary-trim",
+    "kind": "payload",
+    "operation": "request",
+    "request": {
+      "bankBin": " 970422 ",
+      "accountNo": " 056789799999 "
+    }
+  },
+  {
+    "id": "tag62-all-25",
+    "kind": "payload",
+    "operation": "extended",
+    "request": {
+      "bankBin": "970422",
+      "accountNo": "056789799999",
+      "billNumber": "bbbbbbbbbbbbbbbbbbbbbbbbb",
+      "referenceLabel": "rrrrrrrrrrrrrrrrrrrrrrrrr",
+      "description": "ppppppppppppppppppppppppp"
+    }
+  },
+  {
+    "id": "merchant-invariant-uppercase",
+    "kind": "payload",
+    "operation": "extended",
+    "request": {
+      "bankBin": "970422",
+      "accountNo": "056789799999",
+      "merchantName": "Straße ı ﬃ"
+    }
+  },
+  {
+    "id": "parse-surrounding-whitespace",
+    "kind": "parse",
+    "payloadCase": "readme",
+    "transform": "surroundWhitespace"
+  },
+  {
+    "id": "parse-lowercase-crc",
+    "kind": "parse",
+    "payloadCase": "account-static",
+    "transform": "lowercaseCrc"
+  },
+  {
+    "id": "parse-build-account-static",
+    "kind": "parse",
+    "payloadCase": "account-static"
+  },
+  {
+    "id": "parse-build-account-dynamic",
+    "kind": "parse",
+    "payloadCase": "account-dynamic"
+  },
+  {
+    "id": "parse-build-card-static",
+    "kind": "parse",
+    "payloadCase": "card-static"
+  },
+  {
+    "id": "parse-build-card-dynamic",
+    "kind": "parse",
+    "payloadCase": "card-dynamic"
+  },
+  {
+    "id": "parse-build-readme",
+    "kind": "parse",
+    "payloadCase": "readme"
+  },
+  {
+    "id": "parse-build-amount-missing",
+    "kind": "parse",
+    "payloadCase": "amount-missing"
+  },
+  {
+    "id": "parse-build-amount-zero",
+    "kind": "parse",
+    "payloadCase": "amount-zero"
+  },
+  {
+    "id": "parse-build-amount-negative",
+    "kind": "parse",
+    "payloadCase": "amount-negative"
+  },
+  {
+    "id": "parse-build-amount-max13",
+    "kind": "parse",
+    "payloadCase": "amount-max13"
+  },
+  {
+    "id": "parse-build-explicit-static-positive",
+    "kind": "parse",
+    "payloadCase": "explicit-static-positive"
+  },
+  {
+    "id": "parse-build-bill-static-inferred",
+    "kind": "parse",
+    "payloadCase": "bill-static-inferred"
+  },
+  {
+    "id": "parse-build-bill-dynamic",
+    "kind": "parse",
+    "payloadCase": "bill-dynamic"
+  },
+  {
+    "id": "parse-build-reference-static-inferred",
+    "kind": "parse",
+    "payloadCase": "reference-static-inferred"
+  },
+  {
+    "id": "parse-build-reference-dynamic",
+    "kind": "parse",
+    "payloadCase": "reference-dynamic"
+  },
+  {
+    "id": "parse-build-description-vietnamese",
+    "kind": "parse",
+    "payloadCase": "description-vietnamese"
+  },
+  {
+    "id": "parse-build-description-decomposed",
+    "kind": "parse",
+    "payloadCase": "description-decomposed"
+  },
+  {
+    "id": "parse-build-description-emoji",
+    "kind": "parse",
+    "payloadCase": "description-emoji"
+  },
+  {
+    "id": "parse-build-description-chinese",
+    "kind": "parse",
+    "payloadCase": "description-chinese"
+  },
+  {
+    "id": "parse-build-description-spaces",
+    "kind": "parse",
+    "payloadCase": "description-spaces"
+  },
+  {
+    "id": "parse-build-description-tab",
+    "kind": "parse",
+    "payloadCase": "description-tab"
+  },
+  {
+    "id": "parse-build-description-newline",
+    "kind": "parse",
+    "payloadCase": "description-newline"
+  },
+  {
+    "id": "parse-build-description-forty",
+    "kind": "parse",
+    "payloadCase": "description-forty"
+  },
+  {
+    "id": "parse-build-description-surrogate-boundary",
+    "kind": "parse",
+    "payloadCase": "description-surrogate-boundary"
+  },
+  {
+    "id": "parse-build-description-control-only",
+    "kind": "parse",
+    "payloadCase": "description-control-only"
+  },
+  {
+    "id": "parse-build-merchant-both",
+    "kind": "parse",
+    "payloadCase": "merchant-both"
+  },
+  {
+    "id": "parse-build-merchant-name-default-city",
+    "kind": "parse",
+    "payloadCase": "merchant-name-default-city"
+  },
+  {
+    "id": "parse-build-merchant-city-only",
+    "kind": "parse",
+    "payloadCase": "merchant-city-only"
+  },
+  {
+    "id": "parse-build-merchant-truncation",
+    "kind": "parse",
+    "payloadCase": "merchant-truncation"
+  },
+  {
+    "id": "parse-build-beneficiary-trim",
+    "kind": "parse",
+    "payloadCase": "beneficiary-trim"
+  },
+  {
+    "id": "parse-build-tag62-all-25",
+    "kind": "parse",
+    "payloadCase": "tag62-all-25"
+  },
+  {
+    "id": "parse-build-merchant-invariant-uppercase",
+    "kind": "parse",
+    "payloadCase": "merchant-invariant-uppercase"
+  },
+  {
+    "id": "parse-bad-crc-true",
+    "kind": "parse",
+    "payloadCase": "readme",
+    "transform": "badCrc",
+    "options": {
+      "strictCrc": true
+    }
+  },
+  {
+    "id": "parse-bad-crc-false",
+    "kind": "parse",
+    "payloadCase": "readme",
+    "transform": "badCrc",
+    "options": {
+      "strictCrc": false
+    }
+  },
+  {
+    "id": "parse-oversize",
+    "kind": "parse",
+    "payload": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+  },
+  {
+    "id": "parse-garbage-strict",
+    "kind": "parse",
+    "payload": "not TLV"
+  },
+  {
+    "id": "parse-garbage-nonstrict",
+    "kind": "parse",
+    "payload": "not TLV",
+    "options": {
+      "strictCrc": false
+    }
+  },
+  {
+    "id": "parse-empty",
+    "kind": "parse",
+    "payload": ""
+  },
+  {
+    "id": "parse-blank",
+    "kind": "parse",
+    "payload": " \t\n"
+  },
+  {
+    "id": "parse-no-tag38",
+    "kind": "parse",
+    "payload": "00020101021153037046304188F"
+  },
+  {
+    "id": "parse-wrong-aid",
+    "kind": "parse",
+    "payload": "00020101021138540010B00000072701240006970422011001234567890208QRIBFTTA63043EC5"
+  },
+  {
+    "id": "parse-independent-merchant-reference",
+    "kind": "parse",
+    "payload": "00020101021138540010A00000072701240006970422011001234567890208QRIBFTTA53037045802VN5911COFFEE SHOP6006SAIGON62330107BILL-420508ORDER-420806Coffee6304A207"
+  },
+  {
+    "id": "parse-minimal-null-fields",
+    "kind": "parse",
+    "payload": "00020101021138540010A00000072701240006970422011001234567890208QRIBFTTA63048A4D"
+  },
+  {
+    "id": "parse-empty-fields",
+    "kind": "parse",
+    "payload": "00020101021138540010A00000072701240006970422011001234567890208QRIBFTTA530058005900600062120100050008006304DACA"
+  },
+  {
+    "id": "parse-literal-surrogate-reader",
+    "kind": "parse",
+    "payload": "00020101021138560010A0000007270126000697042201120567897999990208QRIBFTTA53037045802VN62290825xxxxxxxxxxxxxxxxxxxxxxxx\uD83D6304A632"
+  },
+  {
+    "id": "parse-custom-max-length",
+    "kind": "parse",
+    "payloadCase": "readme",
+    "options": {
+      "maxPayloadLength": 10
+    }
+  },
+  {
+    "id": "parse-unknown-bank",
+    "kind": "parse",
+    "payload": "00020101021138350010A00000072701170006999999010312363045FBD"
+  },
+  {
+    "id": "parse-missing-account-service-and-point",
+    "kind": "parse",
+    "payload": "38280010A000000727011000069704226304F61E"
+  },
+  {
+    "id": "parse-missing-aid",
+    "kind": "parse",
+    "payload": "000201010211382801240006970422011001234567896304C826"
+  },
+  {
+    "id": "parse-missing-beneficiary",
+    "kind": "parse",
+    "payload": "00020101021138140010A00000072763049905"
+  },
+  {
+    "id": "parse-missing-bin",
+    "kind": "parse",
+    "payload": "00020101021138250010A000000727010701031236304CEBA"
+  },
+  {
+    "id": "parse-blank-bin",
+    "kind": "parse",
+    "payload": "00020101021138240010A00000072701060002  6304E703"
+  },
+  {
+    "id": "parse-malformed-tag38",
+    "kind": "parse",
+    "payload": "00020101021138140011A000000727630437F9"
+  },
+  {
+    "id": "parse-malformed-beneficiary",
+    "kind": "parse",
+    "payload": "00020101021138280010A00000072701100009970422630479BA"
+  },
+  {
+    "id": "parse-short-root-tail",
+    "kind": "parse",
+    "payload": "00020101021138540010A00000072701240006970422011001234567890208QRIBFTTA763048895"
+  },
+  {
+    "id": "parse-invalid-root-header",
+    "kind": "parse",
+    "payload": "00020101021138540010A00000072701240006970422011001234567890208QRIBFTTAXX0063046C32"
+  },
+  {
+    "id": "parse-malformed-additional-is-ignored",
+    "kind": "parse",
+    "payload": "00020101021138540010A00000072701240006970422011001234567890208QRIBFTTA62070809abc630430E2"
+  },
+  {
+    "id": "parse-empty-additional",
+    "kind": "parse",
+    "payload": "00020101021138540010A00000072701240006970422011001234567890208QRIBFTTA620063043FCF"
+  },
+  {
+    "id": "parse-unknown-additional",
+    "kind": "parse",
+    "payload": "00020101021138540010A00000072701240006970422011001234567890208QRIBFTTA62110907ignored6304525B"
+  },
+  {
+    "id": "parse-trim-fields-and-case-insensitive-service",
+    "kind": "parse",
+    "payload": "38510010a00000072701210008 970422 0105 123 0208qribfttc0104 12 5305 704 5804 VN 5908SHOP6010﻿CITY﻿62210103 B 0503 R 0803 P 63048765"
+  },
+  {
+    "id": "parse-duplicate-root-last-wins",
+    "kind": "parse",
+    "payload": "00020101021138540010A00000072701240006970422011001234567890208QRIBFTTA5905FIRST5904LAST01021263041C6B"
+  },
+  {
+    "id": "parse-amount-fractional",
+    "kind": "parse",
+    "payload": "00020101021138540010A00000072701240006970422011001234567890208QRIBFTTA5406123.4563045638"
+  },
+  {
+    "id": "parse-amount-grouped",
+    "kind": "parse",
+    "payload": "00020101021138540010A00000072701240006970422011001234567890208QRIBFTTA54081,234.5063047E91"
+  },
+  {
+    "id": "parse-amount-exponent",
+    "kind": "parse",
+    "payload": "00020101021138540010A00000072701240006970422011001234567890208QRIBFTTA54061.25e26304D9B1"
+  },
+  {
+    "id": "parse-amount-negative",
+    "kind": "parse",
+    "payload": "00020101021138540010A00000072701240006970422011001234567890208QRIBFTTA5406(12.5)630447E6"
+  },
+  {
+    "id": "parse-amount-trailingSign",
+    "kind": "parse",
+    "payload": "00020101021138540010A00000072701240006970422011001234567890208QRIBFTTA540312-630457D5"
+  },
+  {
+    "id": "parse-amount-currency",
+    "kind": "parse",
+    "payload": "00020101021138540010A00000072701240006970422011001234567890208QRIBFTTA5410¤1,234.50630453FA"
+  },
+  {
+    "id": "parse-amount-invalid",
+    "kind": "parse",
+    "payload": "00020101021138540010A00000072701240006970422011001234567890208QRIBFTTA5403NaN63041027"
+  },
+  {
+    "id": "parse-amount-overflow",
+    "kind": "parse",
+    "payload": "00020101021138540010A00000072701240006970422011001234567890208QRIBFTTA5429792281625142643375935439503366304B9C0"
+  },
+  {
+    "id": "parse-amount-empty",
+    "kind": "parse",
+    "payload": "00020101021138540010A00000072701240006970422011001234567890208QRIBFTTA54006304569F"
+  },
+  {
+    "id": "parse-amount-zero",
+    "kind": "parse",
+    "payload": "00020101021138540010A00000072701240006970422011001234567890208QRIBFTTA5401063047210"
+  },
+  {
+    "id": "parse-no-crc-nonstrict",
+    "kind": "parse",
+    "payload": "00020101021138540010A00000072701240006970422011001234567890208QRIBFTTA",
+    "options": {
+      "strictCrc": false
+    }
+  },
+  {
+    "id": "parse-whitespace-nonstrict",
+    "kind": "parse",
+    "payloadCase": "readme",
+    "transform": "surroundWhitespace",
+    "options": {
+      "strictCrc": false
+    }
+  },
+  {
+    "id": "parse-exact-max-length",
+    "kind": "parse",
+    "payload": "00020101021138540010A00000072701240006970422011001234567890208QRIBFTTA9999xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx9999xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx9999xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx9999xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx9999xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx9999xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx9999xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx9999xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx9999xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx9915xxxxxxxxxxxxxxx63041023"
+  },
+  {
+    "id": "parse-service-dotless-i-not-card",
+    "kind": "parse",
+    "payload": "00020101021138570010A0000007270126000697042201120567897999990209QRıBFTTC53037045802VN63040000",
+    "options": {
+      "strictCrc": false
+    }
+  },
+  {
+    "id": "parse-amount-space-after-leading-paren",
+    "kind": "parse",
+    "payload": "00020101021238560010A0000007270126000697042201120567897999990208QRIBFTTA53037045404( 5)5802VN63040000",
+    "options": {
+      "strictCrc": false
+    }
+  },
+  {
+    "id": "parse-amount-space-after-currency-and-sign",
+    "kind": "parse",
+    "payload": "00020101021238560010A0000007270126000697042201120567897999990208QRIBFTTA53037045406¤ - 55802VN63040000",
+    "options": {
+      "strictCrc": false
+    }
+  }
+]
