@@ -1,5 +1,9 @@
 # vietqr-node
 
+[![CI](https://github.com/nguyenchanh0201/vietqr-node/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/nguyenchanh0201/vietqr-node/actions/workflows/ci.yml)
+[![npm](https://img.shields.io/npm/v/vietqr-node)](https://www.npmjs.com/package/vietqr-node)
+[![license](https://img.shields.io/npm/l/vietqr-node)](LICENSE)
+
 > **Tiếng Việt:** `vietqr-node` là bản port TypeScript của thư viện .NET [vietqr-core](https://github.com/Ngochiendev/vietqr-core) (MIT). Thư viện tạo và phân tích chuỗi VietQR/NAPAS247 (EMVCo), giải mã ảnh QR, vẽ thẻ thanh toán (PNG/JPEG/WebP/SVG) với logo ngân hàng, và gọi cổng deeplink mở app ngân hàng. Mọi thứ chạy trong tiến trình Node, không gọi mạng (trừ client deeplink), không cần api.vietqr.io. Đây **không** phải sản phẩm chính thức của NAPAS/VietQR.
 
 TypeScript port of [Ngochiendev/vietqr-core](https://github.com/Ngochiendev/vietqr-core) at commit `1b92450`: build and parse VietQR / NAPAS247 EMVCo payloads, decode QR images, render payment cards, and call a deeplink gateway. Payload, parse, decode, render and the bank catalog are fully offline: no network calls, no CDN, no runtime downloads (the ZXing WASM ships in the package).
@@ -170,6 +174,13 @@ These are kept on purpose so that output stays identical to upstream:
 - **`rawTags` key order.** `VietQrInfo.rawTags` is a plain object. JavaScript enumerates integer-like keys (`"00"` is not one, but `"38"`, `"54"`, `"62"` … are) in ascending numeric order before other keys, so iteration order can differ from upstream's insertion-ordered dictionary. Values are identical; do not rely on key order.
 - **QR matrix.** QR codes are generated with `qrcode` at error-correction level Q (as upstream's QRCoder). Module placement can differ from upstream's images; the encoded payload is the same.
 - **Offline bank logos.** `bankLogo` takes bytes instead of upstream's `BankLogoUrl`.
+
+## Release & supply chain
+
+- Releases are published only from GitHub Actions via [npm trusted publishing](https://docs.npmjs.com/trusted-publishers). No npm token exists, and the package refuses token publishes.
+- Every version from 0.1.1 on carries npm provenance linking it to the CI run that built it. Verify it in your project with `npm audit signatures`.
+- The published tarball is the one CI tested and smoke-tested; the publish job installs nothing from the project.
+- Runtime dependencies are pinned to exact versions, and CI installs with `--ignore-scripts`.
 
 ## Credits and license
 
