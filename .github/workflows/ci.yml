@@ -19,12 +19,12 @@ jobs:
         os: [ubuntu-latest, macos-latest]
         node: [20, 22]
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
         with:
           node-version: ${{ matrix.node }}
           cache: npm
-      - run: npm ci
+      - run: npm ci --ignore-scripts
       - run: npx tsc --noEmit
       - run: npx vitest run
       # Builds, packs, installs the exact tarball into clean consumers with network blocked.
@@ -39,7 +39,7 @@ jobs:
         run: sha256sum *.tgz > SHA256SUMS && cat SHA256SUMS
       - name: Upload tested tarball
         if: matrix.os == 'ubuntu-latest' && matrix.node == 22
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         with:
           name: package-tarball
           path: ${{ runner.temp }}/pack/
@@ -54,11 +54,11 @@ jobs:
       contents: read
       id-token: write
     steps:
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
         with:
-          node-version: 22
+          node-version: '22.x' # >= 22.14.0 required for trusted publishing
           registry-url: https://registry.npmjs.org
-      - uses: actions/download-artifact@v4
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
         with:
           name: package-tarball
           path: pack
@@ -70,7 +70,8 @@ jobs:
           version=$(tar -xOzf "$tarball" package/package.json | node -p "JSON.parse(require('fs').readFileSync(0, 'utf8')).version")
           test "v$version" = "$GITHUB_REF_NAME" || { echo "tarball version $version does not match tag $GITHUB_REF_NAME"; exit 1; }
           echo "TARBALL=$PWD/$tarball" >> "$GITHUB_ENV"
+      # Trusted publishing (OIDC) needs npm >= 11.5.1; Node 22 bundles an older npm. No token exists.
+      - name: Upgrade npm for trusted publishing
+        run: npm install -g --ignore-scripts npm@11.21.1
       - name: Publish the tested tarball
-        run: npm publish "$TARBALL" --provenance --access public
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: npm publish "$TARBALL" --access public

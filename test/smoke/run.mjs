@@ -27,7 +27,7 @@ function consumer(name, extraDeps = []) {
   const dir = temp(name);
   cpSync(join(here, `consumer-${name}`), dir, { recursive: true });
   cpSync(join(here, 'scenario.cjs'), join(dir, 'scenario.cjs'));
-  sh(npm, ['install', '--no-audit', '--no-fund', '--include=dev', tarball, ...extraDeps], dir);
+  sh(npm, ['install', '--no-audit', '--ignore-scripts', '--no-fund', '--include=dev', tarball, ...extraDeps], dir);
   return dir;
 }
 
