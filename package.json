@@ -1,35 +1,81 @@
 {
   "name": "vietqr-node",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "type": "module",
   "license": "MIT",
   "description": "VietQR / NAPAS247 for Node: build, parse, decode and render payment QR codes offline. TypeScript port of vietqr-core.",
-  "keywords": ["vietqr", "napas", "napas247", "emvco", "qr", "qrcode", "vietnam", "payment", "bank", "nestjs"],
+  "keywords": [
+    "vietqr",
+    "napas",
+    "napas247",
+    "emvco",
+    "qr",
+    "qrcode",
+    "vietnam",
+    "payment",
+    "bank",
+    "nestjs"
+  ],
   "author": "Chánh Nguyễn <chanhnguyen34@gmail.com>",
-  "repository": { "type": "git", "url": "git+https://github.com/nguyenchanh0201/vietqr-node.git" },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nguyenchanh0201/vietqr-node.git"
+  },
   "homepage": "https://github.com/nguyenchanh0201/vietqr-node#readme",
-  "bugs": { "url": "https://github.com/nguyenchanh0201/vietqr-node/issues" },
-  "publishConfig": { "access": "public" },
-  "engines": { "node": ">=20" },
+  "bugs": {
+    "url": "https://github.com/nguyenchanh0201/vietqr-node/issues"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "engines": {
+    "node": ">=20"
+  },
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
-      "import": { "types": "./dist/index.d.ts", "default": "./dist/index.js" },
-      "require": { "types": "./dist/index.d.cts", "default": "./dist/index.cjs" }
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
     },
     "./deeplink": {
-      "import": { "types": "./dist/deeplink/index.d.ts", "default": "./dist/deeplink/index.js" },
-      "require": { "types": "./dist/deeplink/index.d.cts", "default": "./dist/deeplink/index.cjs" }
+      "import": {
+        "types": "./dist/deeplink/index.d.ts",
+        "default": "./dist/deeplink/index.js"
+      },
+      "require": {
+        "types": "./dist/deeplink/index.d.cts",
+        "default": "./dist/deeplink/index.cjs"
+      }
     },
     "./nestjs": {
-      "import": { "types": "./dist/nestjs/index.d.ts", "default": "./dist/nestjs/index.js" },
-      "require": { "types": "./dist/nestjs/index.d.cts", "default": "./dist/nestjs/index.cjs" }
+      "import": {
+        "types": "./dist/nestjs/index.d.ts",
+        "default": "./dist/nestjs/index.js"
+      },
+      "require": {
+        "types": "./dist/nestjs/index.d.cts",
+        "default": "./dist/nestjs/index.cjs"
+      }
     }
   },
-  "files": ["dist", "assets", "LICENSE", "DISCLAIMER.md"],
-  "scripts": { "test": "vitest run", "build": "tsup" },
+  "files": [
+    "dist",
+    "assets",
+    "LICENSE",
+    "DISCLAIMER.md"
+  ],
+  "scripts": {
+    "test": "vitest run",
+    "build": "tsup"
+  },
   "dependencies": {
     "@napi-rs/canvas": "1.1.0",
     "qrcode": "1.5.4",
@@ -41,9 +87,15 @@
     "reflect-metadata": "^0.1.12 || ^0.2.0"
   },
   "peerDependenciesMeta": {
-    "@nestjs/common": { "optional": true },
-    "@nestjs/core": { "optional": true },
-    "reflect-metadata": { "optional": true }
+    "@nestjs/common": {
+      "optional": true
+    },
+    "@nestjs/core": {
+      "optional": true
+    },
+    "reflect-metadata": {
+      "optional": true
+    }
   },
   "devDependencies": {
     "@nestjs/common": "11.1.29",
