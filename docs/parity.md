@@ -15,7 +15,7 @@ TypeScript equivalent or to the spec non-goal that excludes it. Paths are relati
 | `VietQr` fluent builder: `SetPointOfInitiationMethod(bool \| VietQrType)` | `PayloadRequest.qrType: 'static' \| 'dynamic'` |
 | `VietQr.SetTransactionAmount(string?)` | `PayloadRequest.amount` (same validation → `qr.invalid_amount`) |
 | `VietQr.SetBeneficiaryOrganization(acquirerId, consumerId, serviceCode)` | `PayloadRequest.bankBin`, `accountNo`, `serviceType` |
-| `VietQr.SetAdditionalData(AdditionalDataOptions)` / `SetAdditionalData(bill, reference, purpose)` | `PayloadRequest.billNumber`, `referenceLabel`, `description` (same 25-char truncation, 99 cap) |
+| `VietQr.SetAdditionalData(AdditionalDataOptions)` / `SetAdditionalData(bill, reference, purpose)` | `PayloadRequest.billNumber`, `referenceLabel`, `description` (same 25-char truncation, 99 cap; `additionalDataMaxLength` is a vietqr-node extension to change the 25) |
 | `VietQr.SetAdditionalDataFieldTemplate(content)` | `PayloadRequest.description` (upstream forwards to `purpose`) |
 | `VietQr.SetMerchantInfo(name, city = "HANOI")` | `PayloadRequest.merchantName`, `merchantCity` (same normalization and default city) |
 | `VietQr.Build()` | `createPayload` returns the built string |

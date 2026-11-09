@@ -35,7 +35,7 @@ createPayload({
 });
 ```
 
-Like upstream, each tag 62 sub-field (bill number, reference label, description) is diacritics-stripped and silently truncated to 25 characters, and tag 62 is capped at 99. Invalid input throws `VietQrError` (`qr.invalid_bin`, `qr.invalid_amount`, `qr.missing_param`).
+Like upstream, each tag 62 sub-field (bill number, reference label, description) is diacritics-stripped and silently truncated to 25 characters, and tag 62 is capped at 99. Pass `additionalDataMaxLength` (1–99) to `createPayload` to change the per-field limit, e.g. `{ ..., description: 'Thanh toan don hang 123456 tai ABC', additionalDataMaxLength: 50 }`. Values above 25 go beyond the NAPAS spec; scan-test them with the bank apps you target. Invalid input throws `VietQrError` (`qr.invalid_bin`, `qr.invalid_amount`, `qr.missing_param`).
 
 Utilities: `calcCrc`, `genCrcCode`, `verifyCrc`, `removeDiacritics`, `extractBinFromEmvCo`.
 

@@ -82,3 +82,19 @@ test('extraction prefers parsed nested bank over substring collisions', () => {
   const payload = '0020A000000727000611111138270010A00000072701090005HELLO';
   expect(api.extractBinFromEmvCo(payload)).toBe('HELLO');
 });
+
+test('additionalDataMaxLength overrides the 25-char tag-62 subfield cap', () => {
+  const base = { bankBin: '970423', accountNo: '0393514981', amount: 10000 };
+  const note = 'Thanh toán đơn hàng số 123456 tại cửa hàng ABC';
+  const ascii = 'Thanh toan don hang so 123456 tai cua hang ABC';
+  const info = (p: string) => api.parse(p).additionalData;
+  expect(api.createPayload({ ...base, description: note })).toBe(api.createPayload({ ...base, description: note, additionalDataMaxLength: 25 }));
+  expect(info(api.createPayload({ ...base, description: note, additionalDataMaxLength: 60 }))?.purpose).toBe(ascii);
+  expect(info(api.createPayload({ ...base, description: note, additionalDataMaxLength: 10 }))?.purpose).toBe('Thanh toan');
+  // tag 62 still caps at 99 overall: 08 + 2-digit length + value = 99 → value ≤ 95
+  const long = info(api.createPayload({ ...base, description: 'x'.repeat(200), additionalDataMaxLength: 99 }));
+  expect(long?.purpose).toHaveLength(95);
+  for (const bad of [0, -1, 1.5, 100, NaN]) {
+    expect(() => api.createPayload({ ...base, description: note, additionalDataMaxLength: bad })).toThrow(expect.objectContaining({ code: 'qr.invalid_payload' }));
+  }
+});

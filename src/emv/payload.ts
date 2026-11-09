@@ -15,6 +15,12 @@ export interface PayloadRequest {
   referenceLabel?: string;
   merchantName?: string;
   merchantCity?: string;
+  /**
+   * Max characters per tag-62 subfield (billNumber, referenceLabel, description), 1–99.
+   * Default 25 matches upstream and the NAPAS spec; some bank apps accept or show more.
+   * Tag 62 as a whole is still capped at 99.
+   */
+  additionalDataMaxLength?: number;
 }
 
 // Match .NET Trim/IsNullOrWhiteSpace, not JS's BOM-inclusive trim.
@@ -52,13 +58,15 @@ export function createPayload(req: PayloadRequest): string {
     if (amount > 9999999999999) throw new VietQrError('qr.invalid_amount');
     transaction = tlv('54', String(amount));
   }
+  const maxField = req.additionalDataMaxLength ?? 25;
+  if (!Number.isInteger(maxField) || maxField < 1 || maxField > 99) throw new VietQrError('qr.invalid_payload');
   let additional = '';
   for (const [tag, value] of [['01', req.billNumber], ['05', req.referenceLabel], ['08', req.description]] as const) {
     if (value == null || !trim(value)) continue;
     const remaining = 99 - additional.length - 4;
     if (remaining <= 0) continue;
     // UTF-16 slice intentionally preserves upstream dangling-surrogate behavior.
-    const clean = removeDiacritics(trim(value)).slice(0, Math.min(25, remaining));
+    const clean = removeDiacritics(trim(value)).slice(0, Math.min(maxField, remaining));
     additional += tlv(tag, clean);
   }
   let merchant = '';
